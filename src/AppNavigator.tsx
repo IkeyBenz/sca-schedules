@@ -1,13 +1,13 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import { HomeScreenCreator, AdminScreenCreator } from './factory';
 
 const AppNavigator = () => (
-  <HashRouter>
+  <BrowserRouter>
     <Route exact path="/" component={HomeScreenCreator} />
     <Route exact path="/admin" component={AdminScreenCreator} />
-  </HashRouter>
+  </BrowserRouter>
 );
 
 export default AppNavigator;
