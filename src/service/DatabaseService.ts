@@ -24,6 +24,10 @@ class FirebaseManager implements Database {
   async delete(path: string) {
     return this.db.ref(path).remove();
   }
+
+  onChange(path: string, cb: (data: any) => void) {
+    this.db.ref(path).on('value', (s) => cb(s.val()));
+  } 
 }
 
 function createFirebaseDbManager(config: FirebaseConfig) {

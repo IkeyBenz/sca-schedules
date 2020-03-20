@@ -1,3 +1,29 @@
-.admin-page-container {
+body {
+  margin: 0;
   height: 100vh;
+}
+.container {
+  height: 100vh !important;
+}
+.admin-page-container {
+  padding: 24px;
+  height: 100vh;
+  justify-content: center;
+  background-color: blue;
+}
+.schedule-manager-widget {
+  height: 500px;
+  background-color: green;
+}
+
+.scroll-content {
+  overflow: scroll;
+}
+
+.file-dropper {
+  background-color: lightblue;
+  flex: 1 1 auto;
+}
+.col {
+  height: 100%;
 }

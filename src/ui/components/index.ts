@@ -1,3 +1,6 @@
 import ScheduleCard from './ScheduleCard';
 
-export { ScheduleCard };
+
+export {
+    ScheduleCard,
+};

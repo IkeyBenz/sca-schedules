@@ -16,11 +16,15 @@ class ScheduleService {
   }
 
   async getAllSchedules(): Promise<Schedule[]> {
-    const schedules = (await this.storage.read('/')) || {};
+    const schedules = (await this.storage.read('schedules')) || {};
     return Object.keys(schedules).map(title => ({
       title,
       rows: schedules[title],
     }));
+  }
+
+  onSchedulesChanged(cb: (schedules: Schedule[]) => void) {
+    this.storage.onChange('schedules', data => cb(data || []));
   }
 }
 
