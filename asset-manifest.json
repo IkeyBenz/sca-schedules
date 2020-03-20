@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/sca-shedules/static/css/main.f643cfd7.chunk.css",
-    "main.js": "/sca-shedules/static/js/main.62f0c141.chunk.js",
-    "main.js.map": "/sca-shedules/static/js/main.62f0c141.chunk.js.map",
-    "runtime-main.js": "/sca-shedules/static/js/runtime-main.bc1c39a9.js",
-    "runtime-main.js.map": "/sca-shedules/static/js/runtime-main.bc1c39a9.js.map",
-    "static/css/2.67123b20.chunk.css": "/sca-shedules/static/css/2.67123b20.chunk.css",
-    "static/js/2.1388df97.chunk.js": "/sca-shedules/static/js/2.1388df97.chunk.js",
-    "static/js/2.1388df97.chunk.js.map": "/sca-shedules/static/js/2.1388df97.chunk.js.map",
-    "index.html": "/sca-shedules/index.html",
-    "precache-manifest.ea7afdee5e15eb888df6a6441d620332.js": "/sca-shedules/precache-manifest.ea7afdee5e15eb888df6a6441d620332.js",
-    "service-worker.js": "/sca-shedules/service-worker.js",
-    "static/css/2.67123b20.chunk.css.map": "/sca-shedules/static/css/2.67123b20.chunk.css.map",
-    "static/css/main.f643cfd7.chunk.css.map": "/sca-shedules/static/css/main.f643cfd7.chunk.css.map",
-    "static/js/2.1388df97.chunk.js.LICENSE.txt": "/sca-shedules/static/js/2.1388df97.chunk.js.LICENSE.txt"
+    "main.css": "/sca-schedules/static/css/main.f643cfd7.chunk.css",
+    "main.js": "/sca-schedules/static/js/main.c7b532b1.chunk.js",
+    "main.js.map": "/sca-schedules/static/js/main.c7b532b1.chunk.js.map",
+    "runtime-main.js": "/sca-schedules/static/js/runtime-main.1692889e.js",
+    "runtime-main.js.map": "/sca-schedules/static/js/runtime-main.1692889e.js.map",
+    "static/css/2.67123b20.chunk.css": "/sca-schedules/static/css/2.67123b20.chunk.css",
+    "static/js/2.87cfd6a7.chunk.js": "/sca-schedules/static/js/2.87cfd6a7.chunk.js",
+    "static/js/2.87cfd6a7.chunk.js.map": "/sca-schedules/static/js/2.87cfd6a7.chunk.js.map",
+    "index.html": "/sca-schedules/index.html",
+    "precache-manifest.89d7de68bef14f321cc35c1d8682b8ba.js": "/sca-schedules/precache-manifest.89d7de68bef14f321cc35c1d8682b8ba.js",
+    "service-worker.js": "/sca-schedules/service-worker.js",
+    "static/css/2.67123b20.chunk.css.map": "/sca-schedules/static/css/2.67123b20.chunk.css.map",
+    "static/css/main.f643cfd7.chunk.css.map": "/sca-schedules/static/css/main.f643cfd7.chunk.css.map",
+    "static/js/2.87cfd6a7.chunk.js.LICENSE.txt": "/sca-schedules/static/js/2.87cfd6a7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bc1c39a9.js",
+    "static/js/runtime-main.1692889e.js",
     "static/css/2.67123b20.chunk.css",
-    "static/js/2.1388df97.chunk.js",
+    "static/js/2.87cfd6a7.chunk.js",
     "static/css/main.f643cfd7.chunk.css",
-    "static/js/main.62f0c141.chunk.js"
+    "static/js/main.c7b532b1.chunk.js"
   ]
 }
