@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import firebase from 'firebase';
+import React, { useEffect, useState } from 'react';
 
 import { AdminScreen } from '../ui';
 import { scheduleManager } from '../service';
