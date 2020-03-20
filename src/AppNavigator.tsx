@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { HomeScreenCreator, AdminScreenCreator } from './factory';
 
 const AppNavigator = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="sca-schedules">
     <Route exact path="/" component={HomeScreenCreator} />
     <Route exact path="/admin" component={AdminScreenCreator} />
   </BrowserRouter>
