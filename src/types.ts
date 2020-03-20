@@ -19,7 +19,7 @@ export interface FirebaseConfig {
   authDomain: string;
   databaseURL: string;
   projectId: string;
-  strageBucket: string;
+  storageBucket: string;
   messagingSenderId: string;
   appId: string;
 }
