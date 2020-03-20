@@ -7,10 +7,7 @@ const HomeScreenCreator = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   useEffect(() => {
-    (async () => {
-      const _schedules = await scheduleManager.getAllSchedules();
-      setSchedules(_schedules);
-    })();
+    scheduleManager.onSchedulesChanged(setSchedules);
   }, []);
 
   return <HomeScreen schedules={schedules} />;

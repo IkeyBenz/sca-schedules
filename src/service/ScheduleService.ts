@@ -3,27 +3,26 @@ import { Schedule, Database } from '../types';
 class ScheduleService {
   storage: Database;
 
-  constructor(databse: Database) {
-    this.storage = databse;
+  constructor(database: Database) {
+    this.storage = database;
   }
 
   async addSchedule(schedule: Schedule) {
-    return this.storage.write(schedule.title, schedule.rows);
+    return this.storage.push('schedules', schedule);
   }
 
-  async removeSchedule(title: string) {
-    return this.storage.delete(title);
+  async removeSchedule(_id: firebase.database.Reference) {
+    console.log(typeof this);
+    return this.storage.delete('schedules', _id);
   }
 
   async getAllSchedules(): Promise<Schedule[]> {
-    const schedules = (await this.storage.read('schedules')) || {};
-    return Object.keys(schedules).map(title => ({
-      title,
-      rows: schedules[title],
-    }));
+    return await this.storage.findAll('schedules') || [];
+
   }
 
   onSchedulesChanged(cb: (schedules: Schedule[]) => void) {
+    console.log(this);
     this.storage.onChange('schedules', data => cb(data || []));
   }
 }

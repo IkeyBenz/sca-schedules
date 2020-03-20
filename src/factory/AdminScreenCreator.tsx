@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import firebase from 'firebase';
 
 import { AdminScreen } from '../ui';
 import { scheduleManager } from '../service';
@@ -28,13 +29,17 @@ const AdminScreenCreator = () => {
     });
   };
 
+  const removeSchedule = _id => {
+    return scheduleManager.removeSchedule(_id);
+  };
+
   return (
     <AdminScreen
       schedules={currentSchedules}
       onNewScheduleTitleSet={setScheduleTitle}
       onNewScheduleDataSet={setScheduleData}
       onUploadBtnPressed={uploadSchedule}
-      onScheduleDelete={scheduleManager.removeSchedule}
+      onScheduleDelete={removeSchedule}
     />
   );
 };

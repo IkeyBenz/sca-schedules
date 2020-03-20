@@ -12,7 +12,9 @@ const SchedulePreviewItem: React.FC<SchedulePreviewItemProps> = ({
   onDeleteBtnPressed,
 }) => (
   <div className="justify-content-between m-2 row">
-    <h3>{schedule.title}</h3>
+    <h3>
+      {schedule.title} ({schedule._id})
+    </h3>
     <button className="btn btn-md btn-danger" onClick={onDeleteBtnPressed}>
       x
     </button>
@@ -24,7 +26,7 @@ interface AdminScreenProps {
   onNewScheduleTitleSet: (title: string) => void;
   onNewScheduleDataSet: (rows: DataFrame) => void;
   onUploadBtnPressed: () => void;
-  onScheduleDelete: (title: string) => Promise<boolean>;
+  onScheduleDelete: (_id: firebase.database.Reference) => Promise<boolean>;
 }
 
 const AdminScreen: React.FC<AdminScreenProps> = ({
@@ -38,10 +40,11 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
     <div className="admin-page-container">
       <div className="schedule-manager-widget row">
         <div className="col scroll-content">
-          {schedules.map(schedule => (
+          {schedules.map((schedule, idx) => (
             <SchedulePreviewItem
+              key={idx}
               schedule={schedule}
-              onDeleteBtnPressed={() => onScheduleDelete(schedule.title)}
+              onDeleteBtnPressed={() => onScheduleDelete(schedule._id)}
             />
           ))}
         </div>
