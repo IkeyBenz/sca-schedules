@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import xlsx from 'xlsx';
 
 import { useDropzone } from 'react-dropzone';
@@ -22,14 +22,12 @@ const dataframeFromExcelFile = (excelFile: File) =>
       resolve(rows);
     };
 
-    reader.onerror = function(ex) {
-      console.log(ex);
-    };
-
     reader.readAsArrayBuffer(excelFile);
   });
 
 const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
+  const [droppedFileName, setDroppedFileName] = useState(undefined);
+
   const convertFileToDF = useCallback(
     (file: File) => {
       const excelExt = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
@@ -37,7 +35,7 @@ const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
       if (!excelExt.test(file.name.toLowerCase())) {
         return alert('Only files with .xlsx or .xls extentions are allowed');
       }
-
+      setDroppedFileName(file.name);
       dataframeFromExcelFile(file).then(onSpreadSheetDropped);
     },
     [onSpreadSheetDropped],
@@ -48,13 +46,9 @@ const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
   });
 
   return (
-    <div {...getRootProps()} className="file-dropper">
+    <div {...getRootProps()} className="file-dropper p-4 my-2">
       <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop spreadsheet here</p>
-      ) : (
-        <p>SpreadSheet Uploader</p>
-      )}
+      <p>{droppedFileName ? droppedFileName : 'Drop excel file here'}</p>
     </div>
   );
 };

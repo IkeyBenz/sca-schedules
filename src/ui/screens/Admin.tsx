@@ -11,14 +11,12 @@ const SchedulePreviewItem: React.FC<SchedulePreviewItemProps> = ({
   schedule,
   onDeleteBtnPressed,
 }) => (
-  <div className="justify-content-between m-2 row">
-    <h3>
-      {schedule.title} ({schedule._id})
-    </h3>
+  <li className="list-group-item d-flex justify-content-between my-2">
+    <h3>{schedule.title}</h3>
     <button className="btn btn-md btn-danger" onClick={onDeleteBtnPressed}>
       x
     </button>
-  </div>
+  </li>
 );
 
 interface AdminScreenProps {
@@ -48,10 +46,10 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
             />
           ))}
         </div>
-        <div className="col p-0">
+        <div className="col py-2">
           <input
             type="text"
-            className="form-control"
+            className="form-control mb-2"
             placeholder="Schedule Title"
             onChange={e => onNewScheduleTitleSet(e.target.value)}
           />
