@@ -9,21 +9,25 @@ h1,
 
 .admin-page-container {
   padding: 24px;
-  height: 100vh;
   justify-content: center;
 }
 .schedule-manager-widget {
   height: 800px;
-  background-color: #192e46;
+  background-color: #0a4877;
 }
 
 .scroll-content {
   overflow: scroll;
 }
+.schedule-upload-container {
+  display: flex;
+  flex-flow: column;
+}
 
 .file-dropper {
   background-color: lightblue;
-  height: 604px;
+  border-radius: 4px;
+  flex-grow: 1;
 }
 .col {
   height: 100%;

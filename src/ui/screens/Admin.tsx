@@ -35,7 +35,7 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
   onScheduleDelete,
 }) => {
   return (
-    <div className="admin-page-container bg-dark">
+    <div className="admin-page-container">
       <div className="schedule-manager-widget row mt-5 py-5">
         <div className="col scroll-content">
           {schedules.map((schedule, idx) => (
@@ -46,10 +46,13 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
             />
           ))}
         </div>
-        <div className="col py-2">
+        <div className="col schedule-upload-container">
+          <div className="text-center">
+            <h3 className="text-light">Upload Schedules Here:</h3>
+          </div>
           <input
             type="text"
-            className="form-control mb-2"
+            className="form-control"
             placeholder="Schedule Title"
             onChange={e => onNewScheduleTitleSet(e.target.value)}
           />

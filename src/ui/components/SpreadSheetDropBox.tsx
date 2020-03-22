@@ -53,7 +53,14 @@ const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
   return (
     <div {...getRootProps()} className="file-dropper scroll-content p-4 my-2">
       <input {...getInputProps()} />
-      <p>{droppedFileName ? droppedFileName : 'Drop excel file here'}</p>
+      {!droppedFileName && (
+        <p>
+          Drop excel file here
+          <br />
+          (or click to choose file)
+        </p>
+      )}
+      {!!droppedFileName && <p>{droppedFileName}</p>}
       {!!dataRows && <ScheduleCard schedule={{ title: '', rows: dataRows }} />}
     </div>
   );
