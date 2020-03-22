@@ -2,12 +2,11 @@ body {
   margin: 0;
   height: 100vh;
 }
-h1 {
-  color: #192e46;
+h1,
+.header-title {
+  color: #0a4877;
 }
-.container {
-  height: 100vh !important;
-}
+
 .admin-page-container {
   padding: 24px;
   height: 100vh;
@@ -29,10 +28,11 @@ h1 {
 .col {
   height: 100%;
 }
-.schedule-card {
+.header-spacing {
+  height: 100px;
 }
 .table thead {
-  background-color: #192e46;
+  background-color: #0a4877;
 }
 li {
   min-width: 420px;
