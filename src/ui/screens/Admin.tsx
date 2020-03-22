@@ -33,37 +33,35 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
   onNewScheduleDataSet,
   onUploadBtnPressed,
   onScheduleDelete,
-}) => {
-  return (
-    <div className="admin-page-container">
-      <div className="schedule-manager-widget row mt-5 py-5">
-        <div className="col scroll-content">
-          {schedules.map((schedule, idx) => (
-            <SchedulePreviewItem
-              key={idx}
-              schedule={schedule}
-              onDeleteBtnPressed={() => onScheduleDelete(schedule._id)}
-            />
-          ))}
-        </div>
-        <div className="col schedule-upload-container">
-          <div className="text-center">
-            <h3 className="text-light">Upload Schedules Here:</h3>
-          </div>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Schedule Title"
-            onChange={e => onNewScheduleTitleSet(e.target.value)}
+}) => (
+  <div className="admin-page-container">
+    <div className="schedule-manager-widget row mt-5 py-5">
+      <div className="col scroll-content">
+        {schedules.map((schedule, idx) => (
+          <SchedulePreviewItem
+            key={idx}
+            schedule={schedule}
+            onDeleteBtnPressed={() => onScheduleDelete(schedule._id)}
           />
-          <SpreadSheetDropBox onSpreadSheetDropped={onNewScheduleDataSet} />
-          <button className="btn btn-success" onClick={onUploadBtnPressed}>
-            Upload Schedule
-          </button>
+        ))}
+      </div>
+      <div className="col schedule-upload-container">
+        <div className="text-center">
+          <h3 className="text-light">Upload Schedules Here:</h3>
         </div>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Schedule Title"
+          onChange={e => onNewScheduleTitleSet(e.target.value)}
+        />
+        <SpreadSheetDropBox onSpreadSheetDropped={onNewScheduleDataSet} />
+        <button className="btn btn-success" onClick={onUploadBtnPressed}>
+          Upload Schedule
+        </button>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default AdminScreen;

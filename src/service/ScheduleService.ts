@@ -17,13 +17,16 @@ class ScheduleService {
   }
 
   async getAllSchedules(): Promise<Schedule[]> {
-    return await this.storage.findAll('schedules') || [];
+    return this._alphabetize(await this.storage.findAll('schedules'));
 
   }
 
   onSchedulesChanged(cb: (schedules: Schedule[]) => void) {
-    console.log(this);
-    this.storage.onChange('schedules', data => cb(data || []));
+    this.storage.onChange('schedules', data => cb(this._alphabetize(data)));
+  }
+
+  _alphabetize(schedules: Schedule[]) {
+    return schedules ? schedules.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0) : [];
   }
 }
 
