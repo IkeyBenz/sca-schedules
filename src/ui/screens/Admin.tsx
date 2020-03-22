@@ -35,8 +35,8 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
   onScheduleDelete,
 }) => {
   return (
-    <div className="admin-page-container">
-      <div className="schedule-manager-widget row">
+    <div className="admin-page-container bg-dark">
+      <div className="schedule-manager-widget row mt-5 py-5">
         <div className="col scroll-content">
           {schedules.map((schedule, idx) => (
             <SchedulePreviewItem

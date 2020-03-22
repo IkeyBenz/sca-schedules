@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import xlsx from 'xlsx';
-
+import readExcelFile from 'read-excel-file';
 import { useDropzone } from 'react-dropzone';
-
+import ScheduleCard from './ScheduleCard';
 import { DataFrame } from '../../types';
 
 const dataframeFromExcelFile = (excelFile: File) =>
@@ -23,10 +23,12 @@ const dataframeFromExcelFile = (excelFile: File) =>
     };
 
     reader.readAsArrayBuffer(excelFile);
+    readExcelFile(excelFile).then();
   });
 
 const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
   const [droppedFileName, setDroppedFileName] = useState(undefined);
+  const [dataRows, setDataRows] = useState<DataFrame>(undefined);
 
   const convertFileToDF = useCallback(
     (file: File) => {
@@ -36,7 +38,10 @@ const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
         return alert('Only files with .xlsx or .xls extentions are allowed');
       }
       setDroppedFileName(file.name);
-      dataframeFromExcelFile(file).then(onSpreadSheetDropped);
+      dataframeFromExcelFile(file).then(rows => {
+        setDataRows(rows);
+        onSpreadSheetDropped(rows);
+      });
     },
     [onSpreadSheetDropped],
   );
@@ -46,9 +51,10 @@ const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
   });
 
   return (
-    <div {...getRootProps()} className="file-dropper p-4 my-2">
+    <div {...getRootProps()} className="file-dropper scroll-content p-4 my-2">
       <input {...getInputProps()} />
       <p>{droppedFileName ? droppedFileName : 'Drop excel file here'}</p>
+      {!!dataRows && <ScheduleCard schedule={{ title: '', rows: dataRows }} />}
     </div>
   );
 };

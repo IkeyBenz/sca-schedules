@@ -12,11 +12,10 @@ h1 {
   padding: 24px;
   height: 100vh;
   justify-content: center;
-  background-color: blue;
 }
 .schedule-manager-widget {
-  height: 500px;
-  background-color: green;
+  height: 800px;
+  background-color: #192e46;
 }
 
 .scroll-content {
@@ -25,7 +24,7 @@ h1 {
 
 .file-dropper {
   background-color: lightblue;
-  flex: 1 1 auto;
+  height: 604px;
 }
 .col {
   height: 100%;
@@ -33,5 +32,8 @@ h1 {
 .schedule-card {
 }
 .table thead {
-  background-color: #25b2fd;
+  background-color: #192e46;
+}
+li {
+  min-width: 420px;
 }
