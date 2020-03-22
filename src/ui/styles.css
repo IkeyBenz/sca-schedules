@@ -2,6 +2,9 @@ body {
   margin: 0;
   height: 100vh;
 }
+h1 {
+  color: #192e46;
+}
 .container {
   height: 100vh !important;
 }
@@ -26,4 +29,9 @@ body {
 }
 .col {
   height: 100%;
+}
+.schedule-card {
+}
+.table thead {
+  background-color: #25b2fd;
 }
