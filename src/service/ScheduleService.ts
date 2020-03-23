@@ -1,7 +1,7 @@
 import { Schedule, Database } from '../types';
 
 class ScheduleService {
-  storage: Database;
+  private storage: Database;
 
   constructor(database: Database) {
     this.storage = database;
@@ -12,13 +12,15 @@ class ScheduleService {
   }
 
   async removeSchedule(_id: firebase.database.Reference) {
-    console.log(typeof this);
     return this.storage.delete('schedules', _id);
+  }
+
+  async updateSchedule(_id: firebase.database.Reference, newSchedule: Schedule) {
+    return this.storage.write(`schedules/${_id}`, newSchedule);
   }
 
   async getAllSchedules(): Promise<Schedule[]> {
     return this._alphabetize(await this.storage.findAll('schedules'));
-
   }
 
   onSchedulesChanged(cb: (schedules: Schedule[]) => void) {
