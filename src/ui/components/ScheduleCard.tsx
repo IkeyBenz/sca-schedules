@@ -5,19 +5,27 @@ import { Schedule } from '../../types';
 
 interface ScheduleCardProps {
   schedule: Schedule;
+  stringToHighlight?: string;
 }
 
+interface SmartTextProps {
+  input: string;
+  highlight?: boolean;
+}
 /** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText = ({ input }) => {
+const SmartText = ({ input, highlight }) => {
   const urls = linkify.find(input);
   if (urls.length === 0) {
-    return <p>{input}</p>;
+    return <p className={highlight && 'highlight'}>{input}</p>;
   }
   const { value, type } = urls[0];
   return <a href={value}>{type === 'url' ? 'Click me' : value}</a>;
 };
 
-const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
+const ScheduleCard: React.FC<ScheduleCardProps> = ({
+  schedule,
+  stringToHighlight,
+}) => {
   const { title, rows } = schedule;
 
   return (
@@ -36,7 +44,13 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
             <tr key={rIdx}>
               {row.map((col, cIdx) => (
                 <td key={cIdx}>
-                  <SmartText input={col} />
+                  <SmartText
+                    input={col}
+                    highlight={
+                      stringToHighlight &&
+                      col.toLowerCase().includes(stringToHighlight)
+                    }
+                  />
                 </td>
               ))}
             </tr>

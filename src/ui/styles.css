@@ -45,3 +45,6 @@ li {
 a {
   text-decoration: underline;
 }
+.highlight {
+  background-color: yellow;
+}

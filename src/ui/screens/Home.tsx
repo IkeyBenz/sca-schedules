@@ -72,8 +72,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules: allSchedules }) => {
           </label>
         </div>
         {filterSchedules(allSchedules).map(schedule => {
-          console.log(schedule);
-          return <ScheduleCard key={schedule.title} schedule={schedule} />;
+          return (
+            <ScheduleCard
+              key={schedule.title}
+              schedule={schedule}
+              stringToHighlight={filterVal}
+            />
+          );
         })}
       </div>
     </>
