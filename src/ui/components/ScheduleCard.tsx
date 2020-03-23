@@ -1,7 +1,8 @@
 import React from 'react';
-import moment from 'moment';
+
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
+import { adjustExcelTime } from '../../util';
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -20,14 +21,6 @@ const SmartText = ({ input }) => {
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
   const { title, rows } = schedule;
 
-  const fixTimes = string => {
-    if (typeof string === 'string') return string;
-    const timeInMiliSeconds = (string - (25567 + 1)) * 86400 * 1000;
-    const fiveHours = 1000 * 60 * 60 * 5;
-    const data = new Date(timeInMiliSeconds + fiveHours);
-    return moment(data).format('LT');
-  };
-
   return (
     <div className="schedule-card my-5">
       <h1>{title}</h1>
@@ -44,7 +37,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
             <tr key={rIdx}>
               {row.map((col, cIdx) => (
                 <td key={cIdx}>
-                  <SmartText input={fixTimes(col)} />
+                  <SmartText input={adjustExcelTime(col)} />
                 </td>
               ))}
             </tr>

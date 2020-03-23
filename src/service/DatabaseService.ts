@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 
 import { Database, FirebaseConfig } from '../types';
+import { convertJsonToArrayWithIds } from '../util';
 
 class FirebaseManager implements Database {
   db: firebase.database.Database;
@@ -28,7 +29,7 @@ class FirebaseManager implements Database {
   /** Gets all documents with their id's in collection */
   async findAll(path: string) {
     return this.db.ref(path).once('value')
-    .then(s => s.val() || {}).then(this._convertTsonToArrayWithIds)
+    .then(s => s.val() || {}).then(convertJsonToArrayWithIds)
   }
 
   async delete(path: string, _id: firebase.database.Reference) {
@@ -36,12 +37,9 @@ class FirebaseManager implements Database {
   }
 
   onChange(path: string, cb: (data: any) => void) {
-    this.db.ref(path).on('value', (s) => cb(this._convertTsonToArrayWithIds(s.val())));
+    this.db.ref(path).on('value', (s) => cb(convertJsonToArrayWithIds(s.val())));
   }
 
-  _convertTsonToArrayWithIds(obj: object) {
-    return Object.entries(obj).map(([_id, val]) => ({ _id, ...val }));
-  }
 }
 
 function createFirebaseDbManager(config: FirebaseConfig) {
