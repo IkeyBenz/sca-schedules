@@ -20,7 +20,7 @@ interface SmartTextProps {
   highlight?: boolean;
 }
 /** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText = ({ input, highlight }) => {
+const SmartText: React.FC<SmartTextProps> = ({ input, highlight }) => {
   const urls = linkify.find(input);
   if (urls.length === 0) {
     return <p className={highlight && 'highlight'}>{input}</p>;
@@ -30,7 +30,7 @@ const SmartText = ({ input, highlight }) => {
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
-  const { title, rows } = schedule;
+  const { title, rows, logo } = schedule;
 
   const filteredRows = filter
     ? filterDataFrameRows(filter.type, filter.match, rows)
@@ -55,7 +55,10 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
 
   return (
     <div className="schedule-card my-5">
-      <h1>{title}</h1>
+      <div className="card-header row">
+        {!!logo && <img src={logo} className="logo" />}
+        <h1 className="schedule-title">{title}</h1>
+      </div>
       <table className="table table-striped table-bordered table-hover shadow">
         <thead className="text-light">
           <tr>

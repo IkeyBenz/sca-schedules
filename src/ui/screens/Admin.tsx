@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SpreadSheetDropBox from '../components/SpreadSheetDropBox';
+import { SpreadSheetDropBox, ImageDropBox } from '../components';
 import { Schedule, DataFrame } from '../../types';
 
 interface SchedulePreviewItemProps {
@@ -23,6 +23,7 @@ interface AdminScreenProps {
   schedules: Schedule[];
   onNewScheduleTitleSet: (title: string) => void;
   onNewScheduleDataSet: (rows: DataFrame) => void;
+  onNewScheduleLogoSet: (logo: string) => void;
   onUploadBtnPressed: () => void;
   onScheduleDelete: (_id: firebase.database.Reference) => Promise<boolean>;
 }
@@ -31,6 +32,7 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
   schedules,
   onNewScheduleTitleSet,
   onNewScheduleDataSet,
+  onNewScheduleLogoSet,
   onUploadBtnPressed,
   onScheduleDelete,
 }) => (
@@ -55,6 +57,7 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
           placeholder="Schedule Title"
           onChange={e => onNewScheduleTitleSet(e.target.value)}
         />
+        <ImageDropBox onImageDropped={onNewScheduleLogoSet} />
         <SpreadSheetDropBox onSpreadSheetDropped={onNewScheduleDataSet} />
         <button className="btn btn-success" onClick={onUploadBtnPressed}>
           Upload Schedule

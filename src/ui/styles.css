@@ -28,7 +28,23 @@ a,
 .file-dropper {
   background-color: lightblue;
   border-radius: 4px;
-  flex-grow: 1;
+  height: 680px;
+}
+.image-dropper {
+  background-color: aquamarine;
+  border-radius: 4px;
+  height: 90px;
+  padding: 15px;
+  display: inline-flex;
+}
+.logo {
+  height: 60px;
+  width: auto;
+  margin: 8px;
+}
+.schedule-title {
+  padding-left: 24px;
+  padding-top: 12px;
 }
 .col {
   height: 100%;

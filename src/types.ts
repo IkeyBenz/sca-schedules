@@ -3,6 +3,8 @@ import firebase from 'firebase';
 export interface Schedule {
   title: string;
   rows: DataFrame;
+  /** Intended to be a base64 encoded image string */
+  logo?: string;
   _id?: firebase.database.Reference;
 }
 export type DataFrame = string[][];
