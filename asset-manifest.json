@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sca-schedules/static/css/main.1ce0afd4.chunk.css",
-    "main.js": "/sca-schedules/static/js/main.8d070475.chunk.js",
-    "main.js.map": "/sca-schedules/static/js/main.8d070475.chunk.js.map",
+    "main.js": "/sca-schedules/static/js/main.6f70cfa3.chunk.js",
+    "main.js.map": "/sca-schedules/static/js/main.6f70cfa3.chunk.js.map",
     "runtime-main.js": "/sca-schedules/static/js/runtime-main.1692889e.js",
     "runtime-main.js.map": "/sca-schedules/static/js/runtime-main.1692889e.js.map",
     "static/css/2.67123b20.chunk.css": "/sca-schedules/static/css/2.67123b20.chunk.css",
     "static/js/2.27130f53.chunk.js": "/sca-schedules/static/js/2.27130f53.chunk.js",
     "static/js/2.27130f53.chunk.js.map": "/sca-schedules/static/js/2.27130f53.chunk.js.map",
     "index.html": "/sca-schedules/index.html",
-    "precache-manifest.bf2b8280f3d7d1aabc62445f7941e960.js": "/sca-schedules/precache-manifest.bf2b8280f3d7d1aabc62445f7941e960.js",
+    "precache-manifest.2903721ecdd9a0be0ce375d6f1ca2cff.js": "/sca-schedules/precache-manifest.2903721ecdd9a0be0ce375d6f1ca2cff.js",
     "service-worker.js": "/sca-schedules/service-worker.js",
     "static/css/2.67123b20.chunk.css.map": "/sca-schedules/static/css/2.67123b20.chunk.css.map",
     "static/css/main.1ce0afd4.chunk.css.map": "/sca-schedules/static/css/main.1ce0afd4.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.67123b20.chunk.css",
     "static/js/2.27130f53.chunk.js",
     "static/css/main.1ce0afd4.chunk.css",
-    "static/js/main.8d070475.chunk.js"
+    "static/js/main.6f70cfa3.chunk.js"
   ]
 }
