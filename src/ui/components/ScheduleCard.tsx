@@ -1,32 +1,21 @@
 import React from 'react';
 import moment from 'moment';
-
+import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
 
 interface ScheduleCardProps {
   schedule: Schedule;
 }
 
-const interactiveText = (() => {
-  var url = new RegExp(
-    /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
-  );
-
-  const replaceUrlsWithAnchorTag = (text: string) => {
-    const out = text
-      .split(' ')
-      .map(t => (url.test(t) ? `<a href="${t}">${t}</a>` : t));
-    console.log(out);
-    return out;
-  };
-
-  return text => {
-    if (typeof text === 'string' && url.test(text)) {
-      return replaceUrlsWithAnchorTag(text);
-    }
-    return text;
-  };
-})();
+/** If input contains a link, SmartText will replace it with a clickable ancor tag */
+const SmartText = ({ input }) => {
+  const urls = linkify.find(input);
+  if (urls.length === 0) {
+    return <p>{input}</p>;
+  }
+  const { value, type } = urls[0];
+  return <a href={value}>{type === 'url' ? 'Click me' : value}</a>;
+};
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
   const { title, rows } = schedule;
@@ -54,7 +43,9 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
           {rows.slice(1).map(row => (
             <tr>
               {row.map(col => (
-                <td>{fixTimes(col)}</td>
+                <td>
+                  <SmartText input={fixTimes(col)} />
+                </td>
               ))}
             </tr>
           ))}
