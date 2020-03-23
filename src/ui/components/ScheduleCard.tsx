@@ -2,7 +2,6 @@ import React from 'react';
 
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
-import { adjustExcelTime } from '../../util';
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -37,7 +36,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
             <tr key={rIdx}>
               {row.map((col, cIdx) => (
                 <td key={cIdx}>
-                  <SmartText input={adjustExcelTime(col)} />
+                  <SmartText input={col} />
                 </td>
               ))}
             </tr>

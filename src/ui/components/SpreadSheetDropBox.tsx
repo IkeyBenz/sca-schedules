@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import xlsx from 'xlsx';
-import readExcelFile from 'read-excel-file';
 import { useDropzone } from 'react-dropzone';
-import ScheduleCard from './ScheduleCard';
+
 import { DataFrame } from '../../types';
+import { cleanExcelData } from '../../util';
+
+import ScheduleCard from './ScheduleCard';
 
 const dataframeFromExcelFile = (excelFile: File) =>
   new Promise<DataFrame>(resolve => {
@@ -19,11 +21,10 @@ const dataframeFromExcelFile = (excelFile: File) =>
       const rows: DataFrame = [header].concat(
         rowObjs.map(obj => header.map(key => obj[key])),
       );
-      resolve(rows);
+      resolve(cleanExcelData(rows));
     };
 
     reader.readAsArrayBuffer(excelFile);
-    readExcelFile(excelFile).then();
   });
 
 const SpreadSheetDropBox = ({ onSpreadSheetDropped }) => {
