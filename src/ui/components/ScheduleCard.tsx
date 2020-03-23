@@ -34,16 +34,16 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule }) => {
       <table className="table table-striped table-bordered table-hover shadow">
         <thead className="text-light">
           <tr>
-            {rows[0].map(col => (
-              <th>{col}</th>
+            {rows[0].map((col, idx) => (
+              <th key={idx}>{col}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {rows.slice(1).map(row => (
-            <tr>
-              {row.map(col => (
-                <td>
+          {rows.slice(1).map((row, rIdx) => (
+            <tr key={rIdx}>
+              {row.map((col, cIdx) => (
+                <td key={cIdx}>
                   <SmartText input={fixTimes(col)} />
                 </td>
               ))}
