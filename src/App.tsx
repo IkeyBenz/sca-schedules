@@ -3,9 +3,6 @@ import React from 'react';
 import AppNavigator from './AppNavigator';
 import SCALogo from './ui/assets/SCALogo.png';
 
-// import * as linkify from 'linkifyjs';
-// import Linkify from 'linkifyjs/react';
-
 const App = () => (
   <>
     <header className="navbar fixed-top bg-light shadow">
@@ -15,12 +12,7 @@ const App = () => (
       </h5>
     </header>
     <div className="header-spacing"></div>
-    {/* <Linkify
-      options={{
-        onClick: () => console.log('Link has been clicked'),
-      }}> */}
     <AppNavigator />
-    {/* </Linkify> */}
   </>
 );
 
