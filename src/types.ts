@@ -5,7 +5,7 @@ export interface Schedule {
   rows: DataFrame;
   _id?: firebase.database.Reference;
 }
-export type DataFrame = (string | number)[][];
+export type DataFrame = string[][];
 export interface Database {
   read: (path: string) => Promise<any>;
   write: (path: string, data: any) => Promise<boolean>;
