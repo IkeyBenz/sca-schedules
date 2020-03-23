@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/sca-schedules/static/css/main.abf344ba.chunk.css",
-    "main.js": "/sca-schedules/static/js/main.0fe5a93f.chunk.js",
-    "main.js.map": "/sca-schedules/static/js/main.0fe5a93f.chunk.js.map",
-    "runtime-main.js": "/sca-schedules/static/js/runtime-main.1692889e.js",
-    "runtime-main.js.map": "/sca-schedules/static/js/runtime-main.1692889e.js.map",
-    "static/css/2.67123b20.chunk.css": "/sca-schedules/static/css/2.67123b20.chunk.css",
-    "static/js/2.66320e17.chunk.js": "/sca-schedules/static/js/2.66320e17.chunk.js",
-    "static/js/2.66320e17.chunk.js.map": "/sca-schedules/static/js/2.66320e17.chunk.js.map",
-    "index.html": "/sca-schedules/index.html",
-    "precache-manifest.64b9f59817b34fe62c7fa239cd957576.js": "/sca-schedules/precache-manifest.64b9f59817b34fe62c7fa239cd957576.js",
-    "service-worker.js": "/sca-schedules/service-worker.js",
-    "static/css/2.67123b20.chunk.css.map": "/sca-schedules/static/css/2.67123b20.chunk.css.map",
-    "static/css/main.abf344ba.chunk.css.map": "/sca-schedules/static/css/main.abf344ba.chunk.css.map",
-    "static/js/2.66320e17.chunk.js.LICENSE.txt": "/sca-schedules/static/js/2.66320e17.chunk.js.LICENSE.txt",
-    "static/media/SCALogo.png": "/sca-schedules/static/media/SCALogo.b2d06419.png"
+    "main.css": "/static/css/main.abf344ba.chunk.css",
+    "main.js": "/static/js/main.b1457f5f.chunk.js",
+    "main.js.map": "/static/js/main.b1457f5f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.aaa53ec6.js",
+    "runtime-main.js.map": "/static/js/runtime-main.aaa53ec6.js.map",
+    "static/css/2.67123b20.chunk.css": "/static/css/2.67123b20.chunk.css",
+    "static/js/2.0d1c9e3d.chunk.js": "/static/js/2.0d1c9e3d.chunk.js",
+    "static/js/2.0d1c9e3d.chunk.js.map": "/static/js/2.0d1c9e3d.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.423ec04bbb7b84240b701f064e3b932f.js": "/precache-manifest.423ec04bbb7b84240b701f064e3b932f.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.67123b20.chunk.css.map": "/static/css/2.67123b20.chunk.css.map",
+    "static/css/main.abf344ba.chunk.css.map": "/static/css/main.abf344ba.chunk.css.map",
+    "static/js/2.0d1c9e3d.chunk.js.LICENSE.txt": "/static/js/2.0d1c9e3d.chunk.js.LICENSE.txt",
+    "static/media/SCALogo.png": "/static/media/SCALogo.b2d06419.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.1692889e.js",
+    "static/js/runtime-main.aaa53ec6.js",
     "static/css/2.67123b20.chunk.css",
-    "static/js/2.66320e17.chunk.js",
+    "static/js/2.0d1c9e3d.chunk.js",
     "static/css/main.abf344ba.chunk.css",
-    "static/js/main.0fe5a93f.chunk.js"
+    "static/js/main.b1457f5f.chunk.js"
   ]
 }
