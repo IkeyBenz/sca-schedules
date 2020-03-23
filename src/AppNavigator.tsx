@@ -4,7 +4,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import { HomeScreenCreator, AdminScreenCreator } from './factory';
 
 const AppNavigator = () => (
-  <HashRouter basename="sca-schedules">
+  <HashRouter>
     <Route exact path="/" component={HomeScreenCreator} />
     <Route exact path="/admin" component={AdminScreenCreator} />
   </HashRouter>
