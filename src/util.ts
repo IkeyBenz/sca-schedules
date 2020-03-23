@@ -16,3 +16,19 @@ export const cleanExcelData = (d: DataFrame) =>
 
 export const convertJsonToArrayWithIds = (obj: object) =>
     Object.entries(obj).map(([_id, val]) => ({ _id, ...val }));
+
+export const filterDataFrameRows = (filterType: string, filterVal: string, data: DataFrame) => {
+    const header = [...data[0]];
+    const searchableColIndex = header.findIndex(key =>
+        key.toLowerCase().includes(filterType)
+    );
+    if (searchableColIndex === -1) { // This table doesn't have a column for specified filterType
+        return [header];
+    }
+    const filteredRows = data.slice(1).filter(row => {
+        let cellText = row[searchableColIndex];
+        if (filterType === 'time') cellText = cellText.replace(':', '');
+        return cellText.toLowerCase().includes(filterVal.toLowerCase());
+    });
+    return [header].concat(filteredRows);
+}

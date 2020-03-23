@@ -2,9 +2,16 @@ import React from 'react';
 
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
+import { filterDataFrameRows } from '../../util';
 
 interface ScheduleCardProps {
   schedule: Schedule;
+  filter?: {
+    /** The column in the header to look for */
+    type: string;
+    /** The string to compare cells with */
+    match: string;
+  };
   stringToHighlight?: string;
 }
 
@@ -22,11 +29,29 @@ const SmartText = ({ input, highlight }) => {
   return <a href={value}>{type === 'url' ? 'Click me' : value}</a>;
 };
 
-const ScheduleCard: React.FC<ScheduleCardProps> = ({
-  schedule,
-  stringToHighlight,
-}) => {
+const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   const { title, rows } = schedule;
+
+  const filteredRows = filter
+    ? filterDataFrameRows(filter.type, filter.match, rows)
+    : rows;
+
+  if (filteredRows.length === 1) {
+    // No rows matched the filter criteria
+    return null;
+  }
+
+  const filterColIdx =
+    filter && rows[0].findIndex(col => col.toLowerCase().includes(filter.type));
+
+  const shouldHighlight = (colText: string, colIdx) => {
+    const text = colText.toLowerCase();
+    return filterColIdx === colIdx
+      ? filter.type === 'time'
+        ? text.replace(':', '').includes(filter.match)
+        : text.includes(filter.match)
+      : false;
+  };
 
   return (
     <div className="schedule-card my-5">
@@ -34,22 +59,19 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({
       <table className="table table-striped table-bordered table-hover shadow">
         <thead className="text-light">
           <tr>
-            {rows[0].map((col, idx) => (
+            {filteredRows[0].map((col, idx) => (
               <th key={idx}>{col}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {rows.slice(1).map((row, rIdx) => (
+          {filteredRows.slice(1).map((row, rIdx) => (
             <tr key={rIdx}>
               {row.map((col, cIdx) => (
                 <td key={cIdx}>
                   <SmartText
                     input={col}
-                    highlight={
-                      stringToHighlight &&
-                      col.toLowerCase().includes(stringToHighlight)
-                    }
+                    highlight={shouldHighlight(col, cIdx)}
                   />
                 </td>
               ))}
