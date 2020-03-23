@@ -3,6 +3,7 @@ body {
   height: 100vh;
 }
 h1,
+a,
 .header-title {
   color: #0a4877;
 }
@@ -40,4 +41,7 @@ h1,
 }
 li {
   min-width: 420px;
+}
+a {
+  text-decoration: underline;
 }
