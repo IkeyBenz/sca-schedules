@@ -26,7 +26,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
               <option value="time">Time of day</option>
               <option value="day">Day of week</option>
               <option value="class">Class</option>
-              <option value="rabbi">Rabbi</option>
+              <option value="teacher">Teacher</option>
             </select>
             {filterType !== 'none' && (
               <input

@@ -26,7 +26,7 @@ const SmartText: React.FC<SmartTextProps> = ({ input, highlight }) => {
     return <p className={highlight && 'highlight'}>{input}</p>;
   }
   const { value, type } = urls[0];
-  return <a href={value}>{type === 'url' ? 'Click me' : value}</a>;
+  return <a href={value}>{type === 'url' ? 'Click here' : value}</a>;
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
