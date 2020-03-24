@@ -16,13 +16,13 @@ const Header: React.FC = props => (
       </div>
 
       <nav className="w-100 d-flex justify-content-center my-3">
-        <a href="/#/letters" className="btn btn-primary mx-2">
+        <a href="/#/letters" className="btn btn-primary btn-sm mx-2">
           Letters
         </a>
-        <a href="mailto:info@scaupdates.org" className="btn btn-primary mx-2">
+        <a href="mailto:info@scaupdates.org" className="btn btn-primary btn-sm mx-2">
           Contact
         </a>
-        <a href="mailto:info@scaupdates.org?subject=Tehillim%20Name%20ubmission" className="btn btn-primary mx-2">
+        <a href="mailto:info@scaupdates.org?subject=Tehillim%20Name%20ubmission" className="btn btn-primary btn-sm mx-2">
           Tehillim Request
         </a>
       </nav>
