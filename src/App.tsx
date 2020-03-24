@@ -6,9 +6,11 @@ import SCALogo from './ui/assets/SCALogo.png';
 const App = () => (
   <>
     <header className="navbar fixed-top bg-light shadow">
-      <img className="navbar-brand py-0" src={SCALogo} alt="SCA" height="60" />
+      <a href="/#">
+        <img className="navbar-brand py-0" src={SCALogo} alt="SCA" height="60" />
+      </a>
       <h5 className="w-100 text-center header-title m-0">
-        Zoom Class Schedules:
+        SCA Affiliate Synagogue Virtual Classes
       </h5>
     </header>
     <div className="header-spacing"></div>
