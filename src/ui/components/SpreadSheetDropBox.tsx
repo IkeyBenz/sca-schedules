@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { DataFrame } from '../../types';
@@ -8,13 +8,17 @@ import ScheduleCard from './ScheduleCard';
 
 interface SpreadSheetDropBoxProps {
   onSpreadSheetDropped: (data: DataFrame) => void;
+  currentSpreadSheet?: DataFrame;
 }
 
 const SpreadSheetDropBox: React.FC<SpreadSheetDropBoxProps> = ({
   onSpreadSheetDropped,
+  currentSpreadSheet,
 }) => {
   const [droppedFileName, setDroppedFileName] = useState(undefined);
   const [dataRows, setDataRows] = useState<DataFrame>(undefined);
+
+  useEffect(() => setDataRows(currentSpreadSheet), [currentSpreadSheet]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (files: File[]) => {

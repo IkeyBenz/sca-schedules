@@ -7,41 +7,34 @@ import { Schedule, DataFrame } from '../types';
 const AdminScreenCreator = () => {
   const [currentSchedules, setCurrentSchedules] = useState<Schedule[]>([]);
 
-  const [scheduleData, setScheduleData] = useState<DataFrame>(undefined);
-  const [scheduleTitle, setScheduleTitle] = useState<string>('');
-  const [scheduleLogo, setScheduleLogo] = useState<string>(undefined);
-
   useEffect(() => {
     scheduleManager.onSchedulesChanged(setCurrentSchedules);
   }, []);
 
-  const uploadSchedule = () => {
-    if (!scheduleData) {
+  const uploadSchedule = schedule => {
+    if (!schedule.rows) {
       return alert('Please upload a spreadsheet first');
     }
-    if (!scheduleTitle) {
+    if (!schedule.title) {
       return alert('Please enter the title of this table');
     }
-
-    scheduleManager.addSchedule({
-      title: scheduleTitle,
-      rows: scheduleData,
-      logo: scheduleLogo,
-    });
+    return scheduleManager.addSchedule(schedule);
   };
 
   const removeSchedule = _id => {
     return scheduleManager.removeSchedule(_id);
   };
 
+  const updateSchedule = (_id, updatedSchedule) => {
+    return scheduleManager.updateSchedule(_id, updatedSchedule);
+  };
+
   return (
     <AdminScreen
       schedules={currentSchedules}
-      onNewScheduleTitleSet={setScheduleTitle}
-      onNewScheduleDataSet={setScheduleData}
-      onNewScheduleLogoSet={setScheduleLogo}
-      onUploadBtnPressed={uploadSchedule}
-      onScheduleDelete={removeSchedule}
+      createSchedule={uploadSchedule}
+      updateSchedule={updateSchedule}
+      deleteSchedule={removeSchedule}
     />
   );
 };

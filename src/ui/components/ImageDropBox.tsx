@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { convertImageFileToBase64Str } from '../../util';
 
 interface ImageDropBoxProps {
-  onImageDropped: (image: string | ArrayBuffer) => void;
+  onImageDropped: (image: string) => void;
+  currentImage?: string;
 }
-const ImageDropBox: React.FC<ImageDropBoxProps> = ({ onImageDropped }) => {
-  const [previewImage, setPreviewImage] = useState(undefined);
+const ImageDropBox: React.FC<ImageDropBoxProps> = ({
+  onImageDropped,
+  currentImage,
+}) => {
+  const [previewImage, setPreviewImage] = useState(currentImage);
+
+  useEffect(() => setPreviewImage(currentImage), [currentImage]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (files: File[]) => {
@@ -19,8 +25,8 @@ const ImageDropBox: React.FC<ImageDropBoxProps> = ({ onImageDropped }) => {
         );
       }
       convertImageFileToBase64Str(file).then(base64URL => {
-        setPreviewImage(base64URL);
-        onImageDropped(base64URL);
+        setPreviewImage(base64URL as string);
+        onImageDropped(base64URL as string);
       });
     },
   });
