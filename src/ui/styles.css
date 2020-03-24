@@ -8,6 +8,10 @@ a,
   color: #0a4877;
 }
 
+table {
+  table-layout: fixed;
+}
+
 .admin-page-container {
   padding: 24px;
   justify-content: center;

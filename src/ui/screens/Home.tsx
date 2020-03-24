@@ -14,8 +14,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
   return (
     <>
       <div className="container">
-        <LiveItems
-          schedules={schedules} />
+        <LiveItems schedules={schedules} />
       </div>
       <div className="container">
         <div className="input-group mt-3">
@@ -42,10 +41,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
             )}
           </label>
         </div>
-        {schedules.map(schedule => {
+        {schedules.map((schedule, idx) => {
           return (
             <ScheduleCard
-              key={schedule.title}
+              key={idx}
               schedule={schedule}
               filter={
                 !(filterType === 'none' || filterVal === '') && {
