@@ -41,6 +41,17 @@ table {
   padding: 15px;
   display: inline-flex;
 }
+.image-dropper form {
+  position: relative;
+}
+#image-drop, #file-drop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+}
 .logo {
   height: 60px;
   width: auto;
@@ -68,4 +79,16 @@ table a {
 }
 .highlight {
   background-color: yellow;
+}
+.attachment-card {
+  text-align: center;
+}
+.attachment-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.attachment-cover {
+  max-width: 100%;
+  margin-bottom: 8px;
 }

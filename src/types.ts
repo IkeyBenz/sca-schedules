@@ -7,6 +7,14 @@ export interface Schedule {
   logo?: string;
   _id?: firebase.database.Reference;
 }
+
+export interface Attachment {
+  title: string;
+  cover?: string;
+  file: string;
+  body?: string;
+  _id?: firebase.database.Reference;
+}
 export type DataFrame = string[][];
 export interface Database {
   read: (path: string) => Promise<any>;

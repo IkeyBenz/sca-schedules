@@ -23,7 +23,7 @@ interface LiveItemsProps {
 
 const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
   const rows = [];
-  schedules.map(schedule => {
+  schedules.forEach(schedule => {
     rows.push(...schedule.rows);
   });
   const headerRows = rows[0];
@@ -48,7 +48,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
     } else if (rowDays.includes(days[now.getDay()])) {
       flag = true;
     } else if (rowDays.includes('-')) {
-      const rowDaysArr = rowDays.split(/[^\w\-]/);
+      const rowDaysArr = rowDays.split(/[^\w-]/);
       rowDaysArr.forEach(rowDay => {
         if (rowDay.includes('-')) {
           const leftRight = rowDay.split('-');

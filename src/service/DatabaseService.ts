@@ -5,10 +5,12 @@ import { convertJsonToArrayWithIds } from '../util';
 
 class FirebaseManager implements Database {
   db: firebase.database.Database;
+  storage: firebase.storage.Storage;
 
   constructor(config: FirebaseConfig) {
     const app = firebase.initializeApp(config);
     this.db = app.database();
+    this.storage = app.storage();
   }
 
   async read(path: string) {
