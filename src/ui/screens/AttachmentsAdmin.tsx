@@ -144,13 +144,13 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
           </div>
 
           <textarea
-            className="form-control"
+            className="form-control mt-2"
             placeholder="Caption"
             value={attachmentBeingEdited?.body || ''}
             onChange={e => updateAttachmentBeingEdited({ body: e.target.value })}
           />
 
-          <button className="btn btn-success" onClick={onSaveBtnPressed}>
+          <button className="btn btn-success mt-2" onClick={onSaveBtnPressed}>
             {attachmentBeingEdited?._id ? 'Save updates' : 'Upload Attachment'}
           </button>
         </div>

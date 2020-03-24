@@ -13,13 +13,19 @@ const Header: React.FC = props => (
             height="60"
           />
         </a>
-        <a href="/#/letters" className="btn btn-primary pt-3" style={{marginLeft: 'auto'}}>
+      </div>
+
+      <nav className="w-100 d-flex justify-content-center my-3">
+        <a href="/#/letters" className="btn btn-primary mx-2">
           Letters
         </a>
-        <a href="mailto:info@scaupdates.org" className="btn btn-primary pt-3">
+        <a href="mailto:info@scaupdates.org" className="btn btn-primary mx-2">
           Contact
         </a>
-      </div>
+        <a href="mailto:info@scaupdates.org?subject=Tehillim%20Name%20ubmission" className="btn btn-primary mx-2">
+          Tehillim Request
+        </a>
+      </nav>
 
       <h5 className="w-100 text-center header-title m-0">
         SCA Affiliate Synagogue Virtual Classes

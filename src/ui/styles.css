@@ -65,7 +65,7 @@ table {
   height: 100%;
 }
 .header-spacing {
-  height: 100px;
+  height: 170px;
 }
 .table thead,
 .btn-primary {
@@ -91,4 +91,16 @@ table a {
 .attachment-cover {
   max-width: 100%;
   margin-bottom: 8px;
+}
+
+.schedule-card table {
+  min-width: 500px;
+}
+@media (max-width: 500px) {
+  .schedule-card table {
+    zoom: 0.5;
+  }
+}
+label.hidden {
+  display: none;
 }
