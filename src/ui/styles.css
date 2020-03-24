@@ -56,13 +56,14 @@ table {
 .header-spacing {
   height: 100px;
 }
-.table thead {
+.table thead,
+.btn-primary {
   background-color: #0a4877;
 }
 li {
   min-width: 420px;
 }
-a {
+table a {
   text-decoration: underline;
 }
 .highlight {
