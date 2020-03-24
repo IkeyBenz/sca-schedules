@@ -22,7 +22,7 @@ const Header: React.FC = props => (
         <a href="mailto:info@scaupdates.org" className="btn btn-primary btn-sm mx-2">
           Contact
         </a>
-        <a href="mailto:info@scaupdates.org?subject=Tehillim%20Name%20ubmission" className="btn btn-primary btn-sm mx-2">
+        <a href="mailto:info@scaupdates.org?subject=Tehillim%20Name%20Submission" className="btn btn-primary btn-sm mx-2">
           Tehillim Request
         </a>
       </nav>
