@@ -55,8 +55,12 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
 
   return (
     <div className="schedule-card my-5">
-      <div className="card-header row">
-        {!!logo && <img src={logo} className="logo" />}
+      <div className="card-header">
+        {!!logo && (
+          <div className="w-100">
+            <img src={logo} className="logo ml-4" />
+          </div>
+        )}
         <h1 className="schedule-title">{title}</h1>
       </div>
       <table className="table table-striped table-bordered table-hover shadow">
