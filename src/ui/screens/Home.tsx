@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScheduleCard } from '../components';
+import { ScheduleCard, LiveItems } from '../components';
 
 import { Schedule } from '../../types';
 
@@ -13,6 +13,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
 
   return (
     <>
+      <div className="container">
+        <LiveItems
+          schedules={schedules} />
+      </div>
       <div className="container">
         <div className="input-group mt-3">
           <label htmlFor="filter" className="header-title">
