@@ -4,11 +4,11 @@ import { ScheduleCard, LiveItems } from '../components';
 import { Schedule } from '../../types';
 import { useLocation } from 'react-router-dom';
 
-interface HomeScreenProps {
+interface ClassesScreenProps {
   schedules: Schedule[];
 }
 
-const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
+const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   const [filterType, setfilterType] = useState<string>('none');
   const [filterVal, setFilterVal] = useState<string>('');
   let location = useLocation();
@@ -22,15 +22,19 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
     <>
       {(() => {
         if (filterVal !== 'minyan') {
-          return <div className="container">
-            <LiveItems schedules={schedules} />
-          </div>
+          return (
+            <div className="container">
+              <LiveItems schedules={schedules} />
+            </div>
+          );
         }
       })()}
       <div className="container">
         <div className="row">
           <div className="input-group mt-3">
-            <label htmlFor="filter" className={filterType === 'topic' ? 'hidden' : 'header-title'}>
+            <label
+              htmlFor="filter"
+              className={filterType === 'topic' ? 'hidden' : 'header-title'}>
               Filter By:{' '}
               <select
                 name="filter"
@@ -73,4 +77,4 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
   );
 };
 
-export default HomeScreen;
+export default ClassesScreen;

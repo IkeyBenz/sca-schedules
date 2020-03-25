@@ -1,14 +1,7 @@
 import React from 'react';
 
-import { Header } from './ui/components';
 import AppNavigator from './AppNavigator';
-import SCALogo from './ui/assets/SCALogo.png';
 
-const App = () => (
-  <>
-    <Header />
-    <AppNavigator />
-  </>
-);
+const App = () => <AppNavigator />;
 
 export default App;
