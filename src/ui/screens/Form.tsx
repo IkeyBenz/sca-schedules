@@ -73,9 +73,14 @@ const FormScreen: React.FC<FormScreenProps> = ({ forms }) => {
           </thead>
           <tbody>
           {forms.map((person, idx) => {
+            let hebrew = ~person.firstName.search(/[\u0590-\u05FF]/) && ~person.mothersName.search(/[\u0590-\u05FF]/);
+            let benbat = person.benbat;
+            if (hebrew) {
+              benbat = benbat === 'ben' ? 'בן' : 'בת'
+            }
             return (
               <tr key={idx}>
-                <td>{person.firstName} {person.benbat} {person.mothersName}</td>
+                <td dir={hebrew && 'rtl'}>{person.firstName} {benbat} {person.mothersName}</td>
               </tr>
             )
           })}

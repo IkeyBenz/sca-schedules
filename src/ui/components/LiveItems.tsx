@@ -3,7 +3,7 @@ import React from 'react';
 import moment from 'moment';
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
-import { filterDataFrameRows } from '../../util';
+import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface SmartTextProps {
   input: string;
@@ -32,7 +32,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules, filter, heading }) => 
   schedules.forEach(schedule => {
     const filteredRows = filter?.match === 'minyan'
       ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
-      : schedule.rows;
+      : excludeFilterDataFrameRows('topic', 'minyan', schedule.rows);
     rows.push(...filteredRows);
   });
   const headerRows = rows[0];
