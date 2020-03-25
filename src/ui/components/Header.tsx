@@ -6,6 +6,7 @@ import SCALogo from '../assets/SCALogo.png';
 
 const Header: React.FC = props => {
   const location = useLocation();
+  const pageName = mainRoutes[location.pathname]?.pageName;
   return (
     <>
       <header className="navbar fixed-top bg-light shadow">
@@ -28,7 +29,7 @@ const Header: React.FC = props => {
         </nav>
 
         <h5 className="w-100 text-center header-title m-0">
-          SCA Affiliate Synagogue - {mainRoutes[location.pathname].pageName}
+          SCA Affiliate Synagogue{pageName ? ` - ${pageName}` : ''}
         </h5>
       </header>
       <div className="header-spacing"></div>
