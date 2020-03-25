@@ -23,19 +23,19 @@ interface LiveItemsProps {
 
 const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
   const rows = [];
-  schedules.map(schedule => {
+  schedules.forEach(schedule => {
     rows.push(...schedule.rows);
   });
   const headerRows = rows[0];
 
   const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
   ]
 
   const now = new Date();
@@ -48,12 +48,16 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
     } else if (rowDays.includes(days[now.getDay()])) {
       flag = true;
     } else if (rowDays.includes('-')) {
-      const rowDaysArr = rowDays.split(/[^\w\-]/);
+      const rowDaysArr = rowDays.split(/[^\w-]/);
       rowDaysArr.forEach(rowDay => {
         if (rowDay.includes('-')) {
           const leftRight = rowDay.split('-');
-          const left = days.indexOf(leftRight[0]);
-          const right = days.indexOf(leftRight[1]);
+          const left = days.findIndex((v) => {
+            return leftRight[0].includes(v);
+          })
+          const right = days.findIndex((v) => {
+            return leftRight[1].includes(v);
+          })
           if (left < now.getDay() && right > now.getDay()) {
             flag = true;
           }
@@ -82,7 +86,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
   return (
     <div className="schedule-card my-5">
       <div className="card-header row">
-        <h1 className="schedule-title">Live Classes</h1>
+        <h1 className="schedule-title">Classes Going on Right Now</h1>
       </div>
       <table className="table table-striped table-bordered table-hover shadow">
         <thead className="text-light">

@@ -1,0 +1,59 @@
+import React, { useState, useEffect } from 'react';
+
+import { Form } from '../../types';
+import { database } from '../../service/index';
+
+const FormScreen: React.FC = () => {
+  const [firstName, setFirstName] = useState<string>('');
+  const [benbat, setBenbat] = useState<string>('');
+  const [mothersName, setMothersName] = useState<string>('');
+
+  const success = (e) => {
+    setFirstName('');
+    setBenbat('');
+    setMothersName('');
+  }
+
+  const fail = (e) => {
+    alert('fail');
+  }
+
+  const submit = (e) => {
+    e.preventDefault();
+    database.push('tehillim', {firstName, benbat, mothersName}).then(success, fail);
+  }
+  
+  return (
+    <div className="container">
+      <p>
+        We are compiling a list of those who have fallen ill to share with the community so that we may dedicate our prayers and learning in the merit of their complete and speedy recovery.
+      </p>
+      <form onSubmit={submit}>
+        <div className="form-group">
+          <label htmlFor="firstName">Hebrew First Name</label>
+          <input type="text" id="firstName" className="form-control" onChange={e => setFirstName(e.target.value)} value={firstName} required />
+        </div>
+        <div className="form-group">
+          <label>Ben/Bat</label>
+          <div className="form-check">
+            <input type="radio" id="ben" name="benbat" value="ben" checked={!!(benbat === 'ben')} onChange={e => e.target.checked && setBenbat(e.target.value)} required />
+            <label htmlFor="ben">Ben</label>
+          </div>
+          <div className="form-check">
+            <input type="radio" id="bat" name="benbat" value="bat" checked={!!(benbat === 'bat')} onChange={e => e.target.checked && setBenbat(e.target.value)} />
+            <label htmlFor="bat">Bat</label>
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="mothersName">Mother's Hebrew Name</label>
+          <input type="text" id="mothersName" className="form-control" onChange={e => setMothersName(e.target.value)} value={mothersName} required />
+        </div>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default FormScreen;

@@ -1,6 +1,7 @@
 import { FirebaseConfig } from '../types';
 
 import createScheduleManager from './ScheduleService';
+import createAttachmentManager from './AttachmentService';
 import createFirebaseDbManager from './DatabaseService';
 
 const firebaseConfig: FirebaseConfig = {
@@ -15,5 +16,6 @@ const firebaseConfig: FirebaseConfig = {
 
 const database = createFirebaseDbManager(firebaseConfig);
 const scheduleManager = createScheduleManager(database);
+const attachmentManager = createAttachmentManager(database);
 
-export { scheduleManager };
+export { database, scheduleManager, attachmentManager };

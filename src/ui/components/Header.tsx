@@ -5,19 +5,36 @@ const Header: React.FC = props => (
   <>
     <header className="navbar fixed-top bg-light shadow">
       <div className="w-100 d-flex justify-content-between">
-        <img
-          className="navbar-brand py-0"
-          src={SCALogo}
-          alt="SCA"
-          height="60"
-        />
-        <a href="mailto:info@scaupdates.org" className="btn btn-primary pt-3">
-          Contact Us
+        <a href="/#">
+          <img
+            className="navbar-brand py-0"
+            src={SCALogo}
+            alt="SCA"
+            height="60"
+          />
         </a>
       </div>
 
+      <nav className="site-nav w-100 d-flex my-3">
+        <a href="/#/classes">
+          Classes
+        </a>
+        <a href="/#/minyanim">
+          Minyanim
+        </a>
+        <a href="/#/letters">
+          Letters
+        </a>
+        <a href="/#/tehillim">
+          Tehillim Request
+        </a>
+        <a href="mailto:info@scaupdates.org">
+          Contact
+        </a>
+      </nav>
+
       <h5 className="w-100 text-center header-title m-0">
-        Zoom Class Schedules:
+        SCA Affiliate Synagogue Virtual Classes
       </h5>
     </header>
     <div className="header-spacing"></div>

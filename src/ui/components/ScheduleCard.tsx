@@ -45,6 +45,9 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
     filter && rows[0].findIndex(col => col.toLowerCase().includes(filter.type));
 
   const shouldHighlight = (colText: string, colIdx) => {
+    if (filter?.match === 'minyan') {
+      return false;
+    }
     const text = colText.toLowerCase();
     return filterColIdx === colIdx
       ? filter.type === 'time'
