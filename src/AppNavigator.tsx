@@ -35,26 +35,26 @@ const AdminNavigator = () => (
 );
 
 export const mainRoutes: RouteMap = {
-  '/': { exact: true, Component: IndexScreenCreator },
+  '/': { exact: true, Component: IndexScreenCreator, pageName: 'SCA Affiliate Synagogue'},
   '/classes': {
     exact: true,
     Component: ClassesScreenCreator,
-    pageName: 'Virtual Classes Schedules',
+    pageName: 'SCA Affiliate Synagogue - Virtual Classes Schedules',
   },
   '/minyanim': {
     exact: true,
     Component: ClassesScreenCreator,
-    pageName: 'Virtual Minyanim Schedules',
+    pageName: 'SCA Affiliate Synagogue - Virtual Minyanim Schedules',
   },
   '/letters': {
     exact: true,
     Component: AttachmentsScreenCreator,
-    pageName: 'Covid-19 Letters',
+    pageName: 'COVID-19 Letters',
   },
   '/tehillim': {
     exact: true,
     Component: FormScreenCreator,
-    pageName: 'Tehilim Request',
+    pageName: 'SCA Tehilim Requests',
   },
   '/admin': { Component: AdminNavigator },
 };

@@ -68,7 +68,7 @@ const FormScreen: React.FC<FormScreenProps> = ({ forms }) => {
         <table className="table table-striped table-bordered table-hover shadow">
           <thead className="text-light">
             <tr>
-              <th>Submitted Names</th>
+              <th>Please dedicate prayers and learning in the merit of their complete and speedy recovery.</th>
             </tr>
           </thead>
           <tbody>

@@ -43,6 +43,8 @@ table {
 }
 .image-dropper form {
   position: relative;
+  width: 250px;
+  overflow: hidden;
 }
 #image-drop,
 #file-drop {
@@ -126,6 +128,12 @@ table a {
   .attachment-card {
     width: 29.333333%;
     flex-basis: 29.333333%;
+  }
+}
+
+@media (max-width: 767px) {
+  .centered-image {
+    display: none;
   }
 }
 

@@ -29,7 +29,7 @@ const Header: React.FC = props => {
         </nav>
 
         <h5 className="w-100 text-center header-title m-0">
-          SCA Affiliate Synagogue{pageName ? ` - ${pageName}` : ''}
+          {pageName ? pageName : ''}
         </h5>
       </header>
       <div className="header-spacing"></div>
