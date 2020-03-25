@@ -55,6 +55,7 @@ const ImageDropBox: React.FC<ImageDropBoxProps> = ({
           accept="image/*"
           randomizeFilename
           storageRef={database.storage.ref("/logos")}
+          metadata={{cacheControl: 'max-age=2592000'}}
           onUploadStart={handleUploadStart}
           onUploadSuccess={handleUploadSuccess}
           id="image-drop"

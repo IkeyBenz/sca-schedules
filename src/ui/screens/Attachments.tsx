@@ -11,7 +11,7 @@ const AttachmentScreen: React.FC<AttachmentScreenProps> = ({ attachments }) => {
   return (
     <>
       <div className="container">
-        <div className="row">
+        <div className="row align-items-stretch">
           {attachments.map((attachment, idx) => {
             return (
               <AttachmentCard

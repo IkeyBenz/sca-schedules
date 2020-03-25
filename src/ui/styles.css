@@ -82,10 +82,19 @@ table a {
 }
 .attachment-card {
   text-align: center;
+  background-color: lightblue;
+  margin: 1rem 2%;
 }
+
 .attachment-card a {
   color: inherit;
   text-decoration: none;
+  height: 100%;
+}
+
+.attachment-card .card-header {
+  background: transparent;
+  border: 0;
 }
 
 .attachment-cover {
@@ -93,10 +102,31 @@ table a {
   margin-bottom: 8px;
 }
 
-.schedule-card table {
-  min-width: 500px;
+.site-nav {
+  overflow-x: auto;
+  justify-content: center;
 }
+
+.site-nav a {
+  font-size: 18px;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0 4px;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .attachment-card {
+    width: 29.333333%;
+    flex-basis: 29.333333%;
+  }
+}
+
 @media (max-width: 500px) {
+  .site-nav {
+    justify-content: flex-start;
+  }
   .schedule-card table {
     font-size: 12px;
   }
@@ -104,7 +134,29 @@ table a {
   .schedule-card th, .schedule-card td {
     padding: 0.3em;
   }
+
+  .header-title {
+    font-size: 1rem;
+  }
+
+  .site-nav-index .btn {
+    font-size: 16px;
+  }
 }
+
 label.hidden {
   display: none;
+}
+
+.site-nav-index .btn {
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.attachment-card .btn {
+  margin-bottom: 0.5rem;
 }

@@ -10,8 +10,8 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({ attachment }) => {
   const { title, file, cover, body } = attachment;
 
   return (
-    <div className="attachment-card my-5 col-md-4 col-sm-12">
-      <a href={file} target="_blank">
+    <div className="attachment-card px-0 col-md-4">
+      <a href={file} target="_blank" className="d-flex flex-column align-items-center justify-content-center">
         <div className="card-header">
           {!!cover && (
             <div className="w-100">
@@ -19,8 +19,11 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({ attachment }) => {
             </div>
           )}
           <h3 className="attachment-title">{title}</h3>
-          <p className="attachment-caption">{body}</p>
+          {!!body && (
+            <p className="attachment-caption">{body}</p>
+          )}
         </div>
+        <span className="btn btn-secondary">Click to download</span>
       </a>
     </div>
   );

@@ -60,7 +60,7 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
 
   const onSaveBtnPressed = () => {
     const { title, file, cover, body } = attachmentBeingEdited;
-    const newAttachment = { title, file, cover, body };
+    const newAttachment = { title, file, cover: cover || '', body: body || ''};
     if (attachmentBeingEdited._id) {
       updateAttachment(attachmentBeingEdited._id, newAttachment);
     } else {
@@ -126,6 +126,7 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
             <form>
               <FileUploader
                 randomizeFilename
+                metadata={{cacheControl: 'max-age=2592000'}}
                 storageRef={database.storage.ref("/attachments")}
                 onUploadStart={handleUploadStart}
                 onUploadSuccess={handleUploadSuccess}

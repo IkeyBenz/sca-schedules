@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ScheduleCard, LiveItems } from '../components';
 
 import { Schedule } from '../../types';
+import { useLocation } from 'react-router-dom';
 
 interface HomeScreenProps {
   schedules: Schedule[];
@@ -10,15 +11,25 @@ interface HomeScreenProps {
 const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
   const [filterType, setfilterType] = useState<string>('none');
   const [filterVal, setFilterVal] = useState<string>('');
+  let location = useLocation();
+
+  if (location.pathname === '/minyanim' && filterType !== 'topic') {
+    setfilterType('topic');
+    setFilterVal('minyan');
+  }
 
   return (
     <>
-      <div className="container">
-        <LiveItems schedules={schedules} />
-      </div>
+      {(() => {
+        if (filterVal !== 'minyan') {
+          return <div className="container">
+            <LiveItems schedules={schedules} />
+          </div>
+        }
+      })()}
       <div className="container">
         <div className="row">
-          <div className="input-group mt-3 col-md-3 col-sm-6">
+          <div className="input-group mt-3">
             <label htmlFor="filter" className={filterType === 'topic' ? 'hidden' : 'header-title'}>
               Filter By:{' '}
               <select
@@ -41,9 +52,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ schedules }) => {
                 />
               )}
             </label>
-          </div>
-          <div className="input-group mt-3 col-md-3 col-sm-6">
-            <label htmlFor="minaynim"><input type="checkbox" onChange={(e) => {if (e.target.checked) {setFilterVal('minyan'); setfilterType('topic')} else {setFilterVal(''); setfilterType('')}}}/>Show minyanim</label>
           </div>
         </div>
         {schedules.map((schedule, idx) => {

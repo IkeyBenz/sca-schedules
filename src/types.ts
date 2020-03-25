@@ -15,6 +15,12 @@ export interface Attachment {
   body?: string;
   _id?: firebase.database.Reference;
 }
+export interface Form {
+  firstName: string;
+  benbat: string;
+  mothersName: string;
+  _id?: firebase.database.Reference;
+}
 export type DataFrame = string[][];
 export interface Database {
   read: (path: string) => Promise<any>;
