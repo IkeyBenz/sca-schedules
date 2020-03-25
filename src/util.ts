@@ -54,7 +54,6 @@ export const filterDataFrameRows = (filterType: string, filterVal: string, data:
     if (searchableColIndex === -1) { // This table doesn't have a column for specified filterType
         return [header];
     }
-    console.log(data);
     const filteredRows = data.slice(1).filter(row => {
         let cellText = row[searchableColIndex];
         if (filterType === 'time') cellText = cellText.replace(':', '');

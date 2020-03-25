@@ -43,7 +43,7 @@ export const mainRoutes: RouteMap = {
   },
   '/minyanim': {
     exact: true,
-    Component: IndexScreenCreator,
+    Component: ClassesScreenCreator,
     pageName: 'Virtual Minyanim Schedules',
   },
   '/letters': {
