@@ -21,18 +21,23 @@ const SmartText: React.FC<SmartTextProps> = ({ input }) => {
 interface LiveItemsProps {
   schedules: Schedule[];
   filter?: {
-    type: string,
-    match: string,
+    type: string;
+    match: string;
   };
   heading: string;
 }
 
-const LiveItems: React.FC<LiveItemsProps> = ({ schedules, filter, heading }) => {
+const LiveItems: React.FC<LiveItemsProps> = ({
+  schedules,
+  filter,
+  heading,
+}) => {
   const rows = [];
   schedules.forEach(schedule => {
-    const filteredRows = filter?.match === 'minyan'
-      ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
-      : excludeFilterDataFrameRows('topic', 'minyan', schedule.rows);
+    const filteredRows =
+      filter?.match === 'minyan'
+        ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
+        : excludeFilterDataFrameRows('topic', 'minyan', schedule.rows);
     rows.push(...filteredRows);
   });
   const headerRows = rows[0];
@@ -42,19 +47,11 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules, filter, heading }) => 
     return null;
   }
 
-  const days = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat"
-  ]
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const now = new Date();
 
-  const filteredByDay = rows.filter((row) => {
+  const filteredByDay = rows.filter(row => {
     let flag = false;
     const rowDays = row[2];
     if (rowDays.includes('Daily')) {
@@ -66,32 +63,39 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules, filter, heading }) => 
       rowDaysArr.forEach(rowDay => {
         if (rowDay.includes('-')) {
           const leftRight = rowDay.split('-');
-          const left = days.findIndex((v) => {
+          const left = days.findIndex(v => {
             return leftRight[0].includes(v);
-          })
-          const right = days.findIndex((v) => {
+          });
+          const right = days.findIndex(v => {
             return leftRight[1].includes(v);
-          })
+          });
           if (left < now.getDay() && right > now.getDay()) {
             flag = true;
           }
         }
       });
     }
-    return flag
-  })
+    return flag;
+  });
 
   const filteredByTime = filteredByDay.filter(row => {
     const rowTimes = row[3].match(/\d\d?:\d\d ?(?:[AP]M)?/g);
-    if (!rowTimes[0].toLowerCase().includes('pm') && row[3].toLowerCase().includes('pm')) {
-      rowTimes[0]+=' pm';
+    if (!rowTimes) return false;
+    if (
+      !rowTimes[0].toLowerCase().includes('pm') &&
+      row[3].toLowerCase().includes('pm')
+    ) {
+      rowTimes[0] += ' pm';
     }
     const startTime = moment(rowTimes[0], 'h:mm:ss a');
-    const endTime = rowTimes.length > 1 ? moment(rowTimes[1], 'h:mm:ss a') : moment(startTime).add(1,'h');
-    startTime.subtract(5, 'm')
+    const endTime =
+      rowTimes.length > 1
+        ? moment(rowTimes[1], 'h:mm:ss a')
+        : moment(startTime).add(1, 'h');
+    startTime.subtract(5, 'm');
 
-    return moment(now).isBetween(startTime, endTime, null, '[)')
-  })
+    return moment(now).isBetween(startTime, endTime, null, '[)');
+  });
 
   if (!filteredByTime.length) {
     return null;
@@ -115,14 +119,11 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules, filter, heading }) => 
             <tr key={rowId}>
               {row.map((cell, cellId) => (
                 <td key={cellId}>
-                  <SmartText
-                    input={cell}
-                  />
+                  <SmartText input={cell} />
                 </td>
               ))}
             </tr>
-            )
-          )}
+          ))}
         </tbody>
       </table>
     </div>
