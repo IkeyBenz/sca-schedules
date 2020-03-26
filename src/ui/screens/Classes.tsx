@@ -23,7 +23,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   return (
     <>
       <div className="container">
-        <LiveItems 
+        <LiveItems
           schedules={schedules}
           filter={
             !(filterType === 'none' || filterVal === '') && {
@@ -52,14 +52,26 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 <option value="class">Class</option>
                 <option value="teacher">Teacher</option>
               </select>
-              {filterType !== 'none' && (
-                <input
-                  type="text"
-                  className="ml-2"
-                  onChange={e => setFilterVal(e.target.value.toLowerCase())}
-                  placeholder={`Enter ${filterType}(s)`}
-                />
-              )}
+              {filterType !== 'none' &&
+                (filterType === 'day' ? (
+                  <select
+                    className="ml-2"
+                    onChange={e => setFilterVal(e.target.value)}>
+                    <option value="mon">Mon</option>
+                    <option value="tues">Tues</option>
+                    <option value="wed">Wed</option>
+                    <option value="thurs">Thurs</option>
+                    <option value="fri">Fri</option>
+                    <option value="sun">Sun</option>
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    className="ml-2"
+                    onChange={e => setFilterVal(e.target.value.toLowerCase())}
+                    placeholder={`Enter ${filterType}(s)`}
+                  />
+                ))}
             </label>
           </div>
         </div>
