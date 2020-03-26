@@ -3,6 +3,7 @@ import { FirebaseConfig } from '../types';
 import createScheduleManager from './ScheduleService';
 import createAttachmentManager from './AttachmentService';
 import createFirebaseDbManager from './DatabaseService';
+import createFormManager from './FormService';
 
 const firebaseConfig: FirebaseConfig = {
   apiKey: "AIzaSyDUNiNW3dfplmHAq65wfKIGGSHS8MGXgzM",
@@ -17,5 +18,6 @@ const firebaseConfig: FirebaseConfig = {
 const database = createFirebaseDbManager(firebaseConfig);
 const scheduleManager = createScheduleManager(database);
 const attachmentManager = createAttachmentManager(database);
+const formManager = createFormManager(database);
 
-export { database, scheduleManager, attachmentManager };
+export { database, scheduleManager, attachmentManager, formManager };

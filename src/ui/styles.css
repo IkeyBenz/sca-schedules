@@ -43,6 +43,8 @@ table {
 }
 .image-dropper form {
   position: relative;
+  width: 250px;
+  overflow: hidden;
 }
 #image-drop,
 #file-drop {
@@ -129,6 +131,12 @@ table a {
   }
 }
 
+@media (max-width: 767px) {
+  .centered-image {
+    display: none;
+  }
+}
+
 @media (max-width: 500px) {
   .site-nav {
     justify-content: flex-start;
@@ -166,4 +174,24 @@ label.hidden {
 
 .attachment-card .btn {
   margin-bottom: 0.5rem;
+}
+
+.form-check label {
+  padding-left: 4px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form-group .alert {
+  padding-left: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: 600;
 }

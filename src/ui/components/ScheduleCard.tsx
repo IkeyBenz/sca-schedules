@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
-import { filterDataFrameRows } from '../../util';
+import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -34,7 +34,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
 
   const filteredRows = filter
     ? filterDataFrameRows(filter.type, filter.match, rows)
-    : rows;
+    : excludeFilterDataFrameRows('topic', 'minyan', rows);
 
   if (filteredRows.length === 1) {
     // No rows matched the filter criteria

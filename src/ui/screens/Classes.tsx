@@ -11,24 +11,29 @@ interface ClassesScreenProps {
 const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   const [filterType, setfilterType] = useState<string>('none');
   const [filterVal, setFilterVal] = useState<string>('');
-  let location = useLocation();
+  const [heading, setHeading] = useState<string>('Classes');
+  const location = useLocation();
 
   if (location.pathname === '/minyanim' && filterType !== 'topic') {
+    setHeading('Minyanim');
     setfilterType('topic');
     setFilterVal('minyan');
   }
 
   return (
     <>
-      {(() => {
-        if (filterVal !== 'minyan') {
-          return (
-            <div className="container">
-              <LiveItems schedules={schedules} />
-            </div>
-          );
-        }
-      })()}
+      <div className="container">
+        <LiveItems 
+          schedules={schedules}
+          filter={
+            !(filterType === 'none' || filterVal === '') && {
+              type: filterType,
+              match: filterVal,
+            }
+          }
+          heading={heading}
+        />
+      </div>
       <div className="container">
         <div className="row">
           <div className="input-group mt-3">

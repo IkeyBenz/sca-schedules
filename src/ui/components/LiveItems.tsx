@@ -3,6 +3,7 @@ import React from 'react';
 import moment from 'moment';
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
+import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface SmartTextProps {
   input: string;
@@ -19,14 +20,27 @@ const SmartText: React.FC<SmartTextProps> = ({ input }) => {
 
 interface LiveItemsProps {
   schedules: Schedule[];
+  filter?: {
+    type: string,
+    match: string,
+  };
+  heading: string;
 }
 
-const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
+const LiveItems: React.FC<LiveItemsProps> = ({ schedules, filter, heading }) => {
   const rows = [];
   schedules.forEach(schedule => {
-    rows.push(...schedule.rows);
+    const filteredRows = filter?.match === 'minyan'
+      ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
+      : excludeFilterDataFrameRows('topic', 'minyan', schedule.rows);
+    rows.push(...filteredRows);
   });
   const headerRows = rows[0];
+
+  if (rows.length === 1) {
+    // No rows matched the filter criteria
+    return null;
+  }
 
   const days = [
     "Sun",
@@ -86,7 +100,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedules }) => {
   return (
     <div className="schedule-card my-5">
       <div className="card-header row">
-        <h1 className="schedule-title">Classes Going on Right Now</h1>
+        <h1 className="schedule-title">{heading} Going on Right Now</h1>
       </div>
       <table className="table table-striped table-bordered table-hover shadow">
         <thead className="text-light">
