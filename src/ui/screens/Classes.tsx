@@ -16,14 +16,12 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   const location = useLocation();
 
   useEffect(() => {
-    setFilterVal('');
-  }, [filterType]);
-
-  if (location.pathname === '/minyanim' && filterType !== 'topic') {
-    setHeading('Minyanim');
-    setfilterType('topic');
-    setFilterVal('minyan');
-  }
+    if (location.pathname === '/minyanim') {
+      setHeading('Minyanim');
+      setfilterType('topic');
+      setFilterVal('minyan');
+    }
+  }, [location.pathname]);
 
   const calcAvailableTimes = useCallback(() => {
     const validTime = /\d\d?:\d\d ([AP]M)/;
@@ -62,17 +60,22 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
           <div className="input-group mt-3">
             <label
               htmlFor="filter"
-              className={filterType === 'topic' ? 'hidden' : 'header-title'}>
+              className={
+                location.pathname === '/minyanim' ? 'hidden' : 'header-title'
+              }>
               Filter By:{' '}
               <select
                 name="filter"
-                onChange={e => setfilterType(e.target.value)}
+                onChange={e => {
+                  setfilterType(e.target.value);
+                  setFilterVal('');
+                }}
                 id=""
                 value={filterType}>
                 <option value="none">No filter</option>
                 <option value="time">Time of day</option>
                 <option value="day">Day of week</option>
-                <option value="class">Class</option>
+                <option value="topic">Topic</option>
                 <option value="teacher">Teacher</option>
               </select>
               {filterType !== 'none' &&
