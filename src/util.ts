@@ -56,7 +56,7 @@ export const excludeFilterDataFrameRows = (filterType: string, filterVal: string
     }
     const filteredRows = data.slice(1).filter(row => {
         let cellText = row[searchableColIndex];
-        if (filterType === 'time') cellText = cellText.replace(':', '');
+        // if (filterType === 'time') cellText = cellText.replace(':', '');
         return cellText && !cellText.toLowerCase().includes(filterVal.toLowerCase());
     });
     return [header].concat(filteredRows);
@@ -70,7 +70,7 @@ export const filterDataFrameRows = (filterType: string, filterVal: string, data:
     }
     const filteredRows = data.slice(1).filter(row => {
         let cellText = row[searchableColIndex];
-        if (filterType === 'time') cellText = cellText.replace(':', '');
+        // if (filterType === 'time') cellText = cellText.replace(':', '');
         return cellText && cellText.toLowerCase().includes(filterVal.toLowerCase());
     });
     return [header].concat(filteredRows);

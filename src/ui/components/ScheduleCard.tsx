@@ -49,11 +49,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
       return false;
     }
     const text = colText.toLowerCase();
-    return filterColIdx === colIdx
-      ? filter.type === 'time'
-        ? text.replace(':', '').includes(filter.match)
-        : text.includes(filter.match)
-      : false;
+    return filterColIdx === colIdx && text.includes(filter.match);
   };
 
   return (

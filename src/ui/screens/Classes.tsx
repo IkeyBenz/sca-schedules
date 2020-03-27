@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ScheduleCard, LiveItems } from '../components';
 
 import { Schedule } from '../../types';
+import { getColumnIdxOfKey } from '../../util';
 import { useLocation } from 'react-router-dom';
 
 interface ClassesScreenProps {
@@ -19,6 +20,24 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
     setfilterType('topic');
     setFilterVal('minyan');
   }
+
+  const calcAvailableTimes = useCallback(() => {
+    const validTime = /\d\d?:\d\d ([AP]M)/;
+    let times = [];
+    schedules.forEach(({ rows }) => {
+      const idxOfTime = getColumnIdxOfKey(rows, 'time');
+      const moreTimes = rows
+        .map(row => row[idxOfTime])
+        .filter(time => validTime.test(time))
+        .map(time => time.match(validTime)[0]);
+      times = times.concat(moreTimes);
+    });
+    return Array.from(new Set(times)).sort((a, b) => {
+      const _a = new Date('1970/01/01 ' + a);
+      const _b = new Date('1970/01/01 ' + b);
+      return _a > _b ? 1 : _a < _b ? -1 : 0;
+    });
+  }, [schedules]);
 
   return (
     <>
@@ -63,6 +82,15 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                     <option value="thurs">Thurs</option>
                     <option value="fri">Fri</option>
                     <option value="sun">Sun</option>
+                  </select>
+                ) : filterType === 'time' ? (
+                  <select
+                    className="ml-2"
+                    onChange={e => setFilterVal(e.target.value.toLowerCase())}>
+                    <option value="">Choose Time</option>
+                    {calcAvailableTimes().map(time => (
+                      <option value={time}>{time}</option>
+                    ))}
                   </select>
                 ) : (
                   <input
