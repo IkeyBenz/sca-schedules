@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ScheduleCard, LiveItems } from '../components';
 
 import { Schedule } from '../../types';
@@ -14,6 +14,10 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   const [filterVal, setFilterVal] = useState<string>('');
   const [heading, setHeading] = useState<string>('Classes');
   const location = useLocation();
+
+  useEffect(() => {
+    setFilterVal('');
+  }, [filterType]);
 
   if (location.pathname === '/minyanim' && filterType !== 'topic') {
     setHeading('Minyanim');
@@ -76,6 +80,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                   <select
                     className="ml-2"
                     onChange={e => setFilterVal(e.target.value)}>
+                    <option value="">Choose Day</option>
                     <option value="mon">Mon</option>
                     <option value="tues">Tues</option>
                     <option value="wed">Wed</option>
