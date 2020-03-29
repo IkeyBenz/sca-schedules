@@ -15,7 +15,7 @@ const IndexScreen: React.FC = () => {
       <div className="w-100 d-flex align-items-center justify-content-center">
         <nav className="d-flex flex-column align-items-center my-3 site-nav-index">
           <a
-            href="https://firebasestorage.googleapis.com/v0/b/sca-rab-schedules.appspot.com/o/attachments%2FSCA_Pre-Pesah%20Day%20of%20Learning.pdf?alt=media&token=9552d20f-b3a4-4751-b843-e5f99ebf32dc"
+            href="https://www.scapesah.org"
             target="_blank"
             className="btn btn-secondary btn-lg my-3">
             Pre Pesah Day of Learning Schedule
