@@ -15,10 +15,10 @@ const IndexScreen: React.FC = () => {
       <div className="w-100 d-flex align-items-center justify-content-center">
         <nav className="d-flex flex-column align-items-center my-3 site-nav-index">
           <a
-            href="https://www.scapesah.org"
+            href="https://www.youtube.com/channel/UCsHn2xQEscv11QaNHpPf37A"
             target="_blank"
             className="btn btn-secondary btn-lg my-3">
-            Pre Pesah Day of Learning Schedule
+            Pre Pesah Day of Learning Class Recordings
           </a>
           <a href="/#/classes" className="btn btn-primary btn-lg my-3">
             Schedule of Live Classes
