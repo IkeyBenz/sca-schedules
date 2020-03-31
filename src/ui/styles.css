@@ -119,6 +119,24 @@ table a {
   text-decoration: underline;
 }
 
+.btn-whatsapp {
+  background-color: #25D366;
+  border-color: #25D366;
+}
+
+.btn-whatsapp:before {
+  content: ' ';
+  transform: translateY(4px);
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  background-image: url('../ui/assets/whatsapp.svg');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .centered-image {
   display: block;
   margin: 0 auto;
@@ -156,6 +174,11 @@ table a {
 
   .site-nav-index .btn {
     font-size: 16px;
+  }
+
+  .btn-whatsapp:before {
+    width: 20px;
+    height: 20px;
   }
 }
 
