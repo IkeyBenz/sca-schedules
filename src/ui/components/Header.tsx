@@ -21,7 +21,7 @@ const Header: React.FC = props => {
           </a>
         </div>
         <nav className="site-nav w-100 d-flex my-3">
-          <a href="/#/classes">Classes</a>
+          <a href="/#/today">Classes</a>
           <a href="/#/minyanim">Minyanim</a>
           <a href="/#/letters">Letters</a>
           <a href="/#/tehillim">Tehillim Request</a>

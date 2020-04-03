@@ -3,7 +3,7 @@ import React from 'react';
 import moment from 'moment';
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
-import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
+import { excludeFilterDataFrameRows, filterDataFrameRows, getColumnIdxOfKey } from '../../util';
 
 interface SmartTextProps {
   input: string;
@@ -15,7 +15,7 @@ const SmartText: React.FC<SmartTextProps> = ({ input }) => {
     return <p>{input}</p>;
   }
   const { value, type } = urls[0];
-  return <a href={value}>{type === 'url' ? 'Click here' : value}</a>;
+  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
 };
 
 interface LiveItemsProps {
@@ -37,15 +37,25 @@ const LiveItems: React.FC<LiveItemsProps> = ({
     const filteredRows =
       filter?.match === 'minyan'
         ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
-        : excludeFilterDataFrameRows('topic', 'minyan', schedule.rows);
+        : excludeFilterDataFrameRows('type', 'minyan', schedule.rows);
     rows.push(...filteredRows);
   });
   const headerRows = rows[0];
 
-  if (rows.length === 1) {
+  if (rows.length < 2) {
     // No rows matched the filter criteria
     return null;
   }
+
+  const dayIdx = headerRows.findIndex(data => data.includes('Days'))
+  const timeIdx = headerRows.findIndex(data => data.includes('Time'))
+
+  const filteredCols = headerRows.reduce((acc, cur, idx) => {
+    if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
+      acc.push(idx)
+    }
+    return acc;
+  }, []);
 
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -53,7 +63,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
 
   const filteredByDay = rows.filter(row => {
     let flag = false;
-    const rowDays = row[2];
+    const rowDays = row[dayIdx];
     if (rowDays.includes('Daily')) {
       flag = true;
     } else if (rowDays.includes(days[now.getDay()])) {
@@ -78,8 +88,12 @@ const LiveItems: React.FC<LiveItemsProps> = ({
     return flag;
   });
 
-  const filteredByTime = filteredByDay.filter(row => {
-    const rowTimes = row[3].match(/\d\d?:\d\d ?(?:[AP]M)?/g);
+  const live = [];
+  const elapsed = [];
+  const upcoming = [];
+
+  filteredByDay.forEach(row => {
+    const rowTimes = row[timeIdx].match(/\d\d?:\d\d ?(?:[AP]M)?/g);
     if (!rowTimes) return false;
     if (
       !rowTimes[0].toLowerCase().includes('pm') &&
@@ -92,40 +106,123 @@ const LiveItems: React.FC<LiveItemsProps> = ({
       rowTimes.length > 1
         ? moment(rowTimes[1], 'h:mm:ss a')
         : moment(startTime).add(1, 'h');
-    startTime.subtract(5, 'm');
+    startTime.subtract(10, 'm');
 
-    return moment(now).isBetween(startTime, endTime, null, '[)');
+    if (moment(now).isBetween(startTime, endTime, null, '[)')) {
+      live.push(row);
+    } else if (moment(now).isSameOrAfter(endTime)) {
+      elapsed.push(row);
+    } else if (moment(now).isBefore(startTime)) {
+      upcoming.push(row);
+    }
   });
-
-  if (!filteredByTime.length) {
-    return null;
-  }
 
   return (
     <div className="schedule-card my-5">
-      <div className="card-header row">
-        <h1 className="schedule-title">{heading} Going on Right Now</h1>
-      </div>
-      <table className="table table-striped table-bordered table-hover shadow">
-        <thead className="text-light">
-          <tr>
-            {headerRows.map((col, idx) => (
-              <th key={idx}>{col}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredByTime.map((row, rowId) => (
-            <tr key={rowId}>
-              {row.map((cell, cellId) => (
-                <td key={cellId}>
-                  <SmartText input={cell} />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {
+        (() => (
+          live.length > 0 &&
+          <>
+            <div className="card-header row">
+              <h1 className="schedule-title">Ongoing {heading}</h1>
+            </div>
+            <table className="table table-striped table-bordered table-hover shadow">
+              <thead className="text-light">
+                <tr>
+                  {headerRows.map((col, idx) => {
+                    if (!filteredCols.includes(idx)) {
+                      return <th key={idx}>{col}</th>
+                    }
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {live.map((row, rowId) => (
+                  <tr key={rowId}>
+                    {row.map((cell, cellId) => {
+                      if (!filteredCols.includes(cellId)) {
+                        return <td key={cellId}>
+                          <SmartText input={cell} />
+                        </td>
+                      }
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        ))()
+      }
+      {
+        (() => (
+          upcoming.length > 0 &&
+          <>
+            <div className="card-header row">
+              <h1 className="schedule-title">Upcoming {heading}</h1>
+            </div>
+            <table className="table table-striped table-bordered table-hover shadow">
+              <thead className="text-light">
+                <tr>
+                  {headerRows.map((col, idx) => {
+                    if (!filteredCols.includes(idx)) {
+                      return <th key={idx}>{col}</th>
+                    }
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {upcoming.map((row, rowId) => (
+                  <tr key={rowId}>
+                    {row.map((cell, cellId) => {
+                      if (!filteredCols.includes(cellId)) {
+                        return <td key={cellId}>
+                          <SmartText input={cell} />
+                        </td>
+                      }
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        ))()
+      }
+
+      {
+        (() => (
+          elapsed.length > 0 &&
+          <>
+            <div className="card-header row">
+              <h1 className="schedule-title">Completed {heading}</h1>
+            </div>
+            <table className="table table-striped table-bordered table-hover shadow">
+              <thead className="text-light">
+                <tr>
+                  {headerRows.map((col, idx) => {
+                    if (!filteredCols.includes(idx)) {
+                      return <th key={idx}>{col}</th>
+                    }
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {elapsed.map((row, rowId) => (
+                  <tr key={rowId}>
+                    {row.map((cell, cellId) => {
+                      if (!filteredCols.includes(cellId)) {
+                        return <td key={cellId}>
+                          <SmartText input={cell} />
+                        </td>
+                      }
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        ))()
+      }
+
     </div>
   );
 };

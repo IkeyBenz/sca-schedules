@@ -166,6 +166,7 @@ table a {
   .schedule-card th,
   .schedule-card td {
     padding: 0.3em;
+    word-wrap: break-word;
   }
 
   .header-title {
@@ -179,6 +180,10 @@ table a {
   .btn-whatsapp:before {
     width: 20px;
     height: 20px;
+  }
+  .schedule-title {
+    font-size: 20px;
+    text-transform: uppercase;
   }
 }
 
@@ -217,4 +222,26 @@ label.hidden {
   animation: fadeIn 0.3s ease-in-out;
   font-size: 16px;
   font-weight: 600;
+}
+
+.zoomIcon {
+  display: inline-block;
+  background-image: url('./assets/zoom.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  text-indent: -99999px;
+  overflow: hidden;
+}
+
+.gtmIcon {
+  display: inline-block;
+  background-image: url('./assets/gtm.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  text-indent: -99999px;
+  overflow: hidden;
 }

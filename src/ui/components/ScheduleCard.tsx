@@ -26,7 +26,7 @@ const SmartText: React.FC<SmartTextProps> = ({ input, highlight }) => {
     return <p className={highlight && 'highlight'}>{input}</p>;
   }
   const { value, type } = urls[0];
-  return <a href={value}>{type === 'url' ? 'Click here' : value}</a>;
+  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
@@ -34,12 +34,21 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
 
   const filteredRows = filter
     ? filterDataFrameRows(filter.type, filter.match, rows)
-    : excludeFilterDataFrameRows('topic', 'minyan', rows);
+    : excludeFilterDataFrameRows('type', 'minyan', rows);
 
   if (filteredRows.length === 1) {
     // No rows matched the filter criteria
     return null;
   }
+
+  const headerRow = filteredRows[0];
+
+  const filteredCols = headerRow.reduce((acc, cur, idx) => {
+    if (cur.toString().toLowerCase().startsWith('hide')) {
+      acc.push(idx)
+    }
+    return acc;
+  }, []);
 
   const filterColIdx =
     filter && rows[0].findIndex(col => col.toLowerCase().includes(filter.type));
@@ -65,22 +74,26 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
       <table className="table table-striped table-bordered table-hover shadow">
         <thead className="text-light">
           <tr>
-            {filteredRows[0].map((col, idx) => (
-              <th key={idx}>{col}</th>
-            ))}
+            {filteredRows[0].map((col, idx) => {
+              if (!filteredCols.includes(idx)) {
+                return <th key={idx}>{col}</th>
+              }
+            })}
           </tr>
         </thead>
         <tbody>
           {filteredRows.slice(1).map((row, rIdx) => (
             <tr key={rIdx}>
-              {row.map((col, cIdx) => (
-                <td key={cIdx}>
-                  <SmartText
-                    input={col}
-                    highlight={shouldHighlight(col, cIdx)}
-                  />
-                </td>
-              ))}
+              {row.map((col, cIdx) => {
+                if (!filteredCols.includes(cIdx)) {
+                  return <td key={cIdx}>
+                    <SmartText
+                      input={col}
+                      highlight={shouldHighlight(col, cIdx)}
+                    />
+                  </td>
+                }
+              })}
             </tr>
           ))}
         </tbody>

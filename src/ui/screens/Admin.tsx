@@ -57,6 +57,9 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
   const onSaveBtnPressed = () => {
     const { title, rows, logo } = scheduleBeingEdited;
     const newSchedule = { title, rows, logo };
+    if (!newSchedule.logo) {
+      newSchedule.logo = '';
+    }
     if (scheduleBeingEdited._id) {
       updateSchedule(scheduleBeingEdited._id, newSchedule);
     } else {
