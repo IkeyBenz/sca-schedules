@@ -34,6 +34,7 @@ export const convertImageFileToBase64Str = (image: File) =>
     
 
 export const adjustExcelTime = string => {
+    return string.toString();
     if (typeof string === 'string') return string;
     const timeInMiliSeconds = (string - (25567 + 1)) * 86400 * 1000;
     const fiveHours = 1000 * 60 * 60 * 5;

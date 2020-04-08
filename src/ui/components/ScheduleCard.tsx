@@ -18,15 +18,21 @@ interface ScheduleCardProps {
 interface SmartTextProps {
   input: string;
   highlight?: boolean;
+  row?: string[];
+  passwordCol: number;
 }
 /** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText: React.FC<SmartTextProps> = ({ input, highlight }) => {
+const SmartText: React.FC<SmartTextProps> = ({ input, highlight, row, passwordCol }) => {
   const urls = linkify.find(input);
+  let password = '';
+  if (~passwordCol && row[passwordCol] !== '-') {
+    password = `Password: ${row[passwordCol]}`;
+  }
   if (urls.length === 0) {
     return <p className={highlight && 'highlight'}>{input}</p>;
   }
   const { value, type } = urls[0];
-  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
+  return <p><a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a> <span className="password">{password}</span></p>;
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
@@ -52,6 +58,9 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
 
   const filterColIdx =
     filter && rows[0].findIndex(col => col.toLowerCase().includes(filter.type));
+
+  const passwordColIdx =
+    rows[0].findIndex(col => col.toLowerCase().includes('password'));
 
   const shouldHighlight = (colText: string, colIdx) => {
     if (filter?.match === 'minyan') {
@@ -89,6 +98,8 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
                   return <td key={cIdx}>
                     <SmartText
                       input={col}
+                      row={row}
+                      passwordCol={passwordColIdx}
                       highlight={shouldHighlight(col, cIdx)}
                     />
                   </td>

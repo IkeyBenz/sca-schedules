@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
+  font-weight: 300;
 }
 h1,
 a,
@@ -68,15 +71,15 @@ table {
   height: 100%;
 }
 .header-spacing {
-  height: 170px;
+  height: 98px;
 }
 .table thead,
 .btn-primary {
   background-color: #0a4877;
 }
-li {
+/* li {
   min-width: 420px;
-}
+} */
 table a {
   text-decoration: underline;
 }
@@ -244,4 +247,8 @@ label.hidden {
   background-size: 100%;
   text-indent: -99999px;
   overflow: hidden;
+}
+
+.bg-aliceblue {
+  background: #F0F8FF;
 }

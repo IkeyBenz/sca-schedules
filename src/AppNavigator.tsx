@@ -51,6 +51,11 @@ export const mainRoutes: RouteMap = {
     Component: ClassesScreenCreator,
     pageName: 'SCA Affiliate Synagogue - Virtual Minyanim Schedules',
   },
+  '/bekhorot': {
+    exact: true,
+    Component: ClassesScreenCreator,
+    pageName: 'SCA Affiliate Synagogue - Siyum Bekhorot Schedules',
+  },
   '/letters': {
     exact: true,
     Component: AttachmentsScreenCreator,

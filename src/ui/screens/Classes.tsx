@@ -27,6 +27,10 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
       const today = days[now.getDay()]
       setfilterType('day');
       setFilterVal(today);
+    } else if (location.pathname === '/bekhorot') {
+      setHeading('Siyum Bekhorot');
+      setfilterType('type');
+      setFilterVal('siyum bekhorot');
     }
   }, [location.pathname]);
 
@@ -66,10 +70,17 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
           location.pathname !== '/minyanim' &&
           <div className="container">
             <div className="row">
-              <div className="col-12 text-center my-3">
-                <a href="/#/today" className={location.pathname === '/today' ? 'btn btn-primary mx-3' : 'btn btn-secondary mx-3'}>Today's Classes</a>
-                <a href="/#/classes" className={location.pathname === '/classes' ? 'btn btn-primary mx-3' : 'btn btn-secondary mx-3'}>Full Schedule</a>
-              </div>
+              <ul className="nav nav-pills nav-justified m-3 w-100">
+                <li className="nav-item">
+                  <a href="/#/today" className={location.pathname === '/today' ? 'nav-link active' : 'nav-link'}>Today's Classes</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/#/bekhorot" className={location.pathname === '/bekhorot' ? 'nav-link active' : 'nav-link'}>Siyum Bekhorot</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/#/classes" className={location.pathname === '/classes' ? 'nav-link active' : 'nav-link'}>Full Schedule</a>
+                </li>
+              </ul>
             </div>
           </div>
         ))()
@@ -97,7 +108,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
             <label
               htmlFor="filter"
               className={
-                location.pathname === '/minyanim' || location.pathname === '/today' ? 'hidden' : 'header-title'
+                location.pathname === '/classes' ? 'header-title' : 'hidden'
               }>
               Filter By:{' '}
               <select
