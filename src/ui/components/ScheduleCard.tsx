@@ -63,7 +63,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
     rows[0].findIndex(col => col.toLowerCase().includes('password'));
 
   const shouldHighlight = (colText: string, colIdx) => {
-    if (filter?.match === 'minyan') {
+    if (filter?.type === 'type') {
       return false;
     }
     const text = colText.toLowerCase();

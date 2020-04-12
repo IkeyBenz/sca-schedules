@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 
-import { Header } from './ui/components';
+import { Header, Footer } from './ui/components';
 import {
   ClassesScreenCreator,
   AdminScreenCreator,
@@ -73,6 +73,7 @@ const MainNavigator = () => (
   <HashRouter>
     <Header />
     {renderRoutes(mainRoutes)}
+    <Footer />
   </HashRouter>
 );
 
