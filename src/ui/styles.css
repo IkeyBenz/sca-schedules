@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
+  font-weight: 300;
 }
 h1,
 a,
@@ -68,15 +71,15 @@ table {
   height: 100%;
 }
 .header-spacing {
-  height: 170px;
+  height: 98px;
 }
 .table thead,
 .btn-primary {
   background-color: #0a4877;
 }
-li {
+/* li {
   min-width: 420px;
-}
+} */
 table a {
   text-decoration: underline;
 }
@@ -166,6 +169,7 @@ table a {
   .schedule-card th,
   .schedule-card td {
     padding: 0.3em;
+    word-wrap: break-word;
   }
 
   .header-title {
@@ -179,6 +183,10 @@ table a {
   .btn-whatsapp:before {
     width: 20px;
     height: 20px;
+  }
+  .schedule-title {
+    font-size: 20px;
+    text-transform: uppercase;
   }
 }
 
@@ -217,4 +225,30 @@ label.hidden {
   animation: fadeIn 0.3s ease-in-out;
   font-size: 16px;
   font-weight: 600;
+}
+
+.zoomIcon {
+  display: inline-block;
+  background-image: url('./assets/zoom.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  text-indent: -99999px;
+  overflow: hidden;
+}
+
+.gtmIcon {
+  display: inline-block;
+  background-image: url('./assets/gtm.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  text-indent: -99999px;
+  overflow: hidden;
+}
+
+.bg-aliceblue {
+  background: #F0F8FF;
 }

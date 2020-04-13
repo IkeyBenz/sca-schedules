@@ -4,6 +4,7 @@ import SpreadSheetDropBox from './SpreadSheetDropBox';
 import ImageDropBox from './ImageDropBox';
 import LiveItems from './LiveItems';
 import Header from './Header';
+import Footer from './Footer';
 
 export {
     ScheduleCard,
@@ -12,4 +13,5 @@ export {
     LiveItems,
     Header,
     AttachmentCard,
+    Footer,
 };

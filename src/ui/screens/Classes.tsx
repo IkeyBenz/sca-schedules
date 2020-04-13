@@ -15,11 +15,22 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   const [heading, setHeading] = useState<string>('Classes');
   const location = useLocation();
 
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
   useEffect(() => {
     if (location.pathname === '/minyanim') {
       setHeading('Minyanim');
-      setfilterType('topic');
+      setfilterType('type');
       setFilterVal('minyan');
+    } else if (location.pathname === '/today') {
+      const now = new Date();
+      const today = days[now.getDay()]
+      setfilterType('day');
+      setFilterVal(today);
+    } else if (location.pathname === '/bekhorot') {
+      setHeading('Siyum Bekhorot');
+      setfilterType('type');
+      setFilterVal('siyum bekhorot');
     }
   }, [location.pathname]);
 
@@ -41,27 +52,63 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
     });
   }, [schedules]);
 
+  const calcTeachers = useCallback(() => {
+    let teachers = [];
+    schedules.forEach(({ rows }) => {
+      const idxOfTime = getColumnIdxOfKey(rows, 'teacher');
+      const moreTimes = rows
+        .map(row => row[idxOfTime]);
+      teachers = teachers.concat(moreTimes);
+    });
+    return Array.from(new Set(teachers)).sort();
+  }, [schedules]);
+
   return (
     <>
+      {
+        (() => (
+          location.pathname !== '/minyanim' &&
+          <div className="container">
+            <div className="row">
+              <ul className="nav nav-pills nav-justified m-3 w-100">
+                <li className="nav-item">
+                  <a href="/#/today" className={location.pathname === '/today' ? 'nav-link active' : 'nav-link'}>Today's Classes</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/#/bekhorot" className={location.pathname === '/bekhorot' ? 'nav-link active' : 'nav-link'}>Siyum Bekhorot</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/#/classes" className={location.pathname === '/classes' ? 'nav-link active' : 'nav-link'}>Full Schedule</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ))()
+      }
       <div className="container">
-        <LiveItems
-          schedules={schedules}
-          filter={
-            !(filterType === 'none' || filterVal === '') && {
-              type: filterType,
-              match: filterVal,
-            }
-          }
-          heading={heading}
-        />
+        {
+          (() => (
+            location.pathname === '/today' &&
+            <LiveItems
+              schedules={schedules}
+              filter={
+                !(filterType === 'none' || filterVal === '') && {
+                  type: filterType,
+                  match: filterVal,
+                }
+              }
+              heading={heading}
+            />
+          ))()
+        }
       </div>
       <div className="container">
         <div className="row">
-          <div className="input-group mt-3">
+          <div className="input-group mt-3 mx-3">
             <label
               htmlFor="filter"
               className={
-                location.pathname === '/minyanim' ? 'hidden' : 'header-title'
+                location.pathname === '/classes' ? 'header-title' : 'hidden'
               }>
               Filter By:{' '}
               <select
@@ -100,18 +147,27 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                       <option value={time}>{time}</option>
                     ))}
                   </select>
-                ) : (
-                  <input
-                    type="text"
+                ) : filterType === 'teacher' ? (
+                  <select
                     className="ml-2"
-                    onChange={e => setFilterVal(e.target.value.toLowerCase())}
-                    placeholder={`Enter ${filterType}(s)`}
-                  />
-                ))}
+                    onChange={e => setFilterVal(e.target.value.toLowerCase())}>
+                    <option value="">Choose Teacher</option>
+                    {calcTeachers().map(time => (
+                      <option value={time}>{time}</option>
+                    ))}
+                  </select>
+                ) : (
+                      <input
+                        type="text"
+                        className="ml-2"
+                        onChange={e => setFilterVal(e.target.value.toLowerCase())}
+                        placeholder={`Enter ${filterType}(s)`}
+                      />
+                    ))}
             </label>
           </div>
         </div>
-        {schedules.map((schedule, idx) => {
+        {location.pathname !== '/today' && schedules.map((schedule, idx) => {
           return (
             <ScheduleCard
               key={idx}

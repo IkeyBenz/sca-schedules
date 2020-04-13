@@ -34,6 +34,7 @@ export const convertImageFileToBase64Str = (image: File) =>
     
 
 export const adjustExcelTime = string => {
+    return string.toString();
     if (typeof string === 'string') return string;
     const timeInMiliSeconds = (string - (25567 + 1)) * 86400 * 1000;
     const fiveHours = 1000 * 60 * 60 * 5;
@@ -52,7 +53,7 @@ export const excludeFilterDataFrameRows = (filterType: string, filterVal: string
     const header = [...data[0]];
     const searchableColIndex = getColumnIdxOfKey(data, filterType);
     if (searchableColIndex === -1) { // This table doesn't have a column for specified filterType
-        return [header];
+        return [...data];
     }
     const filteredRows = data.slice(1).filter(row => {
         let cellText = row[searchableColIndex];
@@ -80,5 +81,5 @@ export const getColumnIdxOfKey = (data: DataFrame, key: string) => {
   const colIndex = data[0].findIndex(currKey =>
     currKey.toLowerCase().includes(key.toLowerCase())
   );
-  return colIndex !== -1 ? colIndex : undefined;
+  return colIndex;
 }

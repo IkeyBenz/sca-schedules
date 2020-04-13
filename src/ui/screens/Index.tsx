@@ -20,7 +20,7 @@ const IndexScreen: React.FC = () => {
             className="btn btn-secondary btn-lg my-3">
             Pre Pesah Day of Learning Class Recordings
           </a>
-          <a href="/#/classes" className="btn btn-primary btn-lg my-3">
+          <a href="/#/today" className="btn btn-primary btn-lg my-3">
             Schedule of Live Classes
           </a>
           <a href="/#/minyanim" className="btn btn-primary btn-lg my-3">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 
-import { Header } from './ui/components';
+import { Header, Footer } from './ui/components';
 import {
   ClassesScreenCreator,
   AdminScreenCreator,
@@ -36,6 +36,11 @@ const AdminNavigator = () => (
 
 export const mainRoutes: RouteMap = {
   '/': { exact: true, Component: IndexScreenCreator, pageName: 'SCA Affiliate Synagogue'},
+  '/today': {
+    exact: true,
+    Component: ClassesScreenCreator,
+    pageName: 'SCA Affiliate Synagogue - Virtual Classes Schedules',
+  },
   '/classes': {
     exact: true,
     Component: ClassesScreenCreator,
@@ -45,6 +50,11 @@ export const mainRoutes: RouteMap = {
     exact: true,
     Component: ClassesScreenCreator,
     pageName: 'SCA Affiliate Synagogue - Virtual Minyanim Schedules',
+  },
+  '/bekhorot': {
+    exact: true,
+    Component: ClassesScreenCreator,
+    pageName: 'SCA Affiliate Synagogue - Siyum Bekhorot Schedules',
   },
   '/letters': {
     exact: true,
@@ -63,6 +73,7 @@ const MainNavigator = () => (
   <HashRouter>
     <Header />
     {renderRoutes(mainRoutes)}
+    <Footer />
   </HashRouter>
 );
 
