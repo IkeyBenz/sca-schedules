@@ -1,4 +1,5 @@
 import { Attachment, Database } from '../types';
+import { convertJsonToArrayWithIds } from '../util';
 
 class AttachmentService {
   private storage: Database;
@@ -24,7 +25,9 @@ class AttachmentService {
   }
 
   onAttachmentsChanged(cb: (attachments: Attachment[]) => void) {
-    this.storage.onChange('attachments', data => cb(this._alphabetize(data)));
+    this.storage.onChange('attachments', data =>
+      cb(this._alphabetize(convertJsonToArrayWithIds(data)))
+    );
   }
 
   _alphabetize(attachments: Attachment[]) {

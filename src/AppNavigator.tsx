@@ -4,7 +4,6 @@ import { HashRouter, Route } from 'react-router-dom';
 import { Header, Footer } from './ui/components';
 import {
   ClassesScreenCreator,
-  AdminScreenCreator,
   AttachmentsAdminScreenCreator,
   AttachmentsScreenCreator,
   FormScreenCreator,
@@ -26,7 +25,6 @@ const renderRoutes = (routes: RouteMap) =>
   ));
 
 export const adminRoutes: RouteMap = {
-  '/': { exact: true, Component: AdminScreenCreator },
   '/edit-letters': { exact: true, Component: AttachmentsAdminScreenCreator },
 };
 

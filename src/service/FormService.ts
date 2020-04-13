@@ -1,4 +1,5 @@
 import { Form, Database } from '../types';
+import { convertJsonToArrayWithIds } from '../util';
 
 class FormService {
   private storage: Database;
@@ -24,7 +25,9 @@ class FormService {
   }
 
   onFormsChanged(cb: (tehillim: Form[]) => void) {
-    this.storage.onChange('tehillim', data => cb(this._alphabetize(data)));
+    this.storage.onChange('tehillim', data =>
+      cb(this._alphabetize(convertJsonToArrayWithIds(data)))
+    );
   }
 
   _alphabetize(tehillim: Form[]) {

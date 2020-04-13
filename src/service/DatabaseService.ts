@@ -41,7 +41,7 @@ class FirebaseManager implements Database {
   }
 
   onChange(path: string, cb: (data: any) => void) {
-    this.db.ref(path).on('value', (s) => cb(convertJsonToArrayWithIds(s.val())));
+    this.db.ref(path).on('value', (s) => cb(s.val()));
   }
 
 }
