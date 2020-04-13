@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useLocation } from 'react-router-dom';
 import * as linkify from 'linkifyjs';
 import { Schedule } from '../../types';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
@@ -36,6 +36,7 @@ const SmartText: React.FC<SmartTextProps> = ({ input, highlight, row, passwordCo
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
+  const location = useLocation();
   const { title, rows, logo } = schedule;
 
   const filteredRows = filter
@@ -63,7 +64,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
     rows[0].findIndex(col => col.toLowerCase().includes('password'));
 
   const shouldHighlight = (colText: string, colIdx) => {
-    if (filter?.type === 'type') {
+    if (filter?.type === 'topic' && location.pathname === '/bekhorot') {
       return false;
     }
     const text = colText.toLowerCase();

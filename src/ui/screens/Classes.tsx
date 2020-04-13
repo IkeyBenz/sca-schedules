@@ -29,10 +29,10 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
       setFilterVal(today);
     } else if (location.pathname === '/bekhorot') {
       setHeading('Siyum Bekhorot');
-      setfilterType('type');
+      setfilterType('topic');
       setFilterVal('siyum bekhorot');
     }
-  }, [location.pathname]);
+  }, [days, location.pathname]);
 
   const calcAvailableTimes = useCallback(() => {
     const validTime = /\d\d?:\d\d ([AP]M)/;
