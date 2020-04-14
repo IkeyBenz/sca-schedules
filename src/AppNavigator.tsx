@@ -33,7 +33,7 @@ const AdminNavigator = () => (
 );
 
 export const mainRoutes: RouteMap = {
-  '/': { exact: true, Component: IndexScreenCreator, pageName: 'SCA Affiliate Synagogue'},
+  '/': { exact: true, Component: IndexScreenCreator, pageName: ''},
   '/today': {
     exact: true,
     Component: ClassesScreenCreator,

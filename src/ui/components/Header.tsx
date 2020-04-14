@@ -35,10 +35,10 @@ const Header: React.FC = props => {
               <a className="nav-link" href="/#/minyanim">Minyanim</a>
             </li>
             <li className={location.pathname === '/letters' ? 'active nav-item' : 'nav-item'}>
-              <a className="nav-link" href="/#/letters">Letters</a>
+              <a className="nav-link" href="/#/letters">COVID-19</a>
             </li>
             <li className={location.pathname === '/tehillim' ? 'active nav-item' : 'nav-item'}>
-              <a className="nav-link" href="/#/tehillim">Tehillim Request</a>
+              <a className="nav-link" href="/#/tehillim">Tehillim Requests</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="mailto:info@scaupdates.org">Contact</a>
@@ -47,9 +47,11 @@ const Header: React.FC = props => {
         </nav>
       </header>
       <div className="header-spacing"></div>
-      <h5 className="w-100 text-center header-title my-5">
-        {pageName ? pageName : ''}
-      </h5>
+      {
+        !!pageName && <h5 className="w-100 text-center header-title my-5">
+          {pageName}
+        </h5>
+      }
     </>
   );
 };

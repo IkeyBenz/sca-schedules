@@ -140,6 +140,19 @@ table a {
   background-repeat: no-repeat;
 }
 
+.btn-email:before {
+  content: ' ';
+  transform: translateY(4px);
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  background-image: url('../ui/assets/email.svg');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .centered-image {
   display: block;
   margin: 0 auto;
@@ -152,11 +165,11 @@ table a {
   }
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .centered-image {
     display: none;
   }
-}
+} */
 
 @media (max-width: 500px) {
   .site-nav {
@@ -200,7 +213,6 @@ label.hidden {
   border-radius: 10px;
   display: inline-block;
   text-align: center;
-  width: 100%;
 }
 
 .attachment-card .btn {
@@ -251,4 +263,23 @@ label.hidden {
 
 .bg-aliceblue {
   background: #F0F8FF;
+}
+
+.bg-pesah-recordings {
+  background-image: url('./assets/pesah-bgb.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-pesah {
+  background-image: url('./assets/pesah-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: -10px;
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))
 }

@@ -27,10 +27,6 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
       const today = days[now.getDay()]
       setfilterType('day');
       setFilterVal(today);
-    } else if (location.pathname === '/bekhorot') {
-      setHeading('Siyum Bekhorot');
-      setfilterType('topic');
-      setFilterVal('siyum bekhorot');
     }
   }, [days, location.pathname]);
 
@@ -75,10 +71,10 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                   <a href="/#/today" className={location.pathname === '/today' ? 'nav-link active' : 'nav-link'}>Today's Classes</a>
                 </li>
                 <li className="nav-item">
-                  <a href="/#/bekhorot" className={location.pathname === '/bekhorot' ? 'nav-link active' : 'nav-link'}>Siyum Bekhorot</a>
+                  <a href="/#/classes" className={location.pathname === '/classes' ? 'nav-link active' : 'nav-link'}>Full Schedule</a>
                 </li>
                 <li className="nav-item">
-                  <a href="/#/classes" className={location.pathname === '/classes' ? 'nav-link active' : 'nav-link'}>Full Schedule</a>
+                  <a href="https://www.youtube.com/channel/UCsHn2xQEscv11QaNHpPf37A" target="_blank" rel="noopener" className="nav-link">Recordings</a>
                 </li>
               </ul>
             </div>

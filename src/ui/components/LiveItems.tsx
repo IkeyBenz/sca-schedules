@@ -123,7 +123,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
         (() => (
           live.length > 0 &&
           <>
-            <div className="card-header row">
+            <div className="card-header">
               <h1 className="schedule-title">Ongoing {heading}</h1>
             </div>
             <table className="table table-striped table-bordered table-hover shadow">
@@ -157,7 +157,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
         (() => (
           upcoming.length > 0 &&
           <>
-            <div className="card-header row">
+            <div className="card-header">
               <h1 className="schedule-title">Upcoming {heading}</h1>
             </div>
             <table className="table table-striped table-bordered table-hover shadow">
@@ -192,7 +192,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
         (() => (
           elapsed.length > 0 &&
           <>
-            <div className="card-header row">
+            <div className="card-header">
               <h1 className="schedule-title">Completed {heading}</h1>
             </div>
             <table className="table table-striped table-bordered table-hover shadow">
