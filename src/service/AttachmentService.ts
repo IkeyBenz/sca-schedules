@@ -1,4 +1,3 @@
-import { Attachment, Database } from '../types';
 import { convertJsonToArrayWithIds } from '../util';
 
 class AttachmentService {

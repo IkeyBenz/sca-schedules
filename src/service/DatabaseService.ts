@@ -2,7 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/storage';
 
-import { Database, FirebaseConfig } from '../types';
 import { convertJsonToArrayWithIds } from '../util';
 
 class FirebaseManager implements Database {

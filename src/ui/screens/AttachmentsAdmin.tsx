@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import FileUploader from 'react-firebase-file-uploader';
 
 import { ImageDropBox } from '../components';
-import { Attachment } from '../../types';
-import FileUploader from 'react-firebase-file-uploader';
 import { database } from '../../service/index';
 import spinner from '../assets/spinner.gif';
 

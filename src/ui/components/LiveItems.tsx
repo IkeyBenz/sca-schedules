@@ -1,9 +1,8 @@
 import React from 'react';
-
 import moment from 'moment';
 import * as linkify from 'linkifyjs';
-import { Schedule } from '../../types';
-import { excludeFilterDataFrameRows, filterDataFrameRows, getColumnIdxOfKey } from '../../util';
+
+import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface SmartTextProps {
   input: string;

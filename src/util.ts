@@ -1,7 +1,6 @@
 import moment from 'moment';
 import xlsx from 'xlsx';
 
-import { DataFrame } from './types';
 
 export const dataframeFromExcelFile = (excelFile: File) =>
   new Promise<DataFrame>(resolve => {

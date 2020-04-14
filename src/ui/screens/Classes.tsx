@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { ScheduleCard, LiveItems } from '../components';
-
-import { Schedule } from '../../types';
-import { getColumnIdxOfKey } from '../../util';
 import { useLocation } from 'react-router-dom';
+
+import { getColumnIdxOfKey } from '../../util';
+import { ScheduleCard, LiveItems } from '../components';
 
 interface ClassesScreenProps {
   schedules: Schedule[];

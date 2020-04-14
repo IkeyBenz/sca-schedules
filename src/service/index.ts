@@ -1,5 +1,3 @@
-import { FirebaseConfig } from '../types';
-
 import createScheduleManager from './ScheduleService';
 import createAttachmentManager from './AttachmentService';
 import createFirebaseDbManager from './DatabaseService';

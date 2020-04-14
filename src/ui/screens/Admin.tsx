@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { SpreadSheetDropBox, ImageDropBox } from '../components';
-import { Schedule, DataFrame } from '../../types';
 
 interface SchedulePreviewItemProps {
   schedule: Schedule;

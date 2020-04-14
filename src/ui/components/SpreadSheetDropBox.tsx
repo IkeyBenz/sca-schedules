@@ -1,9 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import { DataFrame } from '../../types';
 import { dataframeFromExcelFile } from '../../util';
-
 import ScheduleCard from './ScheduleCard';
 
 interface SpreadSheetDropBoxProps {

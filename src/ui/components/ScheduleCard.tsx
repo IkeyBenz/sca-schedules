@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import * as linkify from 'linkifyjs';
-import { Schedule } from '../../types';
+
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface ScheduleCardProps {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Schedule, DataFrame } from '../types';
+
 import { ClassesScreen } from '../ui';
 import { scheduleManager } from '../service';
 
