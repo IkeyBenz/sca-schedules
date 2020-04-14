@@ -1,4 +1,3 @@
-import { Form, Database } from '../types';
 import { convertJsonToArrayWithIds } from '../util';
 
 class FormService {

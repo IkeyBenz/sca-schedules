@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+
 import { FormScreen } from '../ui';
-import { Form } from '../types';
 import { formManager } from '../service';
 
 const FormScreenCreator = () => {

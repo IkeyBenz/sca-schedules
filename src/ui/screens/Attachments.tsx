@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AttachmentCard } from '../components';
 
-import { Attachment } from '../../types';
 
 interface AttachmentScreenProps {
   attachments: Attachment[];

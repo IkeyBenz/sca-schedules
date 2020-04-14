@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { AttachmentsAdminScreen } from '../ui';
 import { attachmentManager } from '../service';
-import { Attachment } from '../types';
 
 const AttachmentsAdminScreenCreator = () => {
   const [currentAttachments, setCurrentAttachments] = useState<Attachment[]>([]);

@@ -1,5 +1,3 @@
-import { Database, DataFrame } from '../types';
-
 class ScheduleService {
   private storage: Database;
   static scheduleRef = '1TS3fZHRPlhI4L_URhKJXGa48eOy6BiqM1GeSUJL9jFs/live-website-feed';
