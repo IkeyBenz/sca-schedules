@@ -6,6 +6,7 @@ import { convertJsonToArrayWithIds } from '../util';
 
 class FirebaseManager implements Database {
   db: firebase.database.Database;
+
   storage: firebase.storage.Storage;
 
   constructor(config: FirebaseConfig) {
@@ -31,8 +32,11 @@ class FirebaseManager implements Database {
 
   /** Gets all documents with their id's in collection */
   async findAll(path: string) {
-    return this.db.ref(path).once('value')
-    .then(s => s.val() || {}).then(convertJsonToArrayWithIds)
+    return this.db
+      .ref(path)
+      .once('value')
+      .then(s => s.val() || {})
+      .then(convertJsonToArrayWithIds);
   }
 
   async delete(path: string, _id: firebase.database.Reference) {
@@ -40,9 +44,8 @@ class FirebaseManager implements Database {
   }
 
   onChange(path: string, cb: (data: any) => void) {
-    this.db.ref(path).on('value', (s) => cb(s.val()));
+    this.db.ref(path).on('value', s => cb(s.val()));
   }
-
 }
 
 function createFirebaseDbManager(config: FirebaseConfig) {

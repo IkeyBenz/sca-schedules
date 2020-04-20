@@ -1,6 +1,8 @@
 class ScheduleService {
   private storage: Database;
-  static scheduleRef = '1TS3fZHRPlhI4L_URhKJXGa48eOy6BiqM1GeSUJL9jFs/live-website-feed';
+
+  static scheduleRef =
+    '1TS3fZHRPlhI4L_URhKJXGa48eOy6BiqM1GeSUJL9jFs/live-website-feed';
 
   constructor(database: Database) {
     this.storage = database;

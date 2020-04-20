@@ -30,7 +30,11 @@ class FormService {
   }
 
   _alphabetize(tehillim: Form[]) {
-    return tehillim ? tehillim.sort((a, b) => a.firstName > b.firstName ? 1 : a.firstName < b.firstName ? -1 : 0) : [];
+    return tehillim
+      ? tehillim.sort((a, b) =>
+          a.firstName > b.firstName ? 1 : a.firstName < b.firstName ? -1 : 0
+        )
+      : [];
   }
 }
 

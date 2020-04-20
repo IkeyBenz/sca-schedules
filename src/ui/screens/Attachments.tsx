@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AttachmentCard } from '../components';
 
-
 interface AttachmentScreenProps {
   attachments: Attachment[];
 }
@@ -12,12 +11,7 @@ const AttachmentScreen: React.FC<AttachmentScreenProps> = ({ attachments }) => {
       <div className="container">
         <div className="row align-items-stretch">
           {attachments.map((attachment, idx) => {
-            return (
-              <AttachmentCard
-                key={idx}
-                attachment={attachment}
-              />
-            );
+            return <AttachmentCard key={idx} attachment={attachment} />;
           })}
         </div>
       </div>

@@ -15,7 +15,10 @@ class AttachmentService {
     return this.storage.delete('attachments', _id);
   }
 
-  async updateAttachment(_id: firebase.database.Reference, newAttachment: Attachment) {
+  async updateAttachment(
+    _id: firebase.database.Reference,
+    newAttachment: Attachment
+  ) {
     return this.storage.write(`attachments/${_id}`, newAttachment);
   }
 
@@ -30,7 +33,11 @@ class AttachmentService {
   }
 
   _alphabetize(attachments: Attachment[]) {
-    return attachments ? attachments.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0) : [];
+    return attachments
+      ? attachments.sort((a, b) =>
+          a.title > b.title ? 1 : a.title < b.title ? -1 : 0
+        )
+      : [];
   }
 }
 

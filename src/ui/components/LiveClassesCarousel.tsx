@@ -5,7 +5,11 @@ import 'swiper/css/swiper.css';
 import moment from 'moment';
 import * as linkify from 'linkifyjs';
 
-import { excludeFilterDataFrameRows, filterDataFrameRows, getColumnIdxOfKey } from '../../util';
+import {
+  excludeFilterDataFrameRows,
+  filterDataFrameRows,
+  getColumnIdxOfKey,
+} from '../../util';
 
 interface SmartTextProps {
   input: string;
@@ -17,7 +21,20 @@ const SmartText: React.FC<SmartTextProps> = ({ input }) => {
     return <p>{input}</p>;
   }
   const { value, type } = urls[0];
-  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
+  return (
+    <a
+      href={value}
+      className={
+        value.includes('zoom') && type === 'url'
+          ? 'zoomIcon'
+          : value.includes('gotomeeting') && type === 'url'
+          ? 'gtmIcon'
+          : ''
+      }
+    >
+      {type === 'url' ? 'Click here' : value}
+    </a>
+  );
 };
 
 interface LiveClassesProps {
@@ -36,10 +53,10 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
 }) => {
   useEffect(() => {
     console.log('mount');
-    new Swiper('.swiper-container',{
+    new Swiper('.swiper-container', {
       slidesPerView: 'auto',
       centeredSlides: true,
-      grabCursor: true
+      grabCursor: true,
     });
   });
 
@@ -58,12 +75,15 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
     return null;
   }
 
-  const dayIdx = headerRows.findIndex(data => data.includes('Days'))
-  const timeIdx = headerRows.findIndex(data => data.includes('Time'))
+  const dayIdx = headerRows.findIndex(data => data.includes('Days'));
+  const timeIdx = headerRows.findIndex(data => data.includes('Time'));
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
-    if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
-      acc.push(idx)
+    if (
+      cur.toString().toLowerCase().startsWith('hide') ||
+      cur.toString().toLowerCase().startsWith('days')
+    ) {
+      acc.push(idx);
     }
     return acc;
   }, []);
@@ -127,22 +147,33 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
     }
   });
 
-  return (
-    (() => (
-      live.length > 0 &&
+  return (() =>
+    live.length > 0 && (
       <>
-        <div className={heading === 'Minyanim' ? 'h3 shadow-lg p-3 mb-5 bg-secondary text-center font-weight-bold text-white' : 'h3 shadow-lg p-3 mb-5 bg-primary text-center font-weight-bold text-white'}>
+        <div
+          className={
+            heading === 'Minyanim'
+              ? 'h3 shadow-lg p-3 mb-5 bg-secondary text-center font-weight-bold text-white'
+              : 'h3 shadow-lg p-3 mb-5 bg-primary text-center font-weight-bold text-white'
+          }
+        >
           Ongoing {heading}
         </div>
         <div className="swiper-container live-classes d-flex justify-content-center mb-5">
           <div className="swiper-wrapper">
             {live.map((row, rowId) => (
-              <div className="swiper-slide card mb-3 flex-grow-1 mx-1" key={rowId} style={{maxWidth: "400px"}}>
+              <div
+                className="swiper-slide card mb-3 flex-grow-1 mx-1"
+                key={rowId}
+                style={{ maxWidth: '400px' }}
+              >
                 <div className="row no-gutters align-items-center">
                   <div className="col-8">
                     <div className="card-body">
                       <p className="card-text">{row[2]}</p>
-                      <p className="card-text"><small className="text-muted">{row[4]}</small></p>
+                      <p className="card-text">
+                        <small className="text-muted">{row[4]}</small>
+                      </p>
                       <h5 className="card-title">{row[5]}</h5>
                     </div>
                   </div>
@@ -155,8 +186,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
           </div>
         </div>
       </>
-    ))()
-  );
+    ))();
 };
 
 export default LiveClasses;

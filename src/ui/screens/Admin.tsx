@@ -23,7 +23,7 @@ const SchedulePreviewItem: React.FC<SchedulePreviewItemProps> = ({
       </button>
     ) : (
       <button className="btn btn-warning" onClick={onUpdateBtnPressed}>
-        <i className="fas fa-edit text-light"></i>
+        <i className="fas fa-edit text-light" />
       </button>
     )}
   </li>
@@ -32,12 +32,12 @@ const SchedulePreviewItem: React.FC<SchedulePreviewItemProps> = ({
 interface AdminScreenProps {
   schedules: Schedule[];
   createSchedule: (
-    newSchedule: Schedule,
+    newSchedule: Schedule
   ) => Promise<firebase.database.Reference> | void;
   deleteSchedule: (_id: firebase.database.Reference) => Promise<boolean>;
   updateSchedule: (
     _id: firebase.database.Reference,
-    updatedSchedule: Schedule,
+    updatedSchedule: Schedule
   ) => Promise<boolean>;
 }
 
@@ -48,7 +48,7 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
   updateSchedule,
 }) => {
   const [scheduleBeingEdited, setScheduleBeingEdited] = useState<Schedule>(
-    undefined,
+    undefined
   );
   const updateScheduleBeingEdited = updates =>
     setScheduleBeingEdited({ ...scheduleBeingEdited, ...updates });
@@ -87,7 +87,7 @@ const AdminScreen: React.FC<AdminScreenProps> = ({
         <div className="col schedule-upload-container">
           <div className="text-center">
             <h3 className="text-light">
-              {!!scheduleBeingEdited
+              {scheduleBeingEdited
                 ? 'Update Schedule:'
                 : 'Upload Schedule Here:'}
             </h3>

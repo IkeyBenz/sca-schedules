@@ -26,7 +26,7 @@ const AttachmentPreviewItem: React.FC<AttachmentPreviewItemProps> = ({
       </button>
     ) : (
       <button className="btn btn-warning" onClick={onUpdateBtnPressed}>
-        <i className="fas fa-edit text-light"></i>
+        <i className="fas fa-edit text-light" />
       </button>
     )}
   </li>
@@ -35,12 +35,12 @@ const AttachmentPreviewItem: React.FC<AttachmentPreviewItemProps> = ({
 interface AttachmentsAdminScreenProps {
   attachments: Attachment[];
   createAttachment: (
-    newAttachment: Attachment,
+    newAttachment: Attachment
   ) => Promise<firebase.database.Reference> | void;
   deleteAttachment: (_id: firebase.database.Reference) => Promise<boolean>;
   updateAttachment: (
     _id: firebase.database.Reference,
-    updatedAttachment: Attachment,
+    updatedAttachment: Attachment
   ) => Promise<boolean>;
 }
 
@@ -50,16 +50,16 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
   deleteAttachment,
   updateAttachment,
 }) => {
-  const [attachmentBeingEdited, setAttachmentBeingEdited] = useState<Attachment>(
-    undefined,
-  );
+  const [attachmentBeingEdited, setAttachmentBeingEdited] = useState<
+    Attachment
+  >(undefined);
   const updateAttachmentBeingEdited = updates =>
-  setAttachmentBeingEdited({ ...attachmentBeingEdited, ...updates });
+    setAttachmentBeingEdited({ ...attachmentBeingEdited, ...updates });
   let uploading = false;
 
   const onSaveBtnPressed = () => {
     const { title, file, cover, body } = attachmentBeingEdited;
-    const newAttachment = { title, file, cover: cover || '', body: body || ''};
+    const newAttachment = { title, file, cover: cover || '', body: body || '' };
     if (attachmentBeingEdited._id) {
       updateAttachment(attachmentBeingEdited._id, newAttachment);
     } else {
@@ -68,19 +68,18 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
     setAttachmentBeingEdited(undefined);
   };
 
-  const handleUploadSuccess = (file) => {
-    database
-      .storage
-      .ref("/attachments")
+  const handleUploadSuccess = file => {
+    database.storage
+      .ref('/attachments')
       .child(file)
       .getDownloadURL()
       .then(url => {
-        updateAttachmentBeingEdited({file: url as string});
+        updateAttachmentBeingEdited({ file: url as string });
         uploading = false;
       });
   };
 
-  const handleUploadStart = (file) => {
+  const handleUploadStart = file => {
     uploading = true;
   };
 
@@ -104,7 +103,7 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
         <div className="col schedule-upload-container">
           <div className="text-center">
             <h3 className="text-light">
-              {!!attachmentBeingEdited
+              {attachmentBeingEdited
                 ? 'Update Attachment:'
                 : 'Upload Attachment Here:'}
             </h3>
@@ -114,19 +113,20 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
             className="form-control"
             placeholder="Attachment Title"
             value={attachmentBeingEdited?.title || ''}
-            onChange={e => updateAttachmentBeingEdited({ title: e.target.value })}
+            onChange={e =>
+              updateAttachmentBeingEdited({ title: e.target.value })}
           />
           <ImageDropBox
             onImageDropped={cover => updateAttachmentBeingEdited({ cover })}
             currentImage={attachmentBeingEdited?.cover}
           />
-          
+
           <div className="image-dropper mt-2">
             <form>
               <FileUploader
                 randomizeFilename
-                metadata={{cacheControl: 'max-age=2592000'}}
-                storageRef={database.storage.ref("/attachments")}
+                metadata={{ cacheControl: 'max-age=2592000' }}
+                storageRef={database.storage.ref('/attachments')}
                 onUploadStart={handleUploadStart}
                 onUploadSuccess={handleUploadSuccess}
                 id="file-drop"
@@ -140,14 +140,19 @@ const AdminScreen: React.FC<AttachmentsAdminScreenProps> = ({
               </label>
             </form>
             {!!uploading && <img src={spinner} />}
-            {!!attachmentBeingEdited?.file && <a href={attachmentBeingEdited.file} target="_blank">Preview</a>}
+            {!!attachmentBeingEdited?.file && (
+              <a href={attachmentBeingEdited.file} target="_blank">
+                Preview
+              </a>
+            )}
           </div>
 
           <textarea
             className="form-control mt-2"
             placeholder="Caption"
             value={attachmentBeingEdited?.body || ''}
-            onChange={e => updateAttachmentBeingEdited({ body: e.target.value })}
+            onChange={e =>
+              updateAttachmentBeingEdited({ body: e.target.value })}
           />
 
           <button className="btn btn-success mt-2" onClick={onSaveBtnPressed}>

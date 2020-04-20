@@ -8,12 +8,12 @@ import Header from './Header';
 import Footer from './Footer';
 
 export {
-    ScheduleCard,
-    SpreadSheetDropBox,
-    ImageDropBox,
-    LiveItems,
-    Header,
-    AttachmentCard,
-    Footer,
-    LiveClassesCarousel,
+  ScheduleCard,
+  SpreadSheetDropBox,
+  ImageDropBox,
+  LiveItems,
+  Header,
+  AttachmentCard,
+  Footer,
+  LiveClassesCarousel,
 };
