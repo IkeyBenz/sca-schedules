@@ -24,7 +24,7 @@ const SpreadSheetDropBox: React.FC<SpreadSheetDropBoxProps> = ({
       const excelExt = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
       if (!excelExt.test(file.name.toLowerCase())) {
         return alert(
-          'Only files with .xlsx or .xls extentions are allowed here.'
+          'Only files with .xlsx or .xls extentions are allowed here.',
         );
       }
       setDroppedFileName(file.name);

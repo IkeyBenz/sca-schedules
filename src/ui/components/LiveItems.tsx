@@ -14,20 +14,7 @@ const SmartText: React.FC<SmartTextProps> = ({ input }) => {
     return <p>{input}</p>;
   }
   const { value, type } = urls[0];
-  return (
-    <a
-      href={value}
-      className={
-        value.includes('zoom') && type === 'url'
-          ? 'zoomIcon'
-          : value.includes('gotomeeting') && type === 'url'
-          ? 'gtmIcon'
-          : ''
-      }
-    >
-      {type === 'url' ? 'Click here' : value}
-    </a>
-  );
+  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
 };
 
 interface LiveItemsProps {
@@ -59,15 +46,12 @@ const LiveItems: React.FC<LiveItemsProps> = ({
     return null;
   }
 
-  const dayIdx = headerRows.findIndex(data => data.includes('Days'));
-  const timeIdx = headerRows.findIndex(data => data.includes('Time'));
+  const dayIdx = headerRows.findIndex(data => data.includes('Days'))
+  const timeIdx = headerRows.findIndex(data => data.includes('Time'))
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
-    if (
-      cur.toString().toLowerCase().startsWith('hide') ||
-      cur.toString().toLowerCase().startsWith('days')
-    ) {
-      acc.push(idx);
+    if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
+      acc.push(idx)
     }
     return acc;
   }, []);
@@ -134,19 +118,19 @@ const LiveItems: React.FC<LiveItemsProps> = ({
 
   return (
     <div className="schedule-card my-5">
-      {(() =>
-        live.length > 0 && (
+      {
+        (() => (
+          live.length > 0 &&
           <>
             <div className="card-header">
-              <h1 className="schedule-title">
-Ongoing{heading}</h1>
+              <h1 className="schedule-title">Ongoing {heading}</h1>
             </div>
             <table className="table table-striped table-bordered table-hover shadow">
               <thead className="text-light">
                 <tr>
                   {headerRows.map((col, idx) => {
                     if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>;
+                      return <th key={idx}>{col}</th>
                     }
                   })}
                 </tr>
@@ -156,11 +140,9 @@ Ongoing{heading}</h1>
                   <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
-                        return (
-                          <td key={cellId}>
-                            <SmartText input={cell} />
-                               </td>
-                        );
+                        return <td key={cellId}>
+                          <SmartText input={cell} />
+                        </td>
                       }
                     })}
                   </tr>
@@ -168,20 +150,21 @@ Ongoing{heading}</h1>
               </tbody>
             </table>
           </>
-        ))()}
-      {(() =>
-        upcoming.length > 0 && (
+        ))()
+      }
+      {
+        (() => (
+          upcoming.length > 0 &&
           <>
             <div className="card-header">
-              <h1 className="schedule-title">
-Upcoming{heading}</h1>
+              <h1 className="schedule-title">Upcoming {heading}</h1>
             </div>
             <table className="table table-striped table-bordered table-hover shadow">
               <thead className="text-light">
                 <tr>
                   {headerRows.map((col, idx) => {
                     if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>;
+                      return <th key={idx}>{col}</th>
                     }
                   })}
                 </tr>
@@ -191,10 +174,9 @@ Upcoming{heading}</h1>
                   <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
-                        return (
-                          <td key={cellId}>
-                            <SmartText input={cell} />
-                               </td>
+                        return <td key={cellId}>
+                          <SmartText input={cell} />
+                        </td>
                       }
                     })}
                   </tr>
@@ -202,21 +184,22 @@ Upcoming{heading}</h1>
               </tbody>
             </table>
           </>
-        ))()}
+        ))()
+      }
 
-      {(() =>
-        elapsed.length > 0 && (
+      {
+        (() => (
+          elapsed.length > 0 &&
           <>
             <div className="card-header">
-              <h1 className="schedule-title">
-Completed{heading}</h1>
+              <h1 className="schedule-title">Completed {heading}</h1>
             </div>
             <table className="table table-striped table-bordered table-hover shadow">
               <thead className="text-light">
                 <tr>
                   {headerRows.map((col, idx) => {
                     if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>;
+                      return <th key={idx}>{col}</th>
                     }
                   })}
                 </tr>
@@ -226,10 +209,9 @@ Completed{heading}</h1>
                   <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
-                        return (
-                          <td key={cellId}>
-                            <SmartText input={cell} />
-                               </td>
+                        return <td key={cellId}>
+                          <SmartText input={cell} />
+                        </td>
                       }
                     })}
                   </tr>
@@ -237,7 +219,9 @@ Completed{heading}</h1>
               </tbody>
             </table>
           </>
-        ))()}
+        ))()
+      }
+
     </div>
   );
 };

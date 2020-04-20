@@ -4,9 +4,7 @@ import { AttachmentsAdminScreen } from '../ui';
 import { attachmentManager } from '../service';
 
 const AttachmentsAdminScreenCreator = () => {
-  const [currentAttachments, setCurrentAttachments] = useState<Attachment[]>(
-    []
-  );
+  const [currentAttachments, setCurrentAttachments] = useState<Attachment[]>([]);
 
   useEffect(() => {
     attachmentManager.onAttachmentsChanged(setCurrentAttachments);

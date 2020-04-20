@@ -22,12 +22,7 @@ interface SmartTextProps {
   passwordCol: number;
 }
 /** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText: React.FC<SmartTextProps> = ({
-  input,
-  highlight,
-  row,
-  passwordCol,
-}) => {
+const SmartText: React.FC<SmartTextProps> = ({ input, highlight, row, passwordCol }) => {
   const urls = linkify.find(input);
   let password = '';
   if (~passwordCol && row[passwordCol] !== '-') {
@@ -37,23 +32,7 @@ const SmartText: React.FC<SmartTextProps> = ({
     return <p className={highlight && 'highlight'}>{input}</p>;
   }
   const { value, type } = urls[0];
-  return (
-    <p>
-      <a
-        href={value}
-        className={
-          value.includes('zoom') && type === 'url'
-            ? 'zoomIcon'
-            : value.includes('gotomeeting') && type === 'url'
-            ? 'gtmIcon'
-            : ''
-        }
-      >
-        {type === 'url' ? 'Click here' : value}
-      </a>{' '}
-      <span className="password">{password}</span>
-    </p>
-  );
+  return <p><a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a> <span className="password">{password}</span></p>;
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
@@ -73,7 +52,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
 
   const filteredCols = headerRow.reduce((acc, cur, idx) => {
     if (cur.toString().toLowerCase().startsWith('hide')) {
-      acc.push(idx);
+      acc.push(idx)
     }
     return acc;
   }, []);
@@ -81,9 +60,8 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   const filterColIdx =
     filter && rows[0].findIndex(col => col.toLowerCase().includes(filter.type));
 
-  const passwordColIdx = rows[0].findIndex(col =>
-    col.toLowerCase().includes('password')
-  );
+  const passwordColIdx =
+    rows[0].findIndex(col => col.toLowerCase().includes('password'));
 
   const shouldHighlight = (colText: string, colIdx) => {
     if (filter?.type === 'topic' && location.pathname === '/bekhorot') {
@@ -108,7 +86,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
           <tr>
             {filteredRows[0].map((col, idx) => {
               if (!filteredCols.includes(idx)) {
-                return <th key={idx}>{col}</th>;
+                return <th key={idx}>{col}</th>
               }
             })}
           </tr>
@@ -118,15 +96,14 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
             <tr key={rIdx}>
               {row.map((col, cIdx) => {
                 if (!filteredCols.includes(cIdx)) {
-                  return (
-                    <td key={cIdx}>
-                      <SmartText
-                        input={col}
-                        row={row}
-                        passwordCol={passwordColIdx}
-                        highlight={shouldHighlight(col, cIdx)}
-                      />
-                         </td>
+                  return <td key={cIdx}>
+                    <SmartText
+                      input={col}
+                      row={row}
+                      passwordCol={passwordColIdx}
+                      highlight={shouldHighlight(col, cIdx)}
+                    />
+                  </td>
                 }
               })}
             </tr>

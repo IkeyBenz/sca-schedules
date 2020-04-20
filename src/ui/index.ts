@@ -5,11 +5,4 @@ import AttachmentsAdminScreen from './screens/AttachmentsAdmin';
 import FormScreen from './screens/Form';
 import IndexScreen from './screens/Index';
 
-export {
-  ClassesScreen,
-  AdminScreen,
-  AttachmentsAdminScreen,
-  AttachmentsScreen,
-  FormScreen,
-  IndexScreen,
-};
+export { ClassesScreen, AdminScreen, AttachmentsAdminScreen, AttachmentsScreen, FormScreen, IndexScreen };

@@ -22,7 +22,7 @@ const ImageDropBox: React.FC<ImageDropBoxProps> = ({
       const imageExt = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png)$/;
       if (!imageExt.test(file.name.toLowerCase())) {
         return alert(
-          'Only files with .jpg or .jpeg or .png extensions are allowed here.'
+          'Only files with .jpg or .jpeg or .png extensions are allowed here.',
         );
       }
       /* convertImageFileToBase64Str(file).then(base64URL => {
@@ -32,13 +32,14 @@ const ImageDropBox: React.FC<ImageDropBoxProps> = ({
     },
   });
 
-  const handleUploadStart = file => {
+  const handleUploadStart = (file) => {
     setPreviewImage(spinner as string);
   };
 
-  const handleUploadSuccess = file => {
-    database.storage
-      .ref('/logos')
+  const handleUploadSuccess = (file) => {
+    database
+      .storage
+      .ref("/logos")
       .child(file)
       .getDownloadURL()
       .then(url => {
@@ -53,8 +54,8 @@ const ImageDropBox: React.FC<ImageDropBoxProps> = ({
         <FileUploader
           accept="image/*"
           randomizeFilename
-          storageRef={database.storage.ref('/logos')}
-          metadata={{ cacheControl: 'max-age=2592000' }}
+          storageRef={database.storage.ref("/logos")}
+          metadata={{cacheControl: 'max-age=2592000'}}
           onUploadStart={handleUploadStart}
           onUploadSuccess={handleUploadSuccess}
           id="image-drop"

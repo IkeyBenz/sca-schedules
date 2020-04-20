@@ -7,7 +7,13 @@ const Footer: React.FC = props => {
     <>
       <footer className="bg-dark d-flex">
         <a href="/#" className="my-5 mx-auto d-block">
-          <img className="py-0" src={sca} alt="SCA" height="60" width="177" />
+          <img
+            className="py-0"
+            src={sca}
+            alt="SCA"
+            height="60"
+            width="177"
+          />
         </a>
       </footer>
     </>

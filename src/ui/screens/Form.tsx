@@ -12,7 +12,7 @@ const FormScreen: React.FC<FormScreenProps> = ({ forms }) => {
   const [mothersName, setMothersName] = useState<string>('');
   const [formMessage, setFormMessage] = useState<string>('');
 
-  const success = e => {
+  const success = (e) => {
     setFirstName('');
     setBenbat('');
     setMothersName('');
@@ -20,81 +20,46 @@ const FormScreen: React.FC<FormScreenProps> = ({ forms }) => {
     setTimeout(() => {
       setFormMessage('');
     }, 2000);
-  };
+  }
 
-  const fail = e => {
+  const fail = (e) => {
     setFormMessage('Error');
-  };
+  }
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
-    database
-      .push('tehillim', { firstName, benbat, mothersName })
-      .then(success, fail);
-  };
-
+    database.push('tehillim', {firstName, benbat, mothersName}).then(success, fail);
+  }
+  
   return (
     <>
       <div className="container">
         <p>
-          We are compiling a list of those who have fallen ill to share with the
-          community so that we may dedicate our prayers and learning in the
-          merit of their complete and speedy recovery.
+          We are compiling a list of those who have fallen ill to share with the community so that we may dedicate our prayers and learning in the merit of their complete and speedy recovery.
         </p>
         <form onSubmit={submit}>
           <div className="form-group">
             <label htmlFor="firstName">Hebrew First Name</label>
-            <input
-              type="text"
-              id="firstName"
-              className="form-control"
-              onChange={e => setFirstName(e.target.value)}
-              value={firstName}
-              required
-            />
+            <input type="text" id="firstName" className="form-control" onChange={e => setFirstName(e.target.value)} value={firstName} required />
           </div>
           <div className="form-group">
             <label>Ben/Bat</label>
             <div className="form-check">
-              <input
-                type="radio"
-                id="ben"
-                name="benbat"
-                value="ben"
-                checked={!!(benbat === 'ben')}
-                onChange={e => e.target.checked && setBenbat(e.target.value)}
-                required
-              />
+              <input type="radio" id="ben" name="benbat" value="ben" checked={!!(benbat === 'ben')} onChange={e => e.target.checked && setBenbat(e.target.value)} required />
               <label htmlFor="ben"> Ben</label>
             </div>
             <div className="form-check">
-              <input
-                type="radio"
-                id="bat"
-                name="benbat"
-                value="bat"
-                checked={!!(benbat === 'bat')}
-                onChange={e => e.target.checked && setBenbat(e.target.value)}
-              />
+              <input type="radio" id="bat" name="benbat" value="bat" checked={!!(benbat === 'bat')} onChange={e => e.target.checked && setBenbat(e.target.value)} />
               <label htmlFor="bat"> Bat</label>
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="mothersName">Mother's Hebrew Name</label>
-            <input
-              type="text"
-              id="mothersName"
-              className="form-control"
-              onChange={e => setMothersName(e.target.value)}
-              value={mothersName}
-              required
-            />
+            <input type="text" id="mothersName" className="form-control" onChange={e => setMothersName(e.target.value)} value={mothersName} required />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-primary btn-lg">
-              Submit
-            </button>
-            {!!formMessage && <span className="alert">{formMessage}</span>}
+            <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+            {!!formMessage && (<span className="alert">{formMessage}</span>)}
           </div>
         </form>
       </div>
@@ -102,36 +67,26 @@ const FormScreen: React.FC<FormScreenProps> = ({ forms }) => {
         <table className="table table-striped table-bordered table-hover shadow">
           <thead className="text-light">
             <tr>
-              <th>
-                Please dedicate prayers and learning in the merit of their
-                complete and speedy recovery.
-              </th>
+              <th>Please dedicate prayers and learning in the merit of their complete and speedy recovery.</th>
             </tr>
           </thead>
           <tbody>
-            {forms.map((person, idx) => {
-              const hebrew =
-                ~person.firstName.search(/[\u0590-\u05FF]/) &&
-                ~person.mothersName.search(/[\u0590-\u05FF]/);
-              let { benbat } = person;
-              if (hebrew) {
-                benbat = benbat === 'ben' ? 'בן' : 'בת';
-              }
-              return (
-                <tr key={idx}>
-                  <td dir={hebrew && 'rtl'}>
-                    {person.firstName} 
-{' '}
-{benbat} 
-{' '}
-{person.mothersName}
-                  </td>
-                </tr>
-              );
-            })}
+          {forms.map((person, idx) => {
+            let hebrew = ~person.firstName.search(/[\u0590-\u05FF]/) && ~person.mothersName.search(/[\u0590-\u05FF]/);
+            let benbat = person.benbat;
+            if (hebrew) {
+              benbat = benbat === 'ben' ? 'בן' : 'בת'
+            }
+            return (
+              <tr key={idx}>
+                <td dir={hebrew && 'rtl'}>{person.firstName} {benbat} {person.mothersName}</td>
+              </tr>
+            )
+          })}
           </tbody>
         </table>
       </div>
+
     </>
   );
 };

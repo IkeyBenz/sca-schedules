@@ -15,17 +15,12 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({ attachment }) => {
             <img src={cover} className="attachment-cover" />
           </div>
         )}
-        <a
-          href={file}
-          target="_blank"
-          className="card-body d-flex flex-column align-items-center bg-aliceblue"
-          <h3 className="card-title">{title}</h3>
-          {!!body && (
+        <a href={file} target="_blank" className="card-body d-flex flex-column align-items-center bg-aliceblue">
+            <h3 className="card-title">{title}</h3>
+            {!!body && (
               <p className="card-text">{body}</p>
             )}
-          <span className="btn btn-primary d-inline-block mt-auto">
-            Click to download
-          </span>
+          <span className="btn btn-primary d-inline-block mt-auto">Click to download</span>
         </a>
       </div>
     </div>

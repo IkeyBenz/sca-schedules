@@ -25,7 +25,7 @@ declare interface Database {
   write: (path: string, data: any) => Promise<boolean>;
   delete: (path: string, _id: firebase.database.Reference) => Promise<boolean>;
   push: (path: string, data: any) => Promise<firebase.database.Reference>;
-  findAll: (path: string) => Promise<any[]>;
+  findAll: (path: string) => Promise<any[]>
   onChange: (path: string, cb: (data: any) => void) => void;
 }
 declare interface FirebaseConfig {
