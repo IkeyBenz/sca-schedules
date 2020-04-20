@@ -1,7 +1,6 @@
 import React from 'react';
 import SCALogo from '../assets/SCALogo.png';
 
-import { Schedule } from '../../types';
 import { LiveClassesCarousel } from '../components';
 
 
