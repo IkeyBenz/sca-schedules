@@ -31,7 +31,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
   filter,
   heading,
 }) => {
-  const rows = [];
+  let rows = [];
   schedules.forEach(schedule => {
     const filteredRows =
       filter?.match === 'minyan'
@@ -45,6 +45,9 @@ const LiveItems: React.FC<LiveItemsProps> = ({
     // No rows matched the filter criteria
     return null;
   }
+
+  // Only show the rows whose data in column 'HIDE-Toggle' contains 'show'
+  rows = filterDataFrameRows('toggle', 'show', rows);
 
   const dayIdx = headerRows.findIndex(data => data.includes('Days'))
   const timeIdx = headerRows.findIndex(data => data.includes('Time'))
