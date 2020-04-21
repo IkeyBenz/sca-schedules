@@ -3,23 +3,22 @@ import Swiper from 'swiper';
 import 'swiper/css/swiper.css';
 
 import moment from 'moment';
-import * as linkify from 'linkifyjs';
 
-import { excludeFilterDataFrameRows, filterDataFrameRows, getColumnIdxOfKey } from '../../util';
-import { database } from 'firebase';
+import { SmartText } from './ScheduleCard';
+import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface SmartTextProps {
   input: string;
 }
-/** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText: React.FC<SmartTextProps> = ({ input }) => {
-  const urls = linkify.find(input);
-  if (urls.length === 0) {
-    return <p>{input}</p>;
-  }
-  const { value, type } = urls[0];
-  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
-};
+// /** If input contains a link, SmartText will replace it with a clickable ancor tag */
+// const SmartText: React.FC<SmartTextProps> = ({ input }) => {
+//   const urls = linkify.find(input);
+//   if (urls.length === 0) {
+//     return <p>{input}</p>;
+//   }
+//   const { value, type } = urls[0];
+//   return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
+// };
 
 interface LiveClassesProps {
   schedules: Schedule[];
@@ -63,6 +62,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
   const joinIdx = headerRows.findIndex(data => data.toLowerCase().includes('join'));
   const topicIdx = headerRows.findIndex(data => data.toLowerCase().includes('topic'));
   const teacherIdx = headerRows.findIndex(data => data.toLowerCase().includes('teacher'));
+  const passwordIdx = headerRows.findIndex(data => data.toLowerCase().includes('password'));
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
     if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
@@ -144,6 +144,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
               const topic = row[topicIdx];
               const teacher = row[teacherIdx];
               const url = row[joinIdx];
+
               return (
                 <div className="swiper-slide card mb-3 flex-grow-1 mx-1" key={rowId} style={{maxWidth: "400px"}}>
                   <div className="row no-gutters align-items-center">
@@ -155,7 +156,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
                       </div>
                     </div>
                     <div className="col-4">
-                      <SmartText input={url} />
+                      <SmartText input={url} row={row} passwordCol={passwordIdx} />
                     </div>
                   </div>
                 </div>

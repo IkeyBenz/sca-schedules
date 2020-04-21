@@ -5,18 +5,6 @@ import moment from 'moment';
 import { SmartText } from './ScheduleCard';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
-// interface SmartTextProps {
-//   input: string;
-// }
-// /** If input contains a link, SmartText will replace it with a clickable ancor tag */
-// const SmartText: React.FC<SmartTextProps> = ({ input }) => {
-//   const urls = linkify.find(input);
-//   if (urls.length === 0) {
-//     return <p>{input}</p>;
-//   }
-//   const { value, type } = urls[0];
-//   return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
-// };
 
 interface LiveItemsProps {
   schedules: Schedule[];
