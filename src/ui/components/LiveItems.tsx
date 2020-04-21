@@ -210,10 +210,8 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                 </tr>
               </thead>
               <tbody>
-                {elapsed.map((row, rowId) => {
-                  console.log(passwordIdx);
-                  console.log(row[passwordIdx]);
-                  return <tr key={rowId}>
+                {elapsed.map((row, rowId) => (
+                  <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
                         return <td key={cellId}>
@@ -222,7 +220,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                       }
                     })}
                   </tr>
-})}
+                ))}
               </tbody>
             </table>
           </>
