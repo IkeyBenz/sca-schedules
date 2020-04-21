@@ -6,6 +6,7 @@ import moment from 'moment';
 import * as linkify from 'linkifyjs';
 
 import { excludeFilterDataFrameRows, filterDataFrameRows, getColumnIdxOfKey } from '../../util';
+import { database } from 'firebase';
 
 interface SmartTextProps {
   input: string;
@@ -35,7 +36,6 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
   heading,
 }) => {
   useEffect(() => {
-    console.log('mount');
     new Swiper('.swiper-container',{
       slidesPerView: 'auto',
       centeredSlides: true,
@@ -58,8 +58,11 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
     return null;
   }
 
-  const dayIdx = headerRows.findIndex(data => data.includes('Days'))
-  const timeIdx = headerRows.findIndex(data => data.includes('Time'))
+  const dayIdx = headerRows.findIndex(data => data.toLowerCase().includes('days'));
+  const timeIdx = headerRows.findIndex(data => data.toLowerCase().includes('time'));
+  const joinIdx = headerRows.findIndex(data => data.toLowerCase().includes('join'));
+  const topicIdx = headerRows.findIndex(data => data.toLowerCase().includes('topic'));
+  const teacherIdx = headerRows.findIndex(data => data.toLowerCase().includes('teacher'));
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
     if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
@@ -136,22 +139,28 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
         </div>
         <div className="swiper-container live-classes d-flex justify-content-center mb-5">
           <div className="swiper-wrapper">
-            {live.map((row, rowId) => (
-              <div className="swiper-slide card mb-3 flex-grow-1 mx-1" key={rowId} style={{maxWidth: "400px"}}>
-                <div className="row no-gutters align-items-center">
-                  <div className="col-8">
-                    <div className="card-body">
-                      <p className="card-text">{row[2]}</p>
-                      <p className="card-text"><small className="text-muted">{row[4]}</small></p>
-                      <h5 className="card-title">{row[5]}</h5>
+            {live.map((row, rowId) => {
+              const time = row[timeIdx];
+              const topic = row[topicIdx];
+              const teacher = row[teacherIdx];
+              const url = row[joinIdx];
+              return (
+                <div className="swiper-slide card mb-3 flex-grow-1 mx-1" key={rowId} style={{maxWidth: "400px"}}>
+                  <div className="row no-gutters align-items-center">
+                    <div className="col-8">
+                      <div className="card-body">
+                        <p className="card-text my-0">{time}</p>
+                        <p className="card-text my-0"><small className="text-muted">{teacher}</small></p>
+                        <h5 className="card-title text-bold mt-2">{topic}</h5>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <SmartText input={url} />
                     </div>
                   </div>
-                  <div className="col-4">
-                    <SmartText input={row[7]} />
-                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </>
