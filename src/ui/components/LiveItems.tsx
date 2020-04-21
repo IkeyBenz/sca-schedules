@@ -1,21 +1,22 @@
 import React from 'react';
 import moment from 'moment';
-import * as linkify from 'linkifyjs';
+// import * as linkify from 'linkifyjs';
 
+import { SmartText } from './ScheduleCard';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
-interface SmartTextProps {
-  input: string;
-}
-/** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText: React.FC<SmartTextProps> = ({ input }) => {
-  const urls = linkify.find(input);
-  if (urls.length === 0) {
-    return <p>{input}</p>;
-  }
-  const { value, type } = urls[0];
-  return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
-};
+// interface SmartTextProps {
+//   input: string;
+// }
+// /** If input contains a link, SmartText will replace it with a clickable ancor tag */
+// const SmartText: React.FC<SmartTextProps> = ({ input }) => {
+//   const urls = linkify.find(input);
+//   if (urls.length === 0) {
+//     return <p>{input}</p>;
+//   }
+//   const { value, type } = urls[0];
+//   return <a href={value} className={value.includes('zoom') && type === 'url' ? 'zoomIcon' : value.includes('gotomeeting') && type === 'url' ? 'gtmIcon' : ''}>{type === 'url' ? 'Click here' : value}</a>;
+// };
 
 interface LiveItemsProps {
   schedules: Schedule[];
@@ -49,8 +50,9 @@ const LiveItems: React.FC<LiveItemsProps> = ({
   // Only show the rows whose data in column 'HIDE-Toggle' contains 'show'
   rows = filterDataFrameRows('toggle', 'show', rows);
 
-  const dayIdx = headerRows.findIndex(data => data.includes('Days'))
-  const timeIdx = headerRows.findIndex(data => data.includes('Time'))
+  const dayIdx = headerRows.findIndex(data => data.toLowerCase().includes('days'))
+  const timeIdx = headerRows.findIndex(data => data.toLowerCase().includes('time'))
+  const passwordIdx = headerRows.findIndex(data => data.toLowerCase().includes('password'));
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
     if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
@@ -144,7 +146,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
                         return <td key={cellId}>
-                          <SmartText input={cell} />
+                          <SmartText input={cell} passwordCol={passwordIdx} row={row} />
                         </td>
                       }
                     })}
@@ -178,7 +180,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
                         return <td key={cellId}>
-                          <SmartText input={cell} />
+                         <SmartText input={cell} passwordCol={passwordIdx} row={row} />
                         </td>
                       }
                     })}
@@ -208,17 +210,19 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                 </tr>
               </thead>
               <tbody>
-                {elapsed.map((row, rowId) => (
-                  <tr key={rowId}>
+                {elapsed.map((row, rowId) => {
+                  console.log(passwordIdx);
+                  console.log(row[passwordIdx]);
+                  return <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
                         return <td key={cellId}>
-                          <SmartText input={cell} />
+                          <SmartText input={cell} passwordCol={passwordIdx} row={row} />
                         </td>
                       }
                     })}
                   </tr>
-                ))}
+})}
               </tbody>
             </table>
           </>

@@ -22,7 +22,7 @@ interface SmartTextProps {
   passwordCol: number;
 }
 /** If input contains a link, SmartText will replace it with a clickable ancor tag */
-const SmartText: React.FC<SmartTextProps> = ({ input, highlight, row, passwordCol }) => {
+export const SmartText: React.FC<SmartTextProps> = ({ input, highlight, row, passwordCol }) => {
   const urls = linkify.find(input);
   let password = '';
   if (~passwordCol && row[passwordCol] !== '-') {
