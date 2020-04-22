@@ -247,8 +247,7 @@ label.hidden {
   display: inline-block;
   background-image: url('./assets/zoom.png');
   background-repeat: no-repeat;
-  width: auto;
-  height: 100%;
+  background-size: cover;
   background-size: 100%;
   text-indent: -99999px;
   overflow: hidden;
@@ -258,8 +257,7 @@ label.hidden {
   display: inline-block;
   background-image: url('./assets/gtm.png');
   background-repeat: no-repeat;
-  width: auto;
-  height: 100%;
+  background-size: cover;
   background-size: 100%;
   text-indent: -99999px;
   overflow: hidden;

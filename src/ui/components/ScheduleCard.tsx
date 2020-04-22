@@ -39,12 +39,12 @@ export const SmartText: React.FC<SmartTextProps> = ({
   }
 
   const { value, type } = urls[0];
-  console.log(location.pathname);
   let iconSize = location.pathname === '/' ? 80 : 40;
   return (
-    <div style={{ height: iconSize }}>
+    <span>
       <a
         href={value}
+        style={{ height: iconSize, width: iconSize }}
         className={
           value.includes('zoom') && type === 'url'
             ? 'zoomIcon'
@@ -55,7 +55,7 @@ export const SmartText: React.FC<SmartTextProps> = ({
         {type === 'url' ? 'Click here' : value}
       </a>{' '}
       <p className="password">{password}</p>
-    </div>
+    </span>
   );
 };
 
