@@ -123,8 +123,8 @@ table a {
 }
 
 .btn-whatsapp {
-  background-color: #25D366;
-  border-color: #25D366;
+  background-color: #25d366;
+  border-color: #25d366;
 }
 
 .btn-whatsapp:before {
@@ -239,12 +239,16 @@ label.hidden {
   font-weight: 600;
 }
 
+.block {
+  min-height: 250px;
+  align-items: middle;
+}
 .zoomIcon {
   display: inline-block;
   background-image: url('./assets/zoom.png');
   background-repeat: no-repeat;
-  width: 80px;
-  height: 80px;
+  width: auto;
+  height: 100%;
   background-size: 100%;
   text-indent: -99999px;
   overflow: hidden;
@@ -254,19 +258,19 @@ label.hidden {
   display: inline-block;
   background-image: url('./assets/gtm.png');
   background-repeat: no-repeat;
-  width: 40px;
-  height: 40px;
+  width: auto;
+  height: 100%;
   background-size: 100%;
   text-indent: -99999px;
   overflow: hidden;
 }
 
 .bg-aliceblue {
-  background: #F0F8FF;
+  background: #f0f8ff;
 }
 
 .bg-pesah-recordings {
-  background-image: url('./assets/pesah-bgb.jpg');
+  background-image: url('./assets/home-bottom.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -281,5 +285,5 @@ label.hidden {
 }
 
 .bg-gradient-dark {
-  background: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
-import './ui/styles.css';
+import "./ui/styles.css";
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
