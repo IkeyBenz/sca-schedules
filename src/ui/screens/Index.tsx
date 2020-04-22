@@ -10,6 +10,7 @@ interface IndexScreenProps {
 const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
   return (
     <>
+      <div className="home-bg-img"></div>
       <div className="bg-pesah py-5 block shadow">
         <img
           src={SCALogo}
@@ -25,7 +26,7 @@ const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
           heading="Classes"
         />
       </div>
-      <div className="shadow">
+      <div className="shadow" style={{ backgroundColor: '#BEE3F4' }}>
         <div className="bg-pesah-recordings pb-5 block"></div>
       </div>
 

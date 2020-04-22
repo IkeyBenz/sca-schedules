@@ -5,6 +5,16 @@ body {
   height: 100vh;
   font-weight: 300;
 }
+.home-bg-img {
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+  background-image: url('./assets/site-background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 h1,
 a,
 .header-title {
