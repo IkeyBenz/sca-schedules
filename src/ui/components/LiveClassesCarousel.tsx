@@ -167,7 +167,9 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
                 className="swiper-slide card mb-3 flex-grow-1 mx-1"
                 key={rowId}
                 style={{ maxWidth: '400px' }}>
-                <div className="row no-gutters align-items-center">
+                <div
+                  className="row no-gutters align-items-center"
+                  style={{ border: '4px solid #1E4169' }}>
                   <div className="col-8">
                     <div className="card-body">
                       <p className="card-text my-0">{time}</p>

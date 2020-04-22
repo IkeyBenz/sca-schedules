@@ -10,7 +10,9 @@ interface IndexScreenProps {
 const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
   return (
     <>
-      <div className="home-bg-img"></div>
+      <div className="home-bg-img">
+        <div className="opaque-overlay"></div>
+      </div>
       <div className="bg-pesah py-5 block shadow">
         <img
           src={SCALogo}

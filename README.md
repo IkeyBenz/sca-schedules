@@ -6,4 +6,4 @@ The corona pandemic has caused disarray amongst communities around the world. Ma
 
 ### Hosted using Github Pages on the domain [scatorah.org](https://scatorah.org):
 
-![Website Preview](./Preview.png)
+![Website Preview](./Preview.jpeg)
