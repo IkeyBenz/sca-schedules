@@ -39,6 +39,7 @@ export const SmartText: React.FC<SmartTextProps> = ({
   }
 
   const { value, type } = urls[0];
+  console.log(location.pathname);
   let iconSize = location.pathname === '/' ? 80 : 40;
   return (
     <div style={{ height: iconSize }}>

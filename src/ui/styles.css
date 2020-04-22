@@ -240,7 +240,7 @@ label.hidden {
 }
 
 .block {
-  min-height: 250px;
+  min-height: 300px;
   align-items: middle;
 }
 .zoomIcon {
@@ -274,6 +274,8 @@ label.hidden {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  max-width: 1052px;
+  margin: 0 auto;
 }
 
 .bg-pesah {

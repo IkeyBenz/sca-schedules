@@ -7,7 +7,6 @@ import moment from 'moment';
 import { SmartText } from './ScheduleCard';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
-
 interface LiveClassesProps {
   schedules: Schedule[];
   filter?: {
@@ -23,15 +22,16 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
   heading,
 }) => {
   useEffect(() => {
-    new Swiper('.swiper-container',{
+    new Swiper('.swiper-container', {
       slidesPerView: 'auto',
       centeredSlides: true,
-      grabCursor: true
+      grabCursor: true,
     });
   });
 
-  const rows = [];
-  schedules.forEach(schedule => {
+  let rows = [];
+  schedules.forEach((schedule) => {
+    console.log(schedule);
     const filteredRows =
       filter?.match === 'minyan'
         ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
@@ -41,20 +41,34 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
   const headerRows = rows[0];
 
   if (rows.length < 2) {
-    // No rows matched the filter criteria
     return null;
   }
 
-  const dayIdx = headerRows.findIndex(data => data.toLowerCase().includes('days'));
-  const timeIdx = headerRows.findIndex(data => data.toLowerCase().includes('time'));
-  const joinIdx = headerRows.findIndex(data => data.toLowerCase().includes('join'));
-  const topicIdx = headerRows.findIndex(data => data.toLowerCase().includes('topic'));
-  const teacherIdx = headerRows.findIndex(data => data.toLowerCase().includes('teacher'));
-  const passwordIdx = headerRows.findIndex(data => data.toLowerCase().includes('password'));
+  const dayIdx = headerRows.findIndex((data) =>
+    data.toLowerCase().includes('days'),
+  );
+  const timeIdx = headerRows.findIndex((data) =>
+    data.toLowerCase().includes('time'),
+  );
+  const joinIdx = headerRows.findIndex((data) =>
+    data.toLowerCase().includes('join'),
+  );
+  const topicIdx = headerRows.findIndex((data) =>
+    data.toLowerCase().includes('topic'),
+  );
+  const teacherIdx = headerRows.findIndex((data) =>
+    data.toLowerCase().includes('teacher'),
+  );
+  const passwordIdx = headerRows.findIndex((data) =>
+    data.toLowerCase().includes('password'),
+  );
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
-    if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
-      acc.push(idx)
+    if (
+      cur.toString().toLowerCase().startsWith('hide') ||
+      cur.toString().toLowerCase().startsWith('days')
+    ) {
+      acc.push(idx);
     }
     return acc;
   }, []);
@@ -63,7 +77,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
 
   const now = new Date();
 
-  const filteredByDay = rows.filter(row => {
+  const filteredByDay = rows.filter((row) => {
     let flag = false;
     const rowDays = row[dayIdx];
     if (rowDays.includes('Daily')) {
@@ -72,13 +86,13 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
       flag = true;
     } else if (rowDays.includes('-')) {
       const rowDaysArr = rowDays.split(/[^\w-]/);
-      rowDaysArr.forEach(rowDay => {
+      rowDaysArr.forEach((rowDay) => {
         if (rowDay.includes('-')) {
           const leftRight = rowDay.split('-');
-          const left = days.findIndex(v => {
+          const left = days.findIndex((v) => {
             return leftRight[0].includes(v);
           });
-          const right = days.findIndex(v => {
+          const right = days.findIndex((v) => {
             return leftRight[1].includes(v);
           });
           if (left < now.getDay() && right > now.getDay()) {
@@ -90,11 +104,11 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
     return flag;
   });
 
-  const live = [];
+  let live = [];
   const elapsed = [];
   const upcoming = [];
 
-  filteredByDay.forEach(row => {
+  filteredByDay.forEach((row) => {
     const rowTimes = row[timeIdx].match(/\d\d?:\d\d ?(?:[AP]M)?/g);
     if (!rowTimes) return false;
     if (
@@ -118,42 +132,65 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
     }
   });
 
-  return (
-    (() => (
-      live.length > 0 &&
-      <>
-        <div className={heading === 'Minyanim' ? 'h3 shadow-lg p-3 mb-5 bg-secondary text-center font-weight-bold text-white' : 'h3 shadow-lg p-3 mb-5 bg-primary text-center font-weight-bold text-white'}>
-          Ongoing {heading}
-        </div>
-        <div className="swiper-container live-classes d-flex justify-content-center mb-5">
-          <div className="swiper-wrapper">
-            {live.map((row, rowId) => {
-              const time = row[timeIdx];
-              const topic = row[topicIdx];
-              const teacher = row[teacherIdx];
-              const url = row[joinIdx];
+  let isShowingFuture = false;
+  if (live.length === 0) {
+    live = filteredByDay.slice(
+      0,
+      filteredByDay.length > 6 ? 6 : filteredByDay.length,
+    );
+    isShowingFuture = true;
+  }
 
-              return (
-                <div className="swiper-slide card mb-3 flex-grow-1 mx-1" key={rowId} style={{maxWidth: "400px"}}>
-                  <div className="row no-gutters align-items-center">
-                    <div className="col-8">
-                      <div className="card-body">
-                        <p className="card-text my-0">{time}</p>
-                        <p className="card-text my-0"><small className="text-muted">{teacher}</small></p>
-                        <h5 className="card-title text-bold mt-2">{topic}</h5>
-                      </div>
-                    </div>
-                    <div className="col-4">
-                      <SmartText input={url} row={row} passwordCol={passwordIdx} />
+  return (
+    <>
+      <div
+        className={
+          heading === 'Minyanim'
+            ? 'h3 shadow-lg p-3 mb-5 bg-secondary text-center font-weight-bold text-white'
+            : 'h3 shadow-lg p-3 mb-5 bg-primary text-center font-weight-bold text-white'
+        }>
+        Ongoing {heading}
+      </div>
+      <div className="text-center">
+        {isShowingFuture && <h2 className="mr-2 font-weight-bold">Up Next:</h2>}
+      </div>
+      <div className="swiper-container live-classes d-flex justify-content-center mb-5">
+        <div className="swiper-wrapper align-items-center">
+          {live.map((row, rowId) => {
+            const time = row[timeIdx];
+            const topic = row[topicIdx];
+            const teacher = row[teacherIdx];
+            const url = row[joinIdx];
+
+            return (
+              <div
+                className="swiper-slide card mb-3 flex-grow-1 mx-1"
+                key={rowId}
+                style={{ maxWidth: '400px' }}>
+                <div className="row no-gutters align-items-center">
+                  <div className="col-8">
+                    <div className="card-body">
+                      <p className="card-text my-0">{time}</p>
+                      <p className="card-text my-0">
+                        <small className="text-muted">{teacher}</small>
+                      </p>
+                      <h5 className="card-title text-bold mt-2">{topic}</h5>
                     </div>
                   </div>
+                  <div className="col-4">
+                    <SmartText
+                      input={url}
+                      row={row}
+                      passwordCol={passwordIdx}
+                    />
+                  </div>
                 </div>
-              )
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
-      </>
-    ))()
+      </div>
+    </>
   );
 };
 

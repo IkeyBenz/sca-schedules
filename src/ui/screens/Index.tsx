@@ -10,15 +10,13 @@ interface IndexScreenProps {
 const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
   return (
     <>
-      <div className="block">
-        <div className="bg-pesah py-5">
-          <img
-            src={SCALogo}
-            className="centered-image img-fluid"
-            height="150"
-            alt=""
-          />
-        </div>
+      <div className="bg-pesah py-5 block shadow">
+        <img
+          src={SCALogo}
+          className="centered-image img-fluid"
+          height="150"
+          alt=""
+        />
       </div>
       <div className="block">
         <LiveClassesCarousel
@@ -27,20 +25,10 @@ const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
           heading="Classes"
         />
       </div>
-      <div className="block">
-        <div className="bg-pesah-recordings pb-5">
-          <h4 className="h3 text-white text-center pt-2 bg-gradient-dark pb-5 font-weight-bold">
-            Pesah Recordings
-          </h4>
-          <a
-            href="https://www.youtube.com/playlist?list=PLS3KTNjJqUepUQ3quLa-UYoypBlfcAlcc"
-            target="_blank"
-            className="d-block h1 text-white text-center my-5 font-weight-light">
-            To view our library of recorded <br />
-            pesah classes, click here.
-          </a>
-        </div>
+      <div className="shadow">
+        <div className="bg-pesah-recordings pb-5 block"></div>
       </div>
+
       <div className="block">
         <LiveClassesCarousel
           schedules={schedules}
