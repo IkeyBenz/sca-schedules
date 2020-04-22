@@ -256,7 +256,7 @@ label.hidden {
 .opaque-overlay {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .zoomIcon {
   display: inline-block;
@@ -283,12 +283,12 @@ label.hidden {
 }
 
 .bg-pesah-recordings {
-  background-image: url('./assets/home-bottom.jpeg');
+  background-image: url('./assets/home-bottom-wide.jpg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  max-width: 1052px;
-  margin: 0 auto;
+  background-size: contain;
+  height: 64vw;
+  max-height: 500px;
 }
 
 .bg-pesah {
