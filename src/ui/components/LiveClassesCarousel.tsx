@@ -5,7 +5,6 @@ import 'swiper/css/swiper.css';
 import moment from 'moment';
 
 import { SmartText } from './ScheduleCard';
-import DragLeftIndicator from '../assets/drag-left-indicator.png';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface LiveClassesProps {
@@ -142,12 +141,10 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
     }
   });
 
+  // If there are no classes happening live, show 6 on deck
   let isShowingFuture = false;
   if (live.length === 0) {
-    live = filteredByDay.slice(
-      0,
-      filteredByDay.length > 6 ? 6 : filteredByDay.length,
-    );
+    live = upcoming.slice(0, upcoming.length > 6 ? 6 : upcoming.length);
     isShowingFuture = true;
   }
 
