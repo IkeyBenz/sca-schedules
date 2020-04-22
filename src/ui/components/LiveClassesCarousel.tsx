@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swiper from 'swiper';
 import 'swiper/css/swiper.css';
 
 import moment from 'moment';
 
 import { SmartText } from './ScheduleCard';
+import DragLeftIndicator from '../assets/drag-left-indicator.png';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface LiveClassesProps {
@@ -16,11 +17,20 @@ interface LiveClassesProps {
   heading: string;
 }
 
+const AnimatedSwipeIndicator = () => (
+  <div style={{ position: 'relative' }}>
+    <div className="swipe-indicator-icon"></div>
+  </div>
+);
+
 const LiveClasses: React.FC<LiveClassesProps> = ({
   schedules,
   filter,
   heading,
 }) => {
+  const [shouldShowSwipeIndicator, setShouldShowSwipeIndicator] = useState(
+    true,
+  );
   useEffect(() => {
     new Swiper('.swiper-container', {
       slidesPerView: 'auto',
@@ -142,7 +152,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
   }
 
   return (
-    <>
+    <div onClick={() => setShouldShowSwipeIndicator(false)}>
       <div
         className={
           heading === 'Minyanim'
@@ -156,6 +166,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
       </div>
       <div className="swiper-container live-classes d-flex justify-content-center mb-5">
         <div className="swiper-wrapper align-items-center">
+          {shouldShowSwipeIndicator && <AnimatedSwipeIndicator />}
           {live.map((row, rowId) => {
             const time = row[timeIdx];
             const topic = row[topicIdx];
@@ -192,7 +203,7 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
