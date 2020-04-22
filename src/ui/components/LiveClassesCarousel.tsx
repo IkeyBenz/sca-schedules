@@ -86,38 +86,39 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
 
   const now = new Date();
 
-  const filteredByDay = rows.filter((row) => {
-    let flag = false;
-    const rowDays = row[dayIdx];
-    if (rowDays.includes('Daily')) {
-      flag = true;
-    } else if (rowDays.includes(days[now.getDay()])) {
-      flag = true;
-    } else if (rowDays.includes('-')) {
-      const rowDaysArr = rowDays.split(/[^\w-]/);
-      rowDaysArr.forEach((rowDay) => {
-        if (rowDay.includes('-')) {
-          const leftRight = rowDay.split('-');
-          const left = days.findIndex((v) => {
-            return leftRight[0].includes(v);
-          });
-          const right = days.findIndex((v) => {
-            return leftRight[1].includes(v);
-          });
-          if (left < now.getDay() && right > now.getDay()) {
-            flag = true;
+  const filteredByDay = (day) =>
+    rows.filter((row) => {
+      let flag = false;
+      const rowDays = row[dayIdx];
+      if (rowDays.includes('Daily')) {
+        flag = true;
+      } else if (rowDays.includes(days[day])) {
+        flag = true;
+      } else if (rowDays.includes('-')) {
+        const rowDaysArr = rowDays.split(/[^\w-]/);
+        rowDaysArr.forEach((rowDay) => {
+          if (rowDay.includes('-')) {
+            const leftRight = rowDay.split('-');
+            const left = days.findIndex((v) => {
+              return leftRight[0].includes(v);
+            });
+            const right = days.findIndex((v) => {
+              return leftRight[1].includes(v);
+            });
+            if (left < day && right > day) {
+              flag = true;
+            }
           }
-        }
-      });
-    }
-    return flag;
-  });
+        });
+      }
+      return flag;
+    });
 
   let live = [];
   const elapsed = [];
-  const upcoming = [];
+  let upcoming = [];
 
-  filteredByDay.forEach((row) => {
+  filteredByDay(new Date().getDay()).forEach((row) => {
     const rowTimes = row[timeIdx].match(/\d\d?:\d\d ?(?:[AP]M)?/g);
     if (!rowTimes) return false;
     if (
@@ -144,7 +145,15 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
   // If there are no classes happening live, show 6 on deck
   let isShowingFuture = false;
   if (live.length === 0) {
-    live = upcoming.slice(0, upcoming.length > 6 ? 6 : upcoming.length);
+    if (upcoming.length === 0) {
+      const tomorrowsClasses = filteredByDay((new Date().getDay() + 1) % 7);
+      live = tomorrowsClasses.slice(
+        0,
+        tomorrowsClasses.length > 6 ? 6 : tomorrowsClasses.length,
+      );
+    } else {
+      live = upcoming.slice(0, upcoming.length > 6 ? 6 : upcoming.length);
+    }
     isShowingFuture = true;
   }
 
