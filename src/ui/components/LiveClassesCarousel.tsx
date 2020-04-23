@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import { SmartText } from './ScheduleCard';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
+import OnAirIndicator from '../assets/on-air-indicator.png';
 
 interface LiveClassesProps {
   schedules: Schedule[];
@@ -40,7 +41,6 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
 
   let rows = [];
   schedules.forEach((schedule) => {
-    console.log(schedule);
     const filteredRows =
       filter?.match === 'minyan'
         ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
@@ -186,8 +186,8 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
                 style={{ maxWidth: '400px' }}>
                 <div
                   className="row no-gutters align-items-center"
-                  style={{ border: '4px solid #1E4169' }}>
-                  <div className="col-8">
+                  style={{ border: '4px solid #1E4169', height: 165 }}>
+                  <div className="col-7">
                     <div className="card-body">
                       <p className="card-text my-0">{time}</p>
                       <p className="card-text my-0">
@@ -196,12 +196,21 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
                       <h5 className="card-title text-bold mt-2">{topic}</h5>
                     </div>
                   </div>
-                  <div className="col-4">
-                    <SmartText
-                      input={url}
-                      row={row}
-                      passwordCol={passwordIdx}
+                  <div className="col-5">
+                    <img
+                      src={OnAirIndicator}
+                      width="40"
+                      height="40"
+                      style={{ position: 'absolute', right: 8, top: 8 }}
+                      alt=""
                     />
+                    <div className="pt-5 pr-3">
+                      <SmartText
+                        input={url}
+                        row={row}
+                        passwordCol={passwordIdx}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
