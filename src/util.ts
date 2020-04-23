@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import xlsx from 'xlsx';
 
 
@@ -34,11 +34,6 @@ export const convertImageFileToBase64Str = (image: File) =>
 
 export const adjustExcelTime = string => {
     return string.toString();
-    if (typeof string === 'string') return string;
-    const timeInMiliSeconds = (string - (25567 + 1)) * 86400 * 1000;
-    const fiveHours = 1000 * 60 * 60 * 5;
-    const data = new Date(timeInMiliSeconds + fiveHours);
-    return moment(data).format('LT');
 };
 
 export const cleanExcelData = (d: DataFrame) => 
@@ -81,4 +76,9 @@ export const getColumnIdxOfKey = (data: DataFrame, key: string) => {
     currKey.toLowerCase().includes(key.toLowerCase())
   );
   return colIndex;
+}
+
+// Time is intended to be formatted as '7:00 AM'
+export const adjustToLocalTimezone = time => {
+  return moment(time, 'h:mm A').tz('America/New_York').format('h:mm A');
 }
