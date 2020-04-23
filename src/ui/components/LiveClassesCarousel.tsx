@@ -197,13 +197,16 @@ const LiveClasses: React.FC<LiveClassesProps> = ({
                     </div>
                   </div>
                   <div className="col-5">
-                    <img
-                      src={OnAirIndicator}
-                      width="40"
-                      height="40"
-                      style={{ position: 'absolute', right: 8, top: 8 }}
-                      alt=""
-                    />
+                    {!isShowingFuture && (
+                      <img
+                        src={OnAirIndicator}
+                        width="40"
+                        height="40"
+                        style={{ position: 'absolute', right: 8, top: 8 }}
+                        alt=""
+                      />
+                    )}
+
                     <div className="pt-5 pr-3">
                       <SmartText
                         input={url}
