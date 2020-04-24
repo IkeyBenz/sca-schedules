@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactGa from 'react-ga';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
-import "./ui/styles.css";
+import './ui/styles.css';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+ReactGa.initialize('UA-164561407-1');
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
