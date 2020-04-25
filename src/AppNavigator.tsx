@@ -1,5 +1,6 @@
-import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { HashRouter, Route, useHistory } from 'react-router-dom';
+import ReactGa from 'react-ga';
 
 import { Header, Footer } from './ui/components';
 import {
@@ -32,8 +33,19 @@ const AdminNavigator = () => (
   <HashRouter basename="/admin">{renderRoutes(adminRoutes)}</HashRouter>
 );
 
+const CompThatTracksLocation = () => {
+  const history = useHistory();
+  useEffect(() => {
+    return history.listen((location) => {
+      ReactGa.pageview(location.pathname);
+    });
+  }, [history]);
+
+  return null;
+};
+
 export const mainRoutes: RouteMap = {
-  '/': { exact: true, Component: IndexScreenCreator, pageName: ''},
+  '/': { exact: true, Component: IndexScreenCreator, pageName: '' },
   '/today': {
     exact: true,
     Component: ClassesScreenCreator,
@@ -69,6 +81,7 @@ export const mainRoutes: RouteMap = {
 
 const MainNavigator = () => (
   <HashRouter>
+    <CompThatTracksLocation />
     <Header />
     {renderRoutes(mainRoutes)}
     <Footer />
