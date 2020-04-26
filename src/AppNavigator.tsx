@@ -49,17 +49,17 @@ export const mainRoutes: RouteMap = {
   '/today': {
     exact: true,
     Component: ClassesScreenCreator,
-    pageName: 'SCA Affiliate Synagogue - Virtual Classes Schedules',
+    // pageName: 'SCA Affiliate Synagogue - Virtual Classes Schedules',
   },
   '/classes': {
     exact: true,
     Component: ClassesScreenCreator,
-    pageName: 'SCA Affiliate Synagogue - Virtual Classes Schedules',
+    // pageName: 'SCA Affiliate Synagogue - Virtual Classes Schedules',
   },
   '/minyanim': {
     exact: true,
     Component: ClassesScreenCreator,
-    pageName: 'SCA Affiliate Synagogue - Virtual Minyanim Schedules',
+    // pageName: 'SCA Affiliate Synagogue - Virtual Minyanim Schedules',
   },
   '/bekhorot': {
     exact: true,

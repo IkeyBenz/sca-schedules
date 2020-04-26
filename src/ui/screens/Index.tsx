@@ -1,6 +1,5 @@
 import React from 'react';
 import SCALogo from '../assets/SCALogo.png';
-import HomeBottomBanner from '../assets/home-bottom.jpeg';
 
 import { LiveClassesCarousel } from '../components';
 
