@@ -28,7 +28,7 @@ const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
           heading="Classes"
         />
       </div>
-      <a href="https://drive.google.com/file/d/14N0fndfdQGKoRqyDoMrJ5Z0lgCwInTIM/view?usp=drivesdk">
+      <a href="https://www.dol.scatorah.org/">
         <div className="shadow" style={{ backgroundColor: '#BEE3F4' }}>
           <div className="bg-pesah-recordings pb-5 block"></div>
         </div>
