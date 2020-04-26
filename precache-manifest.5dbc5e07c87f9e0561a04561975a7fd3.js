@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "939dc07782919c81d23d0b9cfa1673db",
+    "revision": "cbc2b06f5ff326411c223d919e74c667",
     "url": "/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/2.87dc6fe0.chunk.css"
   },
   {
-    "revision": "6250ad71f7052f0d516d",
-    "url": "/static/css/main.b4b71e8a.chunk.css"
+    "revision": "d4a4091306063e748979",
+    "url": "/static/css/main.e64f351f.chunk.css"
   },
   {
     "revision": "5300af7b4e7ea84136c3",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.b6d713c3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6250ad71f7052f0d516d",
-    "url": "/static/js/main.85941fc8.chunk.js"
+    "revision": "d4a4091306063e748979",
+    "url": "/static/js/main.219b74bf.chunk.js"
   },
   {
     "revision": "42b45c8fc6b07ea2ab24",
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/SCALogo.80df96a3.png"
   },
   {
-    "revision": "b813a2b27257ac4e2bf910ba3ab42f8a",
-    "url": "/static/media/day-of-learning-banner.b813a2b2.jpeg"
+    "revision": "aff869886ef4867275b5b4eab148c313",
+    "url": "/static/media/day-of-learning-banner-wider.aff86988.jpeg"
   },
   {
     "revision": "884988ccf61e397f7a7ee28f53536f88",
