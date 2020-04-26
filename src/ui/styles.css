@@ -282,6 +282,16 @@ label.hidden {
   background: #f0f8ff;
 }
 
+.bg-day-of-learning-banner {
+  background-image: url('./assets/day-of-learning-banner.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 40.25vw;
+  max-height: 300px;
+  background-color: #bee3f4;
+}
+
 .bg-pesah-recordings {
   background-image: url('./assets/home-bottom-wide.jpeg');
   background-position: center;
