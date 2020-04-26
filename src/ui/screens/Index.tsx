@@ -1,5 +1,6 @@
 import React from 'react';
 import SCALogo from '../assets/SCALogo.png';
+import HomeBottomBanner from '../assets/home-bottom.jpeg';
 
 import { LiveClassesCarousel } from '../components';
 
@@ -29,8 +30,15 @@ const IndexScreen: React.FC<IndexScreenProps> = ({ schedules }) => {
         />
       </div>
       <a href="https://www.dol.scatorah.org/">
-        <div className="shadow" style={{ backgroundColor: '#BEE3F4' }}>
-          <div className="bg-pesah-recordings pb-5 block"></div>
+        <div
+          className="shadow text-center pb-2"
+          style={{ backgroundColor: '#BEE3F4' }}>
+          <div className="bg-pesah-recordings pb-5 block text-center"></div>
+          <a
+            href="https://www.dol.scatorah.org/"
+            className="btn btn-danger px-4 mt-2">
+            Click here for full schedule
+          </a>
         </div>
       </a>
 
