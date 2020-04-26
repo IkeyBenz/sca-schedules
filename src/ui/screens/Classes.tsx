@@ -59,7 +59,11 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
 
   return (
     <>
-      <div className="bg-day-of-learning-banner"></div>
+      <a
+        href="https://dol.scatorah.org"
+        title="Click to go to Yom Ha'asmaut day of learning main page">
+        <div className="bg-day-of-learning-banner"></div>
+      </a>
       {location.pathname !== '/minyanim' && (
         <div className="container">
           <div className="row">
