@@ -21,9 +21,9 @@ class ScheduleService {
   }
 
   private convertTimesToLocalTimezone = (data: DataFrame) => {
-    const adjustTime = time => moment(time, 'h:mm A').tz('America/New_York').format('h:mm A');
-    const idxOfTime = data[0].findIndex(col => col.toLowerCase().includes('time'));
-    data.forEach((row, i) => i && (row[idxOfTime] = adjustTime(row[idxOfTime])));
+    // const adjustTime = time => moment(time, 'h:mm A').tz('America/New_York').format('h:mm A');
+    // const idxOfTime = data[0].findIndex(col => col.toLowerCase().includes('time'));
+    // data.forEach((row, i) => i && (row[idxOfTime] = adjustTime(row[idxOfTime])));
     return data;
   }
 }
