@@ -4,6 +4,7 @@ body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
   font-weight: 300;
+  background-color: transparent;
 }
 .home-bg-img {
   width: 100vw;
@@ -23,6 +24,7 @@ a,
 
 table {
   table-layout: fixed;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .admin-page-container {
