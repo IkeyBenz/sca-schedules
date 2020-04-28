@@ -4,7 +4,7 @@ import ReactGa from 'react-ga';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'jquery';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
+import 'bootstrap/dist/js/bootstrap.bundle';
 import './ui/styles.css';
 
 import App from './App';

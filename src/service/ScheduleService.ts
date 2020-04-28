@@ -2,6 +2,7 @@ import moment from 'moment-timezone';
 
 class ScheduleService {
   private storage: Database;
+
   static scheduleRef = '1TS3fZHRPlhI4L_URhKJXGa48eOy6BiqM1GeSUJL9jFs/live-website-feed';
 
   constructor(database: Database) {
@@ -9,9 +10,7 @@ class ScheduleService {
   }
 
   async getAllSchedules(): Promise<DataFrame> {
-    return await this.storage.read(ScheduleService.scheduleRef).then((data) => {
-      return this.convertTimesToLocalTimezone(data);
-    });
+    return this.storage.read(ScheduleService.scheduleRef).then((data) => this.convertTimesToLocalTimezone(data));
   }
 
   onSchedulesChanged(cb: (data: DataFrame) => void) {
@@ -21,9 +20,16 @@ class ScheduleService {
   }
 
   private convertTimesToLocalTimezone = (data: DataFrame) => {
-    // const adjustTime = time => moment(time, 'h:mm A').tz('America/New_York').format('h:mm A');
-    // const idxOfTime = data[0].findIndex(col => col.toLowerCase().includes('time'));
-    // data.forEach((row, i) => i && (row[idxOfTime] = adjustTime(row[idxOfTime])));
+    const adjustTime = (time) => moment(time, 'h:mm A').tz('America/New_York').format('h:mm A');
+    const idxOfTime = data[0].findIndex((col) => col.toLowerCase().includes('time'));
+    data.map((row, i) => {
+      const newRow = [...row];
+      if (i > 0) { // skip header
+        const timeRange = newRow[idxOfTime].split('-').map((time) => time.trim());
+        newRow[idxOfTime] = timeRange.map(adjustTime).join(' - \n');
+      }
+      return newRow;
+    });
     return data;
   }
 }
@@ -31,7 +37,5 @@ class ScheduleService {
 function createScheduleManager(persistedStorage: Database) {
   return new ScheduleService(persistedStorage);
 }
-
-
 
 export default createScheduleManager;

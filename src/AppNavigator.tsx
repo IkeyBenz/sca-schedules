@@ -35,11 +35,13 @@ const AdminNavigator = () => (
 
 const CompThatTracksLocation = () => {
   const history = useHistory();
-  useEffect(() => {
-    return history.listen((location) => {
-      ReactGa.pageview(location.pathname);
-    });
-  }, [history]);
+  useEffect(
+    () =>
+      history.listen((location) => {
+        ReactGa.pageview(location.pathname);
+      }),
+    [history]
+  );
 
   return null;
 };

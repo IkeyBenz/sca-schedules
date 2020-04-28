@@ -41,8 +41,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
       times = times.concat(moreTimes);
     });
     return Array.from(new Set(times)).sort((a, b) => {
-      const _a = new Date('1970/01/01 ' + a);
-      const _b = new Date('1970/01/01 ' + b);
+      const _a = new Date(`1970/01/01 ${a}`);
+      const _b = new Date(`1970/01/01 ${b}`);
       return _a > _b ? 1 : _a < _b ? -1 : 0;
     });
   }, [schedules]);
@@ -61,8 +61,9 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
     <>
       <a
         href="https://dol.scatorah.org"
-        title="Click to go to Yom Ha'asmaut day of learning main page">
-        <div className="bg-day-of-learning-banner"></div>
+        title="Click to go to Yom Ha'asmaut day of learning main page"
+      >
+        <div className="bg-day-of-learning-banner" />
       </a>
       {location.pathname !== '/minyanim' && (
         <div className="container">
@@ -75,8 +76,9 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                     location.pathname === '/today'
                       ? 'nav-link active'
                       : 'nav-link'
-                  }>
-                  Today's Classes
+                  }
+                >
+                  Today&apos;s Classes
                 </a>
               </li>
               <li className="nav-item">
@@ -86,7 +88,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                     location.pathname === '/classes'
                       ? 'nav-link active'
                       : 'nav-link'
-                  }>
+                  }
+                >
                   Full Schedule
                 </a>
               </li>
@@ -94,8 +97,9 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 <a
                   href="https://www.youtube.com/channel/UCsHn2xQEscv11QaNHpPf37A"
                   target="_blank"
-                  rel="noopener"
-                  className="nav-link">
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                >
                   Recordings
                 </a>
               </li>
@@ -125,7 +129,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
               htmlFor="filter"
               className={
                 location.pathname === '/classes' ? 'header-title' : 'hidden'
-              }>
+              }
+            >
               Filter By:{' '}
               <select
                 name="filter"
@@ -134,7 +139,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                   setFilterVal('');
                 }}
                 id=""
-                value={filterType}>
+                value={filterType}
+              >
                 <option value="none">No filter</option>
                 <option value="time">Time of day</option>
                 <option value="day">Day of week</option>
@@ -145,7 +151,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 (filterType === 'day' ? (
                   <select
                     className="ml-2"
-                    onChange={(e) => setFilterVal(e.target.value)}>
+                    onChange={(e) => setFilterVal(e.target.value)}
+                  >
                     <option value="">Choose Day</option>
                     <option value="mon">Mon</option>
                     <option value="tues">Tues</option>
@@ -157,9 +164,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 ) : filterType === 'time' ? (
                   <select
                     className="ml-2"
-                    onChange={(e) =>
-                      setFilterVal(e.target.value.toLowerCase())
-                    }>
+                    onChange={(e) => setFilterVal(e.target.value.toLowerCase())}
+                  >
                     <option value="">Choose Time</option>
                     {calcAvailableTimes().map((time) => (
                       <option value={time}>{time}</option>
@@ -168,9 +174,8 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 ) : filterType === 'teacher' ? (
                   <select
                     className="ml-2"
-                    onChange={(e) =>
-                      setFilterVal(e.target.value.toLowerCase())
-                    }>
+                    onChange={(e) => setFilterVal(e.target.value.toLowerCase())}
+                  >
                     <option value="">Choose Teacher</option>
                     {calcTeachers().map((time) => (
                       <option value={time}>{time}</option>
@@ -188,20 +193,18 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
           </div>
         </div>
         {location.pathname !== '/today' &&
-          schedules.map((schedule, idx) => {
-            return (
-              <ScheduleCard
-                key={idx}
-                schedule={schedule}
-                filter={
-                  !(filterType === 'none' || filterVal === '') && {
-                    type: filterType,
-                    match: filterVal,
-                  }
+          schedules.map((schedule, idx) => (
+            <ScheduleCard
+              key={idx}
+              schedule={schedule}
+              filter={
+                !(filterType === 'none' || filterVal === '') && {
+                  type: filterType,
+                  match: filterVal,
                 }
-              />
-            );
-          })}
+              }
+            />
+          ))}
       </div>
     </>
   );
