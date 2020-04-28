@@ -20,9 +20,9 @@ class ScheduleService {
   }
 
   private convertTimesToLocalTimezone = (data: DataFrame) => {
-    const adjustTime = (time) => moment(time, 'h:mm A').tz('America/New_York').format('h:mm A');
+    const adjustTime = (time) => moment(time, 'h:mm A').local().format('h:mm A');
     const idxOfTime = data[0].findIndex((col) => col.toLowerCase().includes('time'));
-    data.map((row, i) => {
+    const formatted = data.map((row, i) => {
       const newRow = [...row];
       if (i > 0) { // skip header
         const timeRange = newRow[idxOfTime].split('-').map((time) => time.trim());
@@ -30,7 +30,7 @@ class ScheduleService {
       }
       return newRow;
     });
-    return data;
+    return formatted;
   }
 }
 

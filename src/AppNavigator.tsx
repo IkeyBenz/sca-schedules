@@ -37,7 +37,7 @@ const CompThatTracksLocation = () => {
   const history = useHistory();
   useEffect(
     () =>
-      history.listen((location) => {
+      history.listen(location => {
         ReactGa.pageview(location.pathname);
       }),
     [history]
@@ -79,14 +79,16 @@ export const mainRoutes: RouteMap = {
     pageName: 'SCA Tehilim Requests',
   },
   '/admin': { Component: AdminNavigator },
+  // '/wix/today': { Component: ClassesScreenCreator },
 };
 
 const MainNavigator = () => (
   <HashRouter>
     <CompThatTracksLocation />
-    <Header />
+    {/* <Header />
     {renderRoutes(mainRoutes)}
-    <Footer />
+    <Footer /> */}
+    <ClassesScreenCreator />
   </HashRouter>
 );
 

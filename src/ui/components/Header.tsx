@@ -4,16 +4,12 @@ import { useLocation } from 'react-router-dom';
 import { mainRoutes } from '../../AppNavigator';
 import SCALogo from '../assets/SCALogo.png';
 
-const Header: React.FC = (props) => {
+const Header: React.FC = props => {
   const location = useLocation();
   const pageName = mainRoutes[location.pathname]?.pageName;
-  useEffect(() => {
-    console.log(pageName);
-  }, [pageName]);
-
-  /* React.useEffect(() => {
-    ga.send(["pageview", location.pathname]);
-  }, [location]); */
+  if (location.pathname.includes('wix')) {
+    return null; // Hide the header if we're in the wix iframe
+  }
 
   return (
     <>
@@ -28,18 +24,21 @@ const Header: React.FC = (props) => {
           data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup"
           aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
         </button>
         <nav className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <ul
             data-toggle="collapse"
             data-target="#navbarNavAltMarkup.show"
-            className="navbar-nav ml-auto">
+            className="navbar-nav ml-auto"
+          >
             <li
               className={
                 location.pathname === '/today' ? 'active nav-item' : 'nav-item'
-              }>
+              }
+            >
               <a className="nav-link" href="/#/today">
                 Classes
               </a>
@@ -49,7 +48,8 @@ const Header: React.FC = (props) => {
                 location.pathname === '/minyanim'
                   ? 'active nav-item'
                   : 'nav-item'
-              }>
+              }
+            >
               <a className="nav-link" href="/#/minyanim">
                 Minyanim
               </a>
@@ -59,7 +59,8 @@ const Header: React.FC = (props) => {
                 location.pathname === '/letters'
                   ? 'active nav-item'
                   : 'nav-item'
-              }>
+              }
+            >
               <a className="nav-link" href="/#/letters">
                 COVID-19
               </a>
@@ -69,7 +70,8 @@ const Header: React.FC = (props) => {
                 location.pathname === '/tehillim'
                   ? 'active nav-item'
                   : 'nav-item'
-              }>
+              }
+            >
               <a className="nav-link" href="/#/tehillim">
                 Tehillim Requests
               </a>
@@ -82,7 +84,7 @@ const Header: React.FC = (props) => {
           </ul>
         </nav>
       </header>
-      <div className="header-spacing"></div>
+      <div className="header-spacing" />
       {!!pageName && (
         <h5 className="w-100 text-center header-title my-5">{pageName}</h5>
       )}

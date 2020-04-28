@@ -17,11 +17,11 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   useEffect(() => {
-    if (location.pathname === '/minyanim') {
+    if (location.pathname.includes('/minyanim')) {
       setHeading('Minyanim');
       setfilterType('type');
       setFilterVal('minyan');
-    } else if (location.pathname === '/today') {
+    } else if (location.pathname.includes('/today')) {
       const now = new Date();
       const today = days[now.getDay()];
       setfilterType('day');
@@ -35,9 +35,9 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
     schedules.forEach(({ rows }) => {
       const idxOfTime = getColumnIdxOfKey(rows, 'time');
       const moreTimes = rows
-        .map((row) => row[idxOfTime])
-        .filter((time) => validTime.test(time))
-        .map((time) => time.match(validTime)[0]);
+        .map(row => row[idxOfTime])
+        .filter(time => validTime.test(time))
+        .map(time => time.match(validTime)[0]);
       times = times.concat(moreTimes);
     });
     return Array.from(new Set(times)).sort((a, b) => {
@@ -51,7 +51,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
     let teachers = [];
     schedules.forEach(({ rows }) => {
       const idxOfTime = getColumnIdxOfKey(rows, 'teacher');
-      const moreTimes = rows.map((row) => row[idxOfTime]);
+      const moreTimes = rows.map(row => row[idxOfTime]);
       teachers = teachers.concat(moreTimes);
     });
     return Array.from(new Set(teachers)).sort();
@@ -59,12 +59,6 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
 
   return (
     <>
-      <a
-        href="https://dol.scatorah.org"
-        title="Click to go to Yom Ha'asmaut day of learning main page"
-      >
-        <div className="bg-day-of-learning-banner" />
-      </a>
       {location.pathname !== '/minyanim' && (
         <div className="container">
           <div className="row">
@@ -73,7 +67,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 <a
                   href="/#/today"
                   className={
-                    location.pathname === '/today'
+                    location.pathname.includes('/today')
                       ? 'nav-link active'
                       : 'nav-link'
                   }
@@ -85,7 +79,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 <a
                   href="/#/classes"
                   className={
-                    location.pathname === '/classes'
+                    location.pathname.includes('/classes')
                       ? 'nav-link active'
                       : 'nav-link'
                   }
@@ -134,7 +128,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
               Filter By:{' '}
               <select
                 name="filter"
-                onChange={(e) => {
+                onChange={e => {
                   setfilterType(e.target.value);
                   setFilterVal('');
                 }}
@@ -151,7 +145,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 (filterType === 'day' ? (
                   <select
                     className="ml-2"
-                    onChange={(e) => setFilterVal(e.target.value)}
+                    onChange={e => setFilterVal(e.target.value)}
                   >
                     <option value="">Choose Day</option>
                     <option value="mon">Mon</option>
@@ -164,20 +158,20 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                 ) : filterType === 'time' ? (
                   <select
                     className="ml-2"
-                    onChange={(e) => setFilterVal(e.target.value.toLowerCase())}
+                    onChange={e => setFilterVal(e.target.value.toLowerCase())}
                   >
                     <option value="">Choose Time</option>
-                    {calcAvailableTimes().map((time) => (
+                    {calcAvailableTimes().map(time => (
                       <option value={time}>{time}</option>
                     ))}
                   </select>
                 ) : filterType === 'teacher' ? (
                   <select
                     className="ml-2"
-                    onChange={(e) => setFilterVal(e.target.value.toLowerCase())}
+                    onChange={e => setFilterVal(e.target.value.toLowerCase())}
                   >
                     <option value="">Choose Teacher</option>
-                    {calcTeachers().map((time) => (
+                    {calcTeachers().map(time => (
                       <option value={time}>{time}</option>
                     ))}
                   </select>
@@ -185,7 +179,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
                   <input
                     type="text"
                     className="ml-2"
-                    onChange={(e) => setFilterVal(e.target.value.toLowerCase())}
+                    onChange={e => setFilterVal(e.target.value.toLowerCase())}
                     placeholder={`Enter ${filterType}(s)`}
                   />
                 ))}
