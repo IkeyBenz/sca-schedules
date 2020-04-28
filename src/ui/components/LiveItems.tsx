@@ -5,7 +5,6 @@ import moment from 'moment';
 import { SmartText } from './ScheduleCard';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
-
 interface LiveItemsProps {
   schedules: Schedule[];
   filter?: {
@@ -38,13 +37,22 @@ const LiveItems: React.FC<LiveItemsProps> = ({
   // Only show the rows whose data in column 'HIDE-Toggle' contains 'show'
   rows = filterDataFrameRows('toggle', 'show', rows);
 
-  const dayIdx = headerRows.findIndex(data => data.toLowerCase().includes('days'))
-  const timeIdx = headerRows.findIndex(data => data.toLowerCase().includes('time'))
-  const passwordIdx = headerRows.findIndex(data => data.toLowerCase().includes('password'));
+  const dayIdx = headerRows.findIndex(data =>
+    data.toLowerCase().includes('days')
+  );
+  const timeIdx = headerRows.findIndex(data =>
+    data.toLowerCase().includes('time')
+  );
+  const passwordIdx = headerRows.findIndex(data =>
+    data.toLowerCase().includes('password')
+  );
 
   const filteredCols = headerRows.reduce((acc, cur, idx) => {
-    if (cur.toString().toLowerCase().startsWith('hide') || cur.toString().toLowerCase().startsWith('days')) {
-      acc.push(idx)
+    if (
+      cur.toString().toLowerCase().startsWith('hide') ||
+      cur.toString().toLowerCase().startsWith('days')
+    ) {
+      acc.push(idx);
     }
     return acc;
   }, []);
@@ -65,12 +73,8 @@ const LiveItems: React.FC<LiveItemsProps> = ({
       rowDaysArr.forEach(rowDay => {
         if (rowDay.includes('-')) {
           const leftRight = rowDay.split('-');
-          const left = days.findIndex(v => {
-            return leftRight[0].includes(v);
-          });
-          const right = days.findIndex(v => {
-            return leftRight[1].includes(v);
-          });
+          const left = days.findIndex(v => leftRight[0].includes(v));
+          const right = days.findIndex(v => leftRight[1].includes(v));
           if (left < now.getDay() && right > now.getDay()) {
             flag = true;
           }
@@ -110,10 +114,9 @@ const LiveItems: React.FC<LiveItemsProps> = ({
   });
 
   return (
-    <div className="schedule-card my-5">
-      {
-        (() => (
-          live.length > 0 &&
+    <div className="schedule-card my-2">
+      {(() =>
+        live.length > 0 && (
           <>
             <div className="card-header">
               <h1 className="schedule-title">Ongoing {heading}</h1>
@@ -123,7 +126,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                 <tr>
                   {headerRows.map((col, idx) => {
                     if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>
+                      return <th key={idx}>{col}</th>;
                     }
                   })}
                 </tr>
@@ -133,9 +136,15 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                   <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
-                        return <td key={cellId}>
-                          <SmartText input={cell} passwordCol={passwordIdx} row={row} />
-                        </td>
+                        return (
+                          <td key={cellId}>
+                            <SmartText
+                              input={cell}
+                              passwordCol={passwordIdx}
+                              row={row}
+                            />
+                          </td>
+                        );
                       }
                     })}
                   </tr>
@@ -143,11 +152,9 @@ const LiveItems: React.FC<LiveItemsProps> = ({
               </tbody>
             </table>
           </>
-        ))()
-      }
-      {
-        (() => (
-          upcoming.length > 0 &&
+        ))()}
+      {(() =>
+        upcoming.length > 0 && (
           <>
             <div className="card-header">
               <h1 className="schedule-title">Upcoming {heading}</h1>
@@ -157,7 +164,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                 <tr>
                   {headerRows.map((col, idx) => {
                     if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>
+                      return <th key={idx}>{col}</th>;
                     }
                   })}
                 </tr>
@@ -167,9 +174,15 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                   <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
-                        return <td key={cellId}>
-                         <SmartText input={cell} passwordCol={passwordIdx} row={row} />
-                        </td>
+                        return (
+                          <td key={cellId}>
+                            <SmartText
+                              input={cell}
+                              passwordCol={passwordIdx}
+                              row={row}
+                            />
+                          </td>
+                        );
                       }
                     })}
                   </tr>
@@ -177,12 +190,10 @@ const LiveItems: React.FC<LiveItemsProps> = ({
               </tbody>
             </table>
           </>
-        ))()
-      }
+        ))()}
 
-      {
-        (() => (
-          elapsed.length > 0 &&
+      {(() =>
+        elapsed.length > 0 && (
           <>
             <div className="card-header">
               <h1 className="schedule-title">Completed {heading}</h1>
@@ -192,7 +203,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                 <tr>
                   {headerRows.map((col, idx) => {
                     if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>
+                      return <th key={idx}>{col}</th>;
                     }
                   })}
                 </tr>
@@ -202,9 +213,15 @@ const LiveItems: React.FC<LiveItemsProps> = ({
                   <tr key={rowId}>
                     {row.map((cell, cellId) => {
                       if (!filteredCols.includes(cellId)) {
-                        return <td key={cellId}>
-                          <SmartText input={cell} passwordCol={passwordIdx} row={row} />
-                        </td>
+                        return (
+                          <td key={cellId}>
+                            <SmartText
+                              input={cell}
+                              passwordCol={passwordIdx}
+                              row={row}
+                            />
+                          </td>
+                        );
                       }
                     })}
                   </tr>
@@ -212,9 +229,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({
               </tbody>
             </table>
           </>
-        ))()
-      }
-
+        ))()}
     </div>
   );
 };

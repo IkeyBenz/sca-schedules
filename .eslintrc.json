@@ -24,7 +24,9 @@
     "react/no-array-index-key": "off",
     "react/prop-types": "off",
     "implicit-arrow-linebreak": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-nested-ternary": "off",
+    "arrow-parens": "off"
   },
   "settings": {
     "import/resolver": {

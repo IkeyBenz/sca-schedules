@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter, Route, useHistory } from 'react-router-dom';
+import { HashRouter, Route, Redirect, useHistory } from 'react-router-dom';
 import ReactGa from 'react-ga';
 
 import { Header, Footer } from './ui/components';
@@ -82,14 +82,23 @@ export const mainRoutes: RouteMap = {
   // '/wix/today': { Component: ClassesScreenCreator },
 };
 
-const MainNavigator = () => (
+const NavigatorForWix = () => (
   <HashRouter>
     <CompThatTracksLocation />
-    {/* <Header />
-    {renderRoutes(mainRoutes)}
-    <Footer /> */}
-    <ClassesScreenCreator />
+    <Redirect from="/" to="/today" />
+    <Route path="/today" component={ClassesScreenCreator} />
+    <Route path="/minyanim" component={ClassesScreenCreator} />
+    <Route path="/classes" component={ClassesScreenCreator} />
   </HashRouter>
 );
 
-export default MainNavigator;
+const MainNavigator = () => (
+  <HashRouter>
+    <CompThatTracksLocation />
+    <Header />
+    {renderRoutes(mainRoutes)}
+    <Footer />
+  </HashRouter>
+);
+
+export default NavigatorForWix;

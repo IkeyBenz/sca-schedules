@@ -39,7 +39,7 @@ export const SmartText: React.FC<SmartTextProps> = ({
   }
 
   const { value, type } = urls[0];
-  let iconSize = location.pathname === '/' ? 80 : 40;
+  const iconSize = location.pathname === '/' ? 80 : 40;
   return (
     <span>
       <a
@@ -51,7 +51,8 @@ export const SmartText: React.FC<SmartTextProps> = ({
             : value.includes('gotomeeting') && type === 'url'
             ? 'gtmIcon'
             : ''
-        }>
+        }
+      >
         {type === 'url' ? 'Click here' : value}
       </a>{' '}
       <p className="password">{password}</p>
@@ -61,7 +62,14 @@ export const SmartText: React.FC<SmartTextProps> = ({
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   const location = useLocation();
-  const { title, rows, logo } = schedule;
+  const { rows, logo } = schedule;
+
+  const path = location.pathname.split('/');
+  const title = {
+    minyanim: 'Minyanim',
+    classes: 'All Schedules',
+    today: "Today's classes",
+  }[path[path.length - 1]];
 
   const filteredRows = filter
     ? filterDataFrameRows(filter.type, filter.match, rows)
@@ -82,11 +90,10 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   }, []);
 
   const filterColIdx =
-    filter &&
-    rows[0].findIndex((col) => col.toLowerCase().includes(filter.type));
+    filter && rows[0].findIndex(col => col.toLowerCase().includes(filter.type));
 
-  const passwordColIdx = rows[0].findIndex((col) =>
-    col.toLowerCase().includes('password'),
+  const passwordColIdx = rows[0].findIndex(col =>
+    col.toLowerCase().includes('password')
   );
 
   const shouldHighlight = (colText: string, colIdx) => {
@@ -98,7 +105,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   };
 
   return (
-    <div className="schedule-card my-5">
+    <div className="schedule-card my-2">
       <div className="card-header">
         {!!logo && (
           <div className="w-100">

@@ -59,72 +59,78 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
 
   return (
     <>
-      {location.pathname !== '/minyanim' && (
-        <div className="container">
-          <div className="row">
-            <ul className="nav nav-pills nav-justified m-3 w-100">
-              <li className="nav-item">
-                <a
-                  href="/#/today"
-                  className={
-                    location.pathname.includes('/today')
-                      ? 'nav-link active'
-                      : 'nav-link'
-                  }
-                >
-                  Today&apos;s Classes
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="/#/classes"
-                  className={
-                    location.pathname.includes('/classes')
-                      ? 'nav-link active'
-                      : 'nav-link'
-                  }
-                >
-                  Full Schedule
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="https://www.youtube.com/channel/UCsHn2xQEscv11QaNHpPf37A"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="nav-link"
-                >
-                  Recordings
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      )}
-      <div className="container">
-        {(() =>
-          location.pathname === '/today' && (
-            <LiveItems
-              schedules={schedules}
-              filter={
-                !(filterType === 'none' || filterVal === '') && {
-                  type: filterType,
-                  match: filterVal,
-                }
-              }
-              heading={heading}
-            />
-          ))()}
-      </div>
       <div className="container">
         <div className="row">
-          <div className="input-group mt-3 mx-3">
-            <label
-              htmlFor="filter"
-              className={
-                location.pathname === '/classes' ? 'header-title' : 'hidden'
+          <ul className="nav nav-pills nav-justified m-3 w-100">
+            <li className="nav-item">
+              <a
+                href="/#/today"
+                className={
+                  location.pathname.includes('/today')
+                    ? 'nav-link active'
+                    : 'nav-link'
+                }
+              >
+                Today&apos;s Classes
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                href="/#/minyanim"
+                className={
+                  location.pathname.includes('/minyanim')
+                    ? 'nav-link active'
+                    : 'nav-link'
+                }
+              >
+                Minyanim
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                href="/#/classes"
+                className={
+                  location.pathname.includes('/classes')
+                    ? 'nav-link active'
+                    : 'nav-link'
+                }
+              >
+                Full Schedule
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                href="https://www.youtube.com/channel/UCsHn2xQEscv11QaNHpPf37A"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-link"
+              >
+                Recordings
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {location.pathname === '/today' && (
+        <div className="container">
+          <LiveItems
+            schedules={schedules}
+            filter={
+              !(filterType === 'none' || filterVal === '') && {
+                type: filterType,
+                match: filterVal,
               }
-            >
+            }
+            heading={heading}
+          />
+        </div>
+      )}
+
+      <div className="container">
+        <div className={location.pathname !== '/classes' ? 'd-none' : 'row'}>
+          <div className="input-group mt-3 mx-3">
+            <label htmlFor="filter" className="header-title">
               Filter By:{' '}
               <select
                 name="filter"
