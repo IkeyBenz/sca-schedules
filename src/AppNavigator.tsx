@@ -83,7 +83,7 @@ export const mainRoutes: RouteMap = {
 };
 
 const NavigatorForWix = () => (
-  <HashRouter>
+  <HashRouter basename="sca-schedules">
     <CompThatTracksLocation />
     <Redirect from="/" to="/today" />
     <Route path="/today" component={ClassesScreenCreator} />
