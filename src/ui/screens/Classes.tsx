@@ -64,7 +64,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
           <ul className="nav nav-pills nav-justified m-3 w-100">
             <li className="nav-item">
               <a
-                href="/#/today"
+                href="/sca-schedules/#/today"
                 className={
                   location.pathname.includes('/today')
                     ? 'nav-link active'
@@ -76,7 +76,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
             </li>
             <li className="nav-item">
               <a
-                href="/#/minyanim"
+                href="/sca-schedules/#/minyanim"
                 className={
                   location.pathname.includes('/minyanim')
                     ? 'nav-link active'
@@ -88,7 +88,7 @@ const ClassesScreen: React.FC<ClassesScreenProps> = ({ schedules }) => {
             </li>
             <li className="nav-item">
               <a
-                href="/#/classes"
+                href="/sca-schedules/#/classes"
                 className={
                   location.pathname.includes('/classes')
                     ? 'nav-link active'
