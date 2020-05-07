@@ -63,6 +63,8 @@ export const SmartText: React.FC<SmartTextProps> = ({
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   const { rows, logo, title } = schedule;
 
+  console.log(rows, title);
+
   const filteredRows = filter
     ? filterDataFrameRows(filter.type, filter.match, rows)
     : rows;

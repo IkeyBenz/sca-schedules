@@ -27,9 +27,16 @@ class ScheduleService {
     const withoutMinyanim = excludeFilterDataFrameRows('type', 'minyan', withoutHiddenRows);
     const todaysClasses = filterByToday(withoutMinyanim);
 
+    const removeDayCol = (df: DataFrame) => {
+      const dayIdx = df[0].findIndex(col => col.toLowerCase().includes('day'));
+      if (dayIdx === -1) {
+        return df;
+      }
+      return df.map(row => row.filter((_, idx) => dayIdx !== idx));
+    };
 
     return {
-      todaysClasses,
+      todaysClasses: removeDayCol(todaysClasses),
       minyanim: filterDataFrameRows('type', 'minyan', withoutHiddenRows),
       fullSchedule: withoutHiddenRows,
     };

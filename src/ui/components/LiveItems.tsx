@@ -18,12 +18,15 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
   const { rows } = schedule;
 
   const headerRows = rows[0];
-  const removeDayCol = df => {
-    const dayIdx = df[0].findIndex(col => col.toLowerCase().includes('day'));
-    return dayIdx !== -1
-      ? rows.map(row => row.filter((_, i) => i !== dayIdx))
-      : df;
-  };
+  // const removeDayCol = df => {
+  //   const dayIdx = df[0].findIndex(col => col.toLowerCase().includes('day'));
+  //   if (dayIdx === -1) {
+  //     return df;
+  //   }
+  //   return rows.map(row => row.filter((_, i) => i !== dayIdx))
+  //   console.log(dayIdx, df, toReturn);
+  //   return toReturn;
+  // };
 
   if (rows.length < 2) {
     // No rows matched the filter criteria
@@ -49,7 +52,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
     if (!rowTimes) return false;
     if (
       !rowTimes[0].toLowerCase().includes('pm') &&
-      row[3].toLowerCase().includes('pm')
+      row[timeIdx].toLowerCase().includes('pm')
     ) {
       rowTimes[0] += ' pm';
     }
@@ -74,7 +77,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
       {live.length > 0 && (
         <ScheduleCard
           schedule={{
-            rows: removeDayCol([headerRows].concat(live)),
+            rows: [headerRows].concat(live),
             title: `Ongoing ${schedule.title}`,
           }}
           filter={filter}
@@ -83,7 +86,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
       {upcoming.length > 0 && (
         <ScheduleCard
           schedule={{
-            rows: removeDayCol([headerRows].concat(upcoming)),
+            rows: [headerRows].concat(upcoming),
             title: `Upcoming ${schedule.title}`,
           }}
           filter={filter}
@@ -92,7 +95,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
       {elapsed.length > 0 && (
         <ScheduleCard
           schedule={{
-            rows: removeDayCol([headerRows].concat(elapsed)),
+            rows: [headerRows].concat(elapsed),
             title: `Elapsed ${schedule.title}`,
           }}
           filter={filter}
