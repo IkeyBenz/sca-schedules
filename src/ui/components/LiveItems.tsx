@@ -1,9 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-// import * as linkify from 'linkifyjs';
 
-import ScheduleCard, { SmartText } from './ScheduleCard';
-import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
+import ScheduleCard from './ScheduleCard';
 
 interface LiveItemsProps {
   schedule: Schedule;
