@@ -8,8 +8,8 @@ const IndexScreenCreator = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   useEffect(() => {
-    scheduleManager.onSchedulesChanged((data: DataFrame) => {
-      setSchedules([{ title: 'All Schedules', rows: data }]);
+    scheduleManager.onSchedulesChanged(({ fullSchedule }) => {
+      setSchedules([{ title: 'All Schedules', rows: fullSchedule }]);
     });
 
     ReactGa.pageview('/');

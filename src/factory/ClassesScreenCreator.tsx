@@ -4,15 +4,27 @@ import { ClassesScreen } from '../ui';
 import { scheduleManager } from '../service';
 
 const ClassesScreenCreator = () => {
-  const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const defaultScheduleDatas: AllScheduleDatas = {
+    todaysClasses: Array(20).fill(Array(6).fill('')),
+    minyanim: Array(20).fill(Array(6).fill('')),
+    fullSchedule: Array(20).fill(Array(6).fill('')),
+  };
+  const [
+    { todaysClasses, minyanim, fullSchedule },
+    setScheduleDatas,
+  ] = useState<AllScheduleDatas>(defaultScheduleDatas);
 
   useEffect(() => {
-    scheduleManager.onSchedulesChanged((data: DataFrame) => {
-      setSchedules([{ title: 'All Schedules', rows: data }]);
-    });
+    scheduleManager.onSchedulesChanged(setScheduleDatas);
   }, []);
 
-  return <ClassesScreen schedules={schedules} />;
+  return (
+    <ClassesScreen
+      todaysClasses={todaysClasses}
+      minyanim={minyanim}
+      fullSchedule={fullSchedule}
+    />
+  );
 };
 
 export default ClassesScreenCreator;

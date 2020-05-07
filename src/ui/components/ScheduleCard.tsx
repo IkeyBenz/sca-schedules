@@ -61,19 +61,11 @@ export const SmartText: React.FC<SmartTextProps> = ({
 };
 
 const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
-  const location = useLocation();
-  const { rows, logo } = schedule;
-
-  const path = location.pathname.split('/');
-  const title = {
-    minyanim: 'Minyanim',
-    classes: 'All Schedules',
-    today: "Today's classes",
-  }[path[path.length - 1]];
+  const { rows, logo, title } = schedule;
 
   const filteredRows = filter
     ? filterDataFrameRows(filter.type, filter.match, rows)
-    : excludeFilterDataFrameRows('type', 'minyan', rows);
+    : rows;
 
   if (filteredRows.length === 1) {
     // No rows matched the filter criteria
@@ -97,9 +89,6 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ schedule, filter }) => {
   );
 
   const shouldHighlight = (colText: string, colIdx) => {
-    if (filter?.type === 'topic' && location.pathname === '/bekhorot') {
-      return false;
-    }
     const text = colText.toLowerCase();
     return filterColIdx === colIdx && text.includes(filter.match);
   };

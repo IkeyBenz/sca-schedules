@@ -6,6 +6,12 @@ declare interface Schedule {
   _id?: firebase.database.Reference;
 }
 
+declare interface AllScheduleDatas {
+  todaysClasses: DataFrame;
+  minyanim: DataFrame;
+  fullSchedule: DataFrame;
+}
+
 declare interface Attachment {
   title: string;
   cover?: string;

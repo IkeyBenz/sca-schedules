@@ -1,4 +1,6 @@
 import moment from 'moment-timezone';
+import { filterDataFrameRows, excludeFilterDataFrameRows, filterByToday, removeHiddenColumns } from '../util';
+
 
 class ScheduleService {
   private storage: Database;
@@ -9,15 +11,30 @@ class ScheduleService {
     this.storage = database;
   }
 
-  async getAllSchedules(): Promise<DataFrame> {
-    return this.storage.read(ScheduleService.scheduleRef).then((data) => this.convertTimesToLocalTimezone(data));
+  async getAllSchedules(): Promise<AllScheduleDatas> {
+    return this.storage.read(ScheduleService.scheduleRef).then(this.makeSchedules);
   }
 
-  onSchedulesChanged(cb: (data: DataFrame) => void) {
-    this.storage.onChange(ScheduleService.scheduleRef, (data: DataFrame) => {
-      cb(this.convertTimesToLocalTimezone(data));
+  onSchedulesChanged(cb: (schedules: AllScheduleDatas) => void) {
+    this.storage.onChange(ScheduleService.scheduleRef, data => {
+      cb(this.makeSchedules(data));
     });
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  private makeSchedules(data: DataFrame) {
+    const withoutHiddenRows = filterDataFrameRows('toggle', 'show', data);
+    const withoutMinyanim = excludeFilterDataFrameRows('type', 'minyan', withoutHiddenRows);
+    const todaysClasses = filterByToday(withoutMinyanim);
+
+
+    return {
+      todaysClasses,
+      minyanim: filterDataFrameRows('type', 'minyan', withoutHiddenRows),
+      fullSchedule: withoutHiddenRows,
+    };
+  }
+
 
   private convertTimesToLocalTimezone = (data: DataFrame) => {
     const adjustTime = (time) => moment(time, 'h:mm A').local().format('h:mm A');

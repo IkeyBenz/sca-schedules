@@ -2,31 +2,31 @@ import React from 'react';
 import moment from 'moment';
 // import * as linkify from 'linkifyjs';
 
-import { SmartText } from './ScheduleCard';
+import ScheduleCard, { SmartText } from './ScheduleCard';
 import { excludeFilterDataFrameRows, filterDataFrameRows } from '../../util';
 
 interface LiveItemsProps {
-  schedules: Schedule[];
+  schedule: Schedule;
   filter?: {
     type: string;
     match: string;
   };
-  heading: string;
 }
 
-const LiveItems: React.FC<LiveItemsProps> = ({
-  schedules,
-  filter,
-  heading,
-}) => {
-  let rows = [];
-  schedules.forEach(schedule => {
-    const filteredRows =
-      filter?.match === 'minyan'
-        ? filterDataFrameRows(filter.type, filter.match, schedule.rows)
-        : excludeFilterDataFrameRows('type', 'minyan', schedule.rows);
-    rows.push(...filteredRows);
-  });
+/** Displays three schedule cards for upcoming, ongoing, and elapsed classes.
+ * @info The schedule data passed in will be filtered to match todays day of week,
+ * and then apply the supplied filter.
+ */
+const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
+  const { rows } = schedule;
+
+  // if (filter) {
+  //   // if (filter?.match !== 'minyan') {
+  //   //   rows = excludeFilterDataFrameRows('type', 'minyan', rows);
+  //   // }
+  //   rows = filterDataFrameRows(filter.type, filter.match, rows);
+  // }
+
   const headerRows = rows[0];
 
   if (rows.length < 2) {
@@ -34,61 +34,21 @@ const LiveItems: React.FC<LiveItemsProps> = ({
     return null;
   }
 
-  // Only show the rows whose data in column 'HIDE-Toggle' contains 'show'
-  rows = filterDataFrameRows('toggle', 'show', rows);
-
-  const dayIdx = headerRows.findIndex(data =>
-    data.toLowerCase().includes('days')
-  );
   const timeIdx = headerRows.findIndex(data =>
     data.toLowerCase().includes('time')
   );
-  const passwordIdx = headerRows.findIndex(data =>
-    data.toLowerCase().includes('password')
-  );
 
-  const filteredCols = headerRows.reduce((acc, cur, idx) => {
-    if (
-      cur.toString().toLowerCase().startsWith('hide') ||
-      cur.toString().toLowerCase().startsWith('days')
-    ) {
-      acc.push(idx);
-    }
-    return acc;
-  }, []);
-
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  // If can't categorize by times, display all in one
+  if (timeIdx === -1) {
+    return <ScheduleCard schedule={{ title: '', rows }} />;
+  }
 
   const now = new Date();
-
-  const filteredByDay = rows.filter(row => {
-    let flag = false;
-    const rowDays = row[dayIdx];
-    if (rowDays.includes('Daily')) {
-      flag = true;
-    } else if (rowDays.includes(days[now.getDay()])) {
-      flag = true;
-    } else if (rowDays.includes('-')) {
-      const rowDaysArr = rowDays.split(/[^\w-]/);
-      rowDaysArr.forEach(rowDay => {
-        if (rowDay.includes('-')) {
-          const leftRight = rowDay.split('-');
-          const left = days.findIndex(v => leftRight[0].includes(v));
-          const right = days.findIndex(v => leftRight[1].includes(v));
-          if (left < now.getDay() && right > now.getDay()) {
-            flag = true;
-          }
-        }
-      });
-    }
-    return flag;
-  });
-
   const live = [];
   const elapsed = [];
   const upcoming = [];
 
-  filteredByDay.forEach(row => {
+  rows.forEach(row => {
     const rowTimes = row[timeIdx].match(/\d\d?:\d\d ?(?:[AP]M)?/g);
     if (!rowTimes) return false;
     if (
@@ -113,123 +73,36 @@ const LiveItems: React.FC<LiveItemsProps> = ({
     }
   });
 
+  console.log([headerRows].concat(upcoming));
   return (
-    <div className="schedule-card my-2">
-      {(() =>
-        live.length > 0 && (
-          <>
-            <div className="card-header">
-              <h1 className="schedule-title">Ongoing {heading}</h1>
-            </div>
-            <table className="table table-striped table-bordered table-hover shadow">
-              <thead className="text-light">
-                <tr>
-                  {headerRows.map((col, idx) => {
-                    if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>;
-                    }
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {live.map((row, rowId) => (
-                  <tr key={rowId}>
-                    {row.map((cell, cellId) => {
-                      if (!filteredCols.includes(cellId)) {
-                        return (
-                          <td key={cellId}>
-                            <SmartText
-                              input={cell}
-                              passwordCol={passwordIdx}
-                              row={row}
-                            />
-                          </td>
-                        );
-                      }
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        ))()}
-      {(() =>
-        upcoming.length > 0 && (
-          <>
-            <div className="card-header">
-              <h1 className="schedule-title">Upcoming {heading}</h1>
-            </div>
-            <table className="table table-striped table-bordered table-hover shadow">
-              <thead className="text-light">
-                <tr>
-                  {headerRows.map((col, idx) => {
-                    if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>;
-                    }
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {upcoming.map((row, rowId) => (
-                  <tr key={rowId}>
-                    {row.map((cell, cellId) => {
-                      if (!filteredCols.includes(cellId)) {
-                        return (
-                          <td key={cellId}>
-                            <SmartText
-                              input={cell}
-                              passwordCol={passwordIdx}
-                              row={row}
-                            />
-                          </td>
-                        );
-                      }
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        ))()}
-
-      {(() =>
-        elapsed.length > 0 && (
-          <>
-            <div className="card-header">
-              <h1 className="schedule-title">Completed {heading}</h1>
-            </div>
-            <table className="table table-striped table-bordered table-hover shadow">
-              <thead className="text-light">
-                <tr>
-                  {headerRows.map((col, idx) => {
-                    if (!filteredCols.includes(idx)) {
-                      return <th key={idx}>{col}</th>;
-                    }
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {elapsed.map((row, rowId) => (
-                  <tr key={rowId}>
-                    {row.map((cell, cellId) => {
-                      if (!filteredCols.includes(cellId)) {
-                        return (
-                          <td key={cellId}>
-                            <SmartText
-                              input={cell}
-                              passwordCol={passwordIdx}
-                              row={row}
-                            />
-                          </td>
-                        );
-                      }
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        ))()}
+    <div>
+      {live.length > 0 && (
+        <ScheduleCard
+          schedule={{
+            rows: [headerRows].concat(live),
+            title: `Ongoing ${schedule.title}`,
+          }}
+          filter={filter}
+        />
+      )}
+      {upcoming.length > 0 && (
+        <ScheduleCard
+          schedule={{
+            rows: [headerRows].concat(upcoming),
+            title: `Upcoming ${schedule.title}`,
+          }}
+          filter={filter}
+        />
+      )}
+      {elapsed.length > 0 && (
+        <ScheduleCard
+          schedule={{
+            rows: [headerRows].concat(elapsed),
+            title: `Elapsed ${schedule.title}`,
+          }}
+          filter={filter}
+        />
+      )}
     </div>
   );
 };
