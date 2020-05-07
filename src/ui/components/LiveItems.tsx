@@ -14,20 +14,18 @@ interface LiveItemsProps {
 }
 
 /** Displays three schedule cards for upcoming, ongoing, and elapsed classes.
- * @info The schedule data passed in will be filtered to match todays day of week,
- * and then apply the supplied filter.
+ *
  */
 const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
   const { rows } = schedule;
 
-  // if (filter) {
-  //   // if (filter?.match !== 'minyan') {
-  //   //   rows = excludeFilterDataFrameRows('type', 'minyan', rows);
-  //   // }
-  //   rows = filterDataFrameRows(filter.type, filter.match, rows);
-  // }
-
   const headerRows = rows[0];
+  const removeDayCol = df => {
+    const dayIdx = df[0].findIndex(col => col.toLowerCase().includes('day'));
+    return dayIdx !== -1
+      ? rows.map(row => row.filter((_, i) => i !== dayIdx))
+      : df;
+  };
 
   if (rows.length < 2) {
     // No rows matched the filter criteria
@@ -73,13 +71,12 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
     }
   });
 
-  console.log([headerRows].concat(upcoming));
   return (
     <div>
       {live.length > 0 && (
         <ScheduleCard
           schedule={{
-            rows: [headerRows].concat(live),
+            rows: removeDayCol([headerRows].concat(live)),
             title: `Ongoing ${schedule.title}`,
           }}
           filter={filter}
@@ -88,7 +85,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
       {upcoming.length > 0 && (
         <ScheduleCard
           schedule={{
-            rows: [headerRows].concat(upcoming),
+            rows: removeDayCol([headerRows].concat(upcoming)),
             title: `Upcoming ${schedule.title}`,
           }}
           filter={filter}
@@ -97,7 +94,7 @@ const LiveItems: React.FC<LiveItemsProps> = ({ schedule, filter }) => {
       {elapsed.length > 0 && (
         <ScheduleCard
           schedule={{
-            rows: [headerRows].concat(elapsed),
+            rows: removeDayCol([headerRows].concat(elapsed)),
             title: `Elapsed ${schedule.title}`,
           }}
           filter={filter}
