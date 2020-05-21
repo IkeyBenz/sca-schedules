@@ -125,3 +125,13 @@ export const removeHiddenColumns = (data: DataFrame) => {
 
   return data.map(row => row.filter((_, colIdx) => !indicesOfHidden.includes(colIdx)));
 };
+
+export const convertZoomLinkToWebClient = (link: string) => {
+  // https://us02web.zoom.us/j/84266335794?pwd=a05NbmN2SVU1VXdpSERvNHBDQ3JLdz09 - Example link
+  if (!link.includes('/j/')) {
+    return link;
+  }
+  const [domain, meetingParams] = link.split('/j/');
+  const [meetingId] = meetingParams.split('?');
+  return `${domain}/wc/join/${meetingId}`;
+};

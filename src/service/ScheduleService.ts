@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import { filterDataFrameRows, excludeFilterDataFrameRows, filterByToday, removeHiddenColumns } from '../util';
+import { filterDataFrameRows, excludeFilterDataFrameRows, filterByToday, getColumnIdxOfKey, convertZoomLinkToWebClient } from '../util';
 
 
 class ScheduleService {
@@ -23,6 +23,13 @@ class ScheduleService {
 
   // eslint-disable-next-line class-methods-use-this
   private makeSchedules(data: DataFrame) {
+    const joinLinkIdx = getColumnIdxOfKey(data, 'join');
+    data.forEach(row => {
+      if (row[joinLinkIdx].includes('zoom')) {
+        row[joinLinkIdx] = convertZoomLinkToWebClient(row[joinLinkIdx]);
+      }
+    });
+
     const withoutHiddenRows = filterDataFrameRows('toggle', 'show', data);
     const withoutMinyanim = excludeFilterDataFrameRows('type', 'minyan', withoutHiddenRows);
     const todaysClasses = filterByToday(withoutMinyanim);
