@@ -129,7 +129,7 @@ export const removeHiddenColumns = (data: DataFrame) => {
 export const convertZoomLinkToWebClient = (link: string) => {
   // https://us02web.zoom.us/j/84266335794?pwd=a05NbmN2SVU1VXdpSERvNHBDQ3JLdz09 - Example link
   if (!link.includes('/j/')) {
-    return link;
+    return link; // Don't modify, cause we don't know how
   }
   const [domain, meetingParams] = link.split('/j/');
   const [meetingId] = meetingParams.split('?');
