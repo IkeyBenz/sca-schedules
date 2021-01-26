@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/sca-schedules/static/css/main.f14e4c0e.chunk.css",
+    "main.js": "/sca-schedules/static/js/main.01e32966.chunk.js",
+    "main.js.map": "/sca-schedules/static/js/main.01e32966.chunk.js.map",
+    "runtime-main.js": "/sca-schedules/static/js/runtime-main.52ae7a5f.js",
+    "runtime-main.js.map": "/sca-schedules/static/js/runtime-main.52ae7a5f.js.map",
+    "static/css/2.7a626e88.chunk.css": "/sca-schedules/static/css/2.7a626e88.chunk.css",
+    "static/js/2.9ec71829.chunk.js": "/sca-schedules/static/js/2.9ec71829.chunk.js",
+    "static/js/2.9ec71829.chunk.js.map": "/sca-schedules/static/js/2.9ec71829.chunk.js.map",
+    "index.html": "/sca-schedules/index.html",
+    "precache-manifest.393b4cfb723c99269e1fa24f3fee029d.js": "/sca-schedules/precache-manifest.393b4cfb723c99269e1fa24f3fee029d.js",
+    "service-worker.js": "/sca-schedules/service-worker.js",
+    "static/css/2.7a626e88.chunk.css.map": "/sca-schedules/static/css/2.7a626e88.chunk.css.map",
+    "static/css/main.f14e4c0e.chunk.css.map": "/sca-schedules/static/css/main.f14e4c0e.chunk.css.map",
+    "static/js/2.9ec71829.chunk.js.LICENSE.txt": "/sca-schedules/static/js/2.9ec71829.chunk.js.LICENSE.txt",
+    "static/media/SCALogo.png": "/sca-schedules/static/media/SCALogo.80df96a3.png",
+    "static/media/styles.css": "/sca-schedules/static/media/zoom.2530eadc.png",
+    "static/media/on-air-indicator.png": "/sca-schedules/static/media/on-air-indicator.fb6b3f3c.png",
+    "static/media/sca-white.svg": "/sca-schedules/static/media/sca-white.cbe6bec1.svg",
+    "static/media/spinner.gif": "/sca-schedules/static/media/spinner.3acec546.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.52ae7a5f.js",
+    "static/css/2.7a626e88.chunk.css",
+    "static/js/2.9ec71829.chunk.js",
+    "static/css/main.f14e4c0e.chunk.css",
+    "static/js/main.01e32966.chunk.js"
+  ]
+}
