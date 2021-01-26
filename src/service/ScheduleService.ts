@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import { filterDataFrameRows, excludeFilterDataFrameRows, filterByToday, removeHiddenColumns } from '../util';
+import { filterDataFrameRows, excludeFilterDataFrameRows, filterByToday } from '../util';
 
 
 class ScheduleService {
